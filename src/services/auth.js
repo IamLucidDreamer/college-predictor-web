@@ -1,0 +1,1 @@
+const loginService = () => {return new Promise(res , rej)}
