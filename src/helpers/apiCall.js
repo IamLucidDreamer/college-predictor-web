@@ -1,13 +1,7 @@
 import axios from 'axios';
-import {
-  getAuthToken, getRefreshToken, updateAuthToken, updateRefreshToken,
-} from '../constants/authUtils';
-import NotificationService from '../services/notificationService';
-import { AUTH_LOG_OUT_BACKGROUD } from '../store/actions/actionTypes';
-import { store } from '../store/configureStore';
-import RefreshTokenRequestService from './RefreshTokenRequestService';
+import { getAuthToken } from './auth';
 
-const BASE_URL = `${process.env.REACT_APP_RAILS_HOST}/api`;
+const BASE_URL = process.env.REACT_APP_BASE_URL;
 
 export const server = axios.create({
   baseURL: `${BASE_URL}`,

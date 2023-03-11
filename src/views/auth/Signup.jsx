@@ -53,7 +53,7 @@ const SignUp = () => {
               error={errors.password}
             />
             <button type="submit" onClick={handleSubmit}>
-              Login
+              SignUp
             </button>
           </>
         );
