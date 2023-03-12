@@ -4,8 +4,10 @@ import {
 } from "react-router-dom";
 
 import React, { lazy, Suspense } from 'react'
-import SignUp from "../views/auth/Signup";
-import Predictor from "../views/predictor";
+import ProtectedRoute from "./ProtectedRoute";
+
+const SignUp =  lazy(() => import("../views/auth/Signup"));
+const Predictor = lazy(() => import("../views/predictor"))
 const Login = lazy(() => import("../views/auth/Login"))
 
 const router = createBrowserRouter([
@@ -23,7 +25,7 @@ const router = createBrowserRouter([
     },
     {
         path: "/predictor",
-        element: <Predictor />,
+        element: <ProtectedRoute > <Predictor /></ProtectedRoute>,
     },
 ]);
 

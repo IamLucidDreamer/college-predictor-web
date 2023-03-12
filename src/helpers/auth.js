@@ -1,5 +1,5 @@
 export const getAuthToken = () => {
-    const token = localStorage.getItem("authTOoken")
+    const token = localStorage.getItem("authToken")
     if (token) {
         return token
     }
@@ -9,5 +9,5 @@ export const getAuthToken = () => {
 }
 
 export const redirectToLogin = () => {
-    window.history.pushState("/login")
+    window.location.replace("/login")
 }

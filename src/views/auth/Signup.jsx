@@ -3,6 +3,7 @@ import { Formik } from "formik";
 import * as Yup from "yup";
 
 import CustomValidationErrorMessage from "../../components/errors/CustomValidationErrorMessage";
+import { signup } from "../../services/authService";
 
 const signUpalidation = Yup.object({
   email: Yup.string()
@@ -13,8 +14,8 @@ const signUpalidation = Yup.object({
     .min(8, "The Password lenght should be atleast 8 characters"),
 });
 
-const handleSignUp = (values) => {
-  console.log(values, "hello world");
+const handleSignUp = async (values) => {
+  const response = await signup(values.email, values.password);
 };
 
 const SignUp = () => {

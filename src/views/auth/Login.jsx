@@ -3,6 +3,8 @@ import { Formik } from "formik";
 import * as Yup from "yup";
 
 import CustomValidationErrorMessage from "../../components/errors/CustomValidationErrorMessage";
+import { login } from "../../services/authService";
+import { toast } from "react-toastify";
 
 const loginValidation = Yup.object({
   email: Yup.string()
@@ -13,8 +15,15 @@ const loginValidation = Yup.object({
     .min(8, "The Password lenght should be atleast 8 characters"),
 });
 
-const handleLogin = (values) => {
-  console.log(values, "hello world");
+const handleLogin = async (values) => {
+  const response = await login(values.email, values.password);
+  const { status } = response;
+  if (status >= 200 && status < 300) {
+    toast.success("Login Was Success");
+    localStorage.setItem("authToken", response?.data?.token);
+    window.location.replace("/predictor");
+  }
+  toast.error(response?.error?.data?.error);
 };
 
 const Login = () => {

@@ -4,7 +4,7 @@
   "private": true,
   "dependencies": {
     "@headlessui/react": "^1.7.13",
-    "@heroicons/react": "^2.0.16",
+    "@heroicons/react": "v1",
     "@reduxjs/toolkit": "^1.9.3",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
@@ -17,6 +17,7 @@
     "react-router-dom": "^6.8.2",
     "react-scripts": "5.0.1",
     "react-select": "^5.7.0",
+    "react-toastify": "^9.1.1",
     "redux-persist": "^6.0.0",
     "web-vitals": "^2.1.4",
     "yup": "^1.0.2"
