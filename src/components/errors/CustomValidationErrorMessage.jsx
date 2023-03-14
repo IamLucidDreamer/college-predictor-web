@@ -12,7 +12,7 @@ const CustomValidationErrorMessage = ({ show, error }) => {
       leaveFrom="opacity-100"
       leaveTo="opacity-0"
     >
-      <h3 className="text-red-600">{error}</h3>
+      <h3 className="text-red-600 text-sm">{error}</h3>
     </Transition>
   );
 };

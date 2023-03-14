@@ -6,14 +6,15 @@ import {
 import React, { lazy, Suspense } from 'react'
 import ProtectedRoute from "./ProtectedRoute";
 
-const SignUp =  lazy(() => import("../views/auth/Signup"));
+const HomePage = lazy(() => import("../views/index"))
+const SignUp = lazy(() => import("../views/auth/Signup"));
 const Predictor = lazy(() => import("../views/predictor"))
 const Login = lazy(() => import("../views/auth/Login"))
 
 const router = createBrowserRouter([
     {
         path: "/",
-        element: <div>Hello world!</div>,
+        element: <HomePage />,
     },
     {
         path: "/login",
