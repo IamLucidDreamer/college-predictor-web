@@ -2,8 +2,23 @@ import React from "react";
 
 const Updates = () => {
   return (
-    <div className="w-1/4 bg-white shadow h-96 rounded-lg p-5 overflow-y-scroll">
-      <h1 className="text-3xl text-secondary font-semibold">Updates</h1>
+    <div className="hidden lg:block w-1/4 max-w-md p-4 bg-white border border-gray-200 rounded-lg shadow-xl sm:p-8">
+      <div class="flex items-center justify-between mb-4">
+        <h5 class="text-xl font-bold leading-none text-gray-900">
+          Latest Updates
+        </h5>
+        <a
+          href="#"
+          class="text-sm font-medium text-blue-600 hover:underline"
+        >
+          View all
+        </a>
+      </div>
+      <Card />
+      <Card />
+      <Card />
+      <Card />
+      <Card />
       <Card />
       <Card />
       <Card />
@@ -16,46 +31,32 @@ export default Updates;
 
 const Card = () => {
   return (
-    <div class="flex flex-wrap -m-4">
-      <div class="p-4">
-        <div class="flex border-2 rounded-lg border-gray-200 border-opacity-50 p-8 sm:flex-row flex-col">
-          <div class="w-6 h-6 sm:mr-8 sm:mb-0 mb-4 inline-flex items-center justify-center rounded-full bg-indigo-100 text-indigo-500 flex-shrink-0">
-            <svg
-              fill="none"
-              stroke="currentColor"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              class="w-4 h-4"
-              viewBox="0 0 24 24"
-            >
-              <path d="M22 12h-4l-3 9L9 3l-3 9H2"></path>
-            </svg>
-          </div>
-          <div class="flex-grow">
-            <h2 class="text-gray-900 text-lg title-font font-medium mb-3">
-              Shooting Stars
-            </h2>
-            <p class="leading-relaxed text-base">
-              Blue bottle crucifix vinyl post-ironic four dollar toast vegan
-              taxidermy. Gastropub indxgo juice poutine.
-            </p>
-            <a class="mt-3 text-indigo-500 inline-flex items-center">
-              Learn More
-              <svg
-                fill="none"
-                stroke="currentColor"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                class="w-4 h-4 ml-2"
-                viewBox="0 0 24 24"
-              >
-                <path d="M5 12h14M12 5l7 7-7 7"></path>
-              </svg>
-            </a>
-          </div>
-        </div>
+    <div class="">
+      <div class="flow-root">
+        <ul role="list" class="divide-y divide-gray-200">
+          <li class="py-3 sm:py-4">
+            <div class="flex items-center space-x-4">
+              <div class="flex-shrink-0">
+                <img
+                  class="w-8 h-8 rounded-full"
+                  src="/docs/images/people/profile-picture-4.jpg"
+                  alt="Lana image"
+                />
+              </div>
+              <div class="flex-1 min-w-0">
+                <p class="text-sm font-medium text-gray-900 truncate">
+                  Lana Byrd
+                </p>
+                <p class="text-sm text-gray-500 truncate">
+                  email@windster.com
+                </p>
+              </div>
+              <div class="inline-flex items-center text-base font-semibold text-gray-900">
+                $367
+              </div>
+            </div>
+          </li>
+        </ul>
       </div>
     </div>
   );

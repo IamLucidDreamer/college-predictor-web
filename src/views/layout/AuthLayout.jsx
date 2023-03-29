@@ -15,7 +15,7 @@ const AuthLayout = ({ imageLink, title, description, form }) => {
           </div>
         </div>
       </div>
-      <div className="min-h-screen flex w-full lg:w-5/12 items-center justify-center">
+      <div className="min-h-screen flex w-full lg:w-5/12 items-end lg:items-center justify-center pb-20">
         {/* <img src={waterMarkImage} className="fixed right-0 top-0 w-96 h-96"/> */}
         {form}
       </div>

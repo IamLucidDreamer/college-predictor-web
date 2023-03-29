@@ -11,3 +11,7 @@ export const getAuthToken = () => {
 export const redirectToLogin = () => {
     window.location.replace("/login")
 }
+
+export const clearAuth = () => {
+    localStorage.delete("authToken")
+}

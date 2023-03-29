@@ -18,6 +18,8 @@ const VerifyOTP = lazy(() => import("../views/auth/VerifyOTP"))
 const CompleteProfile = lazy(() => import("../views/auth/CompleteProfile"))
 
 const DashboardHomePage = lazy(() => import("../views/dashboardPages/HomePage"))
+const DashboardBlogs = lazy(() => import("../views/dashboardPages/Blogs"))
+const DashboardProfile = lazy(() => import("../views/dashboardPages/Profile"))
 
 
 const router = createBrowserRouter([
@@ -43,11 +45,19 @@ const router = createBrowserRouter([
     },
     {
         path: "/dashboard",
-        element: <Dashboard />,
+        element: <ProtectedRoute><Dashboard /></ProtectedRoute>,
         children: [
             {
                 path: "/dashboard",
                 element: <DashboardHomePage />,
+            },
+            {
+                path: "/dashboard/blogs",
+                element: <DashboardBlogs />,
+            },
+            {
+                path: "/dashboard/profile",
+                element: <DashboardProfile />,
             },
         ],
     },

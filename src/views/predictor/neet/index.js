@@ -8,16 +8,16 @@ const NeetIndex = () => {
     const [activeType, setActiveType] = useState(0)
     const [activeCategoryType, setActiveCategoryType] = useState(0)
     return (
-        <div className='m-4 bg-gray-100 shadow-md rounded-lg'>
+        <div className='m-2 lg:m-4 bg-gray-100 shadow-md rounded-lg'>
             <div className='flex'>
                 <button
                     onClick={() => setActiveType(1)}
-                    className={`w-1/2 text-center text-2xl py-2 rounded-tl-lg ${activeType === 1 ? "bg-primary text-white" : ""}`}>
+                    className={`w-1/2 text-center text-lg lg:text-2xl py-2 rounded-tl-lg ${activeType === 1 ? "bg-primary text-white" : ""}`}>
                     MBBS / BHMS / Bsc. Nursing
                 </button>
                 <button
                     onClick={() => setActiveType(2)}
-                    className={`w-1/2 text-center text-2xl py-2 rounded-tr-lg ${activeType === 2 ? "bg-primary text-white" : ""}`}>
+                    className={`w-1/2 text-center text-lg lg:text-2xl py-2 rounded-tr-lg ${activeType === 2 ? "bg-primary text-white" : ""}`}>
                     Ayush
                 </button>
             </div>
@@ -26,15 +26,15 @@ const NeetIndex = () => {
                 {activeType === 1 &&
                     <div className='flex gap-2'>
                         <button onClick={() => setActiveCategoryType(1)}
-                            className={`w-1/2 text-center text-2xl py-2 rounded-lg ${activeCategoryType === 1 ? "bg-primary text-white" : ""}`}>
+                            className={`w-1/2 text-center text-lg lg:text-2xl py-2 rounded-lg ${activeCategoryType === 1 ? "bg-primary text-white" : ""}`}>
                             All India
                         </button>
                         <button onClick={() => setActiveCategoryType(2)}
-                            className={`w-1/2 text-center text-2xl py-2 rounded-lg ${activeCategoryType === 2 ? "bg-primary text-white" : ""}`}>
+                            className={`w-1/2 text-center text-lg lg:text-2xl py-2 rounded-lg ${activeCategoryType === 2 ? "bg-primary text-white" : ""}`}>
                             State Counciling
                         </button>
                         <button onClick={() => setActiveCategoryType(3)}
-                            className={`w-1/2 text-center text-2xl py-2 rounded-lg ${activeCategoryType === 3 ? "bg-primary text-white" : ""}`}>
+                            className={`w-1/2 text-center text-lg lg:text-2xl py-2 rounded-lg ${activeCategoryType === 3 ? "bg-primary text-white" : ""}`}>
                             Others
                         </button>
                     </div>

@@ -114,7 +114,7 @@ const Login = () => {
                     <div className="text-sm">
                       <Link to={"/forgot-password"}>Forgot Password</Link>
                     </div>
-                    <div className="flex items-center gap-2 mt-4 mb-2 w-11/12 ">
+                    {/* <div className="flex items-center gap-2 mt-4 mb-2 w-11/12 ">
                       <div className="bg-secondary h-0.5 w-full"></div>
                       <h1 className="text-sm text-secondary">or</h1>
                       <div className="bg-secondary h-0.5 w-full"></div>
@@ -126,7 +126,7 @@ const Login = () => {
                       <button className="rounded-full w-32 p-1 border-2 border-secondary">
                         Facebook
                       </button>
-                    </div>
+                    </div> */}
                     <div className="text-sm my-3">
                       Don't have and account ?{" "}
                       <Link to={"/signup"}>Sign Up</Link>
