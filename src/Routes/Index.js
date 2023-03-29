@@ -5,11 +5,20 @@ import {
 
 import React, { lazy, Suspense } from 'react'
 import ProtectedRoute from "./ProtectedRoute";
+import Loader from "../components/loader/index"
+import Dashboard from "../views/layout/Dashboard";
+import UserProfile from "../views/layout/UserProfile";
+import Card from "../views/layout/Card";
 
 const HomePage = lazy(() => import("../views/index"))
 const SignUp = lazy(() => import("../views/auth/Signup"));
 const Predictor = lazy(() => import("../views/predictor"))
 const Login = lazy(() => import("../views/auth/Login"))
+const VerifyOTP = lazy(() => import("../views/auth/VerifyOTP"))
+const CompleteProfile = lazy(() => import("../views/auth/CompleteProfile"))
+
+const DashboardHomePage = lazy(() => import("../views/dashboardPages/HomePage"))
+
 
 const router = createBrowserRouter([
     {
@@ -25,14 +34,28 @@ const router = createBrowserRouter([
         element: <SignUp />,
     },
     {
-        path: "/predictor",
-        element: <ProtectedRoute > <Predictor /></ProtectedRoute>,
+        path: "/verify-otp",
+        element: <VerifyOTP />,
+    },
+    {
+        path: "/complete-profile",
+        element: <CompleteProfile />,
+    },
+    {
+        path: "/dashboard",
+        element: <Dashboard />,
+        children: [
+            {
+                path: "/dashboard",
+                element: <DashboardHomePage />,
+            },
+        ],
     },
 ]);
 
 const Routes = () => {
     return (
-        <Suspense fallback={<div className="text-2xl flex mx-auto self-center flex-col">Loading...</div>}>
+        <Suspense fallback={<Loader coverFullScreen={true} />}>
             <RouterProvider router={router} />
         </Suspense >
     )

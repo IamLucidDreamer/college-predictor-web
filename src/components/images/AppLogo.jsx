@@ -1,10 +1,39 @@
 import React from "react";
-import appLogo from "../../assets/images/careerkick_logo.png";
+import appLogo1 from "../../assets/images/careerkick_logo.png";
+import appLogo2 from "../../assets/images/logo_white.png";
 
-const AppLogo = ({ width = "200px", height = "200px", classname = "" }) => {
-  return (
-    <img src={appLogo} width={width} height={height} className={classname} />
-  );
+const AppLogo = ({
+  width = "200px",
+  height = "200px",
+  classname = "",
+  logotType = 1,
+}) => {
+  switch (logotType) {
+    case 1:
+      return (
+        <img
+          src={appLogo1}
+          width={width}
+          height={height}
+          className={classname}
+        />
+      );
+      break;
+    case 2:
+      return (
+        <img
+          src={appLogo2}
+          width={width}
+          height={height}
+          className={classname}
+        />
+      );
+      break;
+  }
 };
 
 export default AppLogo;
+
+// Enum
+// 1 colored Logo
+// 2 white Logo

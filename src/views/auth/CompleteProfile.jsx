@@ -12,16 +12,16 @@ import AppLogo from "../../components/images/AppLogo";
 import image from "../../assets/images/login.png";
 import { Link } from "react-router-dom";
 
-const loginValidation = Yup.object({
-  email: Yup.string()
-    .email("Not a Valid Email Address")
-    .required("The Email Address is required"),
-  password: Yup.string()
-    .required("Password field is required")
-    .min(8, "The Password lenght should be atleast 8 characters"),
-});
+// const loginValidation = Yup.object({
+//   email: Yup.string()
+//     .email("Not a Valid Email Address")
+//     .required("The Email Address is required"),
+//   password: Yup.string()
+//     .required("Password field is required")
+//     .min(8, "The Password lenght should be atleast 8 characters"),
+// });
 
-const Login = () => {
+const CompleteProfile = () => {
   const [loading, setLoading] = useState(false);
 
   const handleLogin = async (values) => {
@@ -45,7 +45,7 @@ const Login = () => {
       <AuthLayout
         show={true}
         imageLink={image}
-        title={"Sign In"}
+        title={"Complete Profile"}
         description={
           "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nesciunt sapiente ducimus."
         }
@@ -58,10 +58,11 @@ const Login = () => {
             />
             <Formik
               initialValues={{
-                email: "",
+                tenthMarks: "",
+                twelfthMarks: "",
                 password: "",
               }}
-              validationSchema={loginValidation}
+            //   validationSchema={loginValidation}
               onSubmit={(values) => handleLogin(values)}
             >
               {({ values, touched, errors, handleChange, handleSubmit }) => {
@@ -71,36 +72,68 @@ const Login = () => {
                       <div className="bg-gray-100 text-secondary flex gap-3 items-center px-3 rounded-full my-3">
                         <UserIcon className="w-5 h-5" />
                         <input
-                          id="email"
-                          placeholder="name@example.com"
+                          id="tenthMarks"
+                          placeholder="10th Percentage"
                           className="p-2.5 text-lg rounded-full bg-gray-100 w-full focus:outline-none"
-                          type="email"
-                          value={values.email}
+                          type="number"
+                          value={values.tenthMarks}
                           onChange={handleChange}
                         />
                       </div>
                       <CustomValidationErrorMessage
-                        show={touched.email && errors.email ? true : false}
-                        error={errors.email}
+                        show={touched.tenthMarks && errors.tenthMarks ? true : false}
+                        error={errors.tenthMarks}
                       />
                     </div>
                     <div className="w-11/12 ">
                       <div className="bg-gray-100 text-secondary flex gap-3 items-center px-3 rounded-full my-3">
-                        <KeyIcon className="w-4 h-4" />
+                        <UserIcon className="w-5 h-5" />
                         <input
-                          id="password"
-                          placeholder="Password"
+                          id="twelfthMarks"
+                          placeholder="12th Percentage"
                           className="p-2.5 text-lg rounded-full bg-gray-100 w-full focus:outline-none"
-                          type="password"
-                          value={values.password}
+                          type="number"
+                          value={values.twelfthMarks}
                           onChange={handleChange}
                         />
                       </div>
                       <CustomValidationErrorMessage
-                        show={
-                          touched.password && errors.password ? true : false
-                        }
-                        error={errors.password}
+                        show={touched.twelfthMarks && errors.twelfthMarks ? true : false}
+                        error={errors.twelfthMarks}
+                      />
+                    </div>
+                    <div className="w-11/12 ">
+                      <div className="bg-gray-100 text-secondary flex gap-3 items-center px-3 rounded-full my-3">
+                        <UserIcon className="w-5 h-5" />
+                        <input
+                          id="twelfthMarks"
+                          placeholder="12th Percentage"
+                          className="p-2.5 text-lg rounded-full bg-gray-100 w-full focus:outline-none"
+                          type="number"
+                          value={values.twelfthMarks}
+                          onChange={handleChange}
+                        />
+                      </div>
+                      <CustomValidationErrorMessage
+                        show={touched.twelfthMarks && errors.twelfthMarks ? true : false}
+                        error={errors.twelfthMarks}
+                      />
+                    </div>
+                    <div className="w-11/12 ">
+                      <div className="bg-gray-100 text-secondary flex gap-3 items-center px-3 rounded-full my-3">
+                        <UserIcon className="w-5 h-5" />
+                        <input
+                          id="twelfthMarks"
+                          placeholder="12th Percentage"
+                          className="p-2.5 text-lg rounded-full bg-gray-100 w-full focus:outline-none"
+                          type="number"
+                          value={values.twelfthMarks}
+                          onChange={handleChange}
+                        />
+                      </div>
+                      <CustomValidationErrorMessage
+                        show={touched.twelfthMarks && errors.twelfthMarks ? true : false}
+                        error={errors.twelfthMarks}
                       />
                     </div>
                     <button
@@ -109,9 +142,9 @@ const Login = () => {
                       onClick={handleSubmit}
                       disabled={loading}
                     >
-                      {loading ? <Loader width={25} height={25} /> : "SignUp"}
+                      {loading ? <Loader width={25} height={25} /> : "Save"}
                     </button>
-                    <div className="text-sm">
+                    {/* <div className="text-sm">
                       <Link to={"/forgot-password"}>Forgot Password</Link>
                     </div>
                     <div className="flex items-center gap-2 mt-4 mb-2 w-11/12 ">
@@ -130,7 +163,7 @@ const Login = () => {
                     <div className="text-sm my-3">
                       Don't have and account ?{" "}
                       <Link to={"/signup"}>Sign Up</Link>
-                    </div>
+                    </div> */}
                   </>
                 );
               }}
@@ -142,4 +175,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default CompleteProfile;
