@@ -7,10 +7,7 @@ const Updates = () => {
         <h5 class="text-xl font-bold leading-none text-gray-900">
           Latest Updates
         </h5>
-        <a
-          href="#"
-          class="text-sm font-medium text-blue-600 hover:underline"
-        >
+        <a href="#" class="text-sm font-medium text-blue-600 hover:underline">
           View all
         </a>
       </div>
@@ -45,14 +42,9 @@ const Card = () => {
               </div>
               <div class="flex-1 min-w-0">
                 <p class="text-sm font-medium text-gray-900 truncate">
-                  Lana Byrd
+                  New Exam Dates Annouced. Hurry Up
                 </p>
-                <p class="text-sm text-gray-500 truncate">
-                  email@windster.com
-                </p>
-              </div>
-              <div class="inline-flex items-center text-base font-semibold text-gray-900">
-                $367
+                <p class="text-sm text-gray-500 truncate">30/03/23</p>
               </div>
             </div>
           </li>
