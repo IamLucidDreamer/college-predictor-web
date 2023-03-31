@@ -1,0 +1,13 @@
+
+import { SET_USER } from "../actionTypes/index";
+
+const reducer = (state, action) => {
+    switch (action.type) {
+        case SET_USER:
+            return { ...state, ...action.payload };
+        default:
+            return state;
+    }
+};
+
+export default reducer;

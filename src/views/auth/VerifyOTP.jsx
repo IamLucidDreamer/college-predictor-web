@@ -6,11 +6,13 @@ import { toast } from "react-toastify";
 
 import CustomValidationErrorMessage from "../../components/errors/CustomValidationErrorMessage";
 import Loader from "../../components/loader/index";
-import { signup } from "../../services/authService";
+import { sendOtp, signup } from "../../services/authService";
 import AuthLayout from "../layout/AuthLayout";
 import AppLogo from "../../components/images/AppLogo";
 import image from "../../assets/images/login.png";
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import { setUser } from "../../store/actions/userActions";
+import { useDispatch } from "react-redux";
 
 const loginValidation = Yup.object({
   otp: Yup.string()
@@ -21,13 +23,35 @@ const loginValidation = Yup.object({
 const VerifyOTP = () => {
   const { state } = useLocation();
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
   const [loading, setLoading] = useState(false);
+  const [resendLoading, setResendLoading] = useState(false);
 
   useEffect(() => {
     if (!state) {
       navigate("/signup");
     }
   }, []);
+
+  const resenOTP = async () => {
+    setResendLoading(true);
+    try {
+      const response = await sendOtp(
+        `${state.values.countryCode}${state.values.phoneNumber}`
+      );
+      const { status } = response;
+      if (status >= 200 && status < 300) {
+        toast.success(
+          `OTP Re-Sent Succesfully to ${state.values.countryCode}${state.values.phoneNumber}`
+        );
+      }
+    } catch (err) {
+      console.error("Error : ", err);
+      toast.error(err?.message || "Something went Wrong");
+    }
+    setResendLoading(false);
+  };
 
   const handleSignUp = async (values) => {
     setLoading(true);
@@ -36,7 +60,7 @@ const VerifyOTP = () => {
       const response = await signup(data);
       const { status } = response;
       if (status >= 200 && status < 300) {
-        toast.success("Signup was Successfull");
+        dispatch(setUser(response?.data?.data));
         localStorage.setItem("authToken", response?.data?.token);
         navigate("/dashboard");
         toast.success("Welcome to Career Kick");
@@ -58,7 +82,7 @@ const VerifyOTP = () => {
           "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nesciunt sapiente ducimus."
         }
         form={
-          <div className="w-11/12 lg:w-10/12 xl:w-2/3 max-w-2xl flex flex-col items-center justify-center">
+          <div className="w-11/12 lg:w-10/12 xl:w-2/3 flex flex-col items-center justify-center max-w-sm">
             <AppLogo
               width={"250px"}
               height={"250px"}
@@ -81,7 +105,7 @@ const VerifyOTP = () => {
               }) => {
                 return (
                   <>
-                    <div className="w-11/12 ">
+                    <div className="w-11/12">
                       <h1 className="text-lg text-secondary">
                         {`Enter the OTP sent to : ${
                           state?.values?.countryCode || ""
@@ -98,6 +122,7 @@ const VerifyOTP = () => {
                             width: "100%",
                             margin: "0px",
                             borderRadius: 5,
+                            boxShadow: "0 5px 8px -3px rgb(0 0 0 / 0.2)",
                           }}
                           value={values.otp}
                           onChange={(e) => {
@@ -116,26 +141,28 @@ const VerifyOTP = () => {
                       />
                     </div>
                     <button
-                      className="p-2.5 text-lg rounded-full bg-secondary text-white w-11/12  my-3"
+                      className="p-2.5 text-lg rounded-full bg-secondary text-white w-11/12 my-3 shadow-lg"
                       type="submit"
                       onClick={handleSubmit}
                       disabled={loading}
                     >
                       {loading ? <Loader width={25} height={25} /> : "Verify"}
                     </button>
-                    <div className="text-sm">
+                    <div className="text-sm flex w-full justify-end px-5">
                       <ResendOTP
-                        onResendClick={() => console.log("Resend clicked")}
+                        className="flex justify-between items-center gap-5"
+                        onResendClick={() => {
+                          resenOTP();
+                        }}
                       />
-                    </div>
-                    <div className="text-sm my-3">
-                      Already have an account ?{" "}
-                      <Link to={"/signup"}>Sign Up</Link>
                     </div>
                   </>
                 );
               }}
             </Formik>
+            {resendLoading ? (
+              <Loader coverFullScreen={true} width={25} height={25} />
+            ) : null}
           </div>
         }
       />

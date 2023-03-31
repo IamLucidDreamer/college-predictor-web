@@ -20,6 +20,7 @@ const CompleteProfile = lazy(() => import("../views/auth/CompleteProfile"))
 const DashboardHomePage = lazy(() => import("../views/dashboardPages/HomePage"))
 const DashboardBlogs = lazy(() => import("../views/dashboardPages/Blogs"))
 const DashboardProfile = lazy(() => import("../views/dashboardPages/Profile"))
+const DashboardUpdates = lazy(() => import("../views/dashboardPages/UpdatesPage"))
 
 
 const router = createBrowserRouter([
@@ -56,8 +57,8 @@ const router = createBrowserRouter([
                 element: <DashboardBlogs />,
             },
             {
-                path: "/dashboard/profile",
-                element: <DashboardProfile />,
+                path: "/dashboard/updates",
+                element: <DashboardUpdates />,
             },
         ],
     },

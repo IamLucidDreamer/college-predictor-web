@@ -219,13 +219,14 @@ const PredictorAllIndia = () => {
                           {val.map((valMap) => (
                             <div className="flex gap-5 my-2 pl-5 border-b-2 py-0.5">
                               <div className="w-4/12">{valMap.quota}</div>
-                              <div className="w-2/12">{valMap.allottedPH}</div>
+                              <div className="w-1/12">{valMap.allottedPH}</div>
                               <div className="w-2/12">
                                 {valMap.allottedCategory}
                               </div>
                               <div className="w-1/12">{valMap.round}</div>
                               <div className="w-2/12">{valMap.course}</div>
                               <div className="w-1/12">{valMap.closingRank}</div>
+                              <div className="w-1/12">{valMap.percentage}% </div>
                             </div>
                           ))}
                         </div>

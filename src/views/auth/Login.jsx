@@ -68,7 +68,7 @@ const Login = () => {
                 return (
                   <>
                     <div className="w-11/12 ">
-                      <div className="bg-gray-100 text-secondary flex gap-3 items-center px-3 rounded-full my-3">
+                      <div className="bg-gray-100 text-secondary flex gap-3 items-center px-3 rounded-full my-5 shadow-lg">
                         <UserIcon className="w-5 h-5" />
                         <input
                           id="email"
@@ -83,9 +83,7 @@ const Login = () => {
                         show={touched.email && errors.email ? true : false}
                         error={errors.email}
                       />
-                    </div>
-                    <div className="w-11/12 ">
-                      <div className="bg-gray-100 text-secondary flex gap-3 items-center px-3 rounded-full my-3">
+                      <div className="bg-gray-100 text-secondary flex gap-3 items-center px-3 rounded-full my-5 shadow-lg">
                         <KeyIcon className="w-4 h-4" />
                         <input
                           id="password"
@@ -102,19 +100,19 @@ const Login = () => {
                         }
                         error={errors.password}
                       />
-                    </div>
-                    <button
-                      className="p-2.5 text-lg rounded-full bg-secondary text-white w-11/12  my-3"
-                      type="submit"
-                      onClick={handleSubmit}
-                      disabled={loading}
-                    >
-                      {loading ? <Loader width={25} height={25} /> : "SignUp"}
-                    </button>
-                    <div className="text-sm">
-                      <Link to={"/forgot-password"}>Forgot Password</Link>
-                    </div>
-                    {/* <div className="flex items-center gap-2 mt-4 mb-2 w-11/12 ">
+
+                      <button
+                        className="p-2.5 text-lg rounded-full bg-secondary text-white w-full my-3 shadow-lg"
+                        type="submit"
+                        onClick={handleSubmit}
+                        disabled={loading}
+                      >
+                        {loading ? <Loader width={25} height={25} /> : "SignUp"}
+                      </button>
+                      <div className="text-sm w-full text-right my-1 px-3">
+                        <Link to={"/forgot-password"}>Forgot Password</Link>
+                      </div>
+                      {/* <div className="flex items-center gap-2 mt-4 mb-2 w-11/12 ">
                       <div className="bg-secondary h-0.5 w-full"></div>
                       <h1 className="text-sm text-secondary">or</h1>
                       <div className="bg-secondary h-0.5 w-full"></div>
@@ -127,14 +125,15 @@ const Login = () => {
                         Facebook
                       </button>
                     </div> */}
-                    <div className="text-sm my-3">
-                      Don't have and account ?{" "}
-                      <Link
-                        to={"/signup"}
-                        className="text-primary font-semibold"
-                      >
-                        Sign Up
-                      </Link>
+                      <div className="text-sm my-3 text-center">
+                        Don't have and account ?{" "}
+                        <Link
+                          to={"/signup"}
+                          className="text-primary font-semibold"
+                        >
+                          Sign Up
+                        </Link>
+                      </div>
                     </div>
                   </>
                 );

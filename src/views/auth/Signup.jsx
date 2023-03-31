@@ -61,6 +61,7 @@ const SignUp = () => {
     }
     setLoading(false);
   };
+
   return (
     <>
       <AuthLayout
@@ -70,7 +71,7 @@ const SignUp = () => {
           "loren inpusm dolor sadf acudan favascaec acffe sdclaf cudan sdcfa oasd fdSS."
         }
         form={
-          <div className="w-11/12 lg:w-10/12 xl:w-2/3 max-w-2xl flex flex-col items-center justify-center">
+          <div className="w-11/12 lg:w-10/12 xl:w-2/3 max-w-2xl flex flex-col items-center justify-center pt-4">
             <AppLogo
               width={"250px"}
               height={"250px"}
@@ -87,15 +88,14 @@ const SignUp = () => {
               }}
               validationSchema={signUpalidation}
               onSubmit={(values) => {
-                console.log("hii");
                 handleSignUp(values);
               }}
             >
               {({ values, touched, errors, handleChange, handleSubmit }) => {
                 return (
                   <>
-                    <div className="w-11/12 ">
-                      <div className="bg-gray-100 text-secondary flex gap-3 items-center px-3 rounded-full my-3">
+                    <div className="w-11/12">
+                      <div className="bg-gray-100 text-secondary flex gap-3 items-center px-3 rounded-full my-5 shadow-lg">
                         <UserIcon className="w-5 h-5" />
                         <input
                           id="name"
@@ -110,9 +110,7 @@ const SignUp = () => {
                         show={touched.name && errors.name ? true : false}
                         error={errors.name}
                       />
-                    </div>
-                    <div className="w-11/12 ">
-                      <div className="bg-gray-100 text-secondary flex gap-3 items-center px-3 rounded-full my-3">
+                      <div className="bg-gray-100 text-secondary flex gap-3 items-center px-3 rounded-full my-5 shadow-lg">
                         <MailIcon className="w-5 h-5" />
                         <input
                           id="email"
@@ -127,9 +125,7 @@ const SignUp = () => {
                         show={touched.email && errors.email ? true : false}
                         error={errors.email}
                       />
-                    </div>
-                    <div className="w-11/12 ">
-                      <div className="bg-gray-100 text-secondary flex gap-3 items-center px-3 rounded-full my-3">
+                      <div className="bg-gray-100 text-secondary flex gap-3 items-center px-3 rounded-full my-5 shadow-lg">
                         <PhoneIcon className="w-6 h-6" />
                         <select
                           id="countryCode"
@@ -161,9 +157,7 @@ const SignUp = () => {
                         }
                         error={errors.phoneNumber}
                       />
-                    </div>
-                    <div className="w-11/12 ">
-                      <div className="bg-gray-100 text-secondary flex gap-3 items-center px-3 rounded-full my-3">
+                      <div className="bg-gray-100 text-secondary flex gap-3 items-center px-3 rounded-full my-5 shadow-lg">
                         <KeyIcon className="w-4 h-4" />
                         <input
                           id="password"
@@ -180,9 +174,7 @@ const SignUp = () => {
                         }
                         error={errors.password}
                       />
-                    </div>
-                    <div className="w-11/12 ">
-                      <div className="bg-gray-100 text-secondary flex gap-3 items-center px-3 rounded-full my-3">
+                      <div className="bg-gray-100 text-secondary flex gap-3 items-center px-3 rounded-full my-5 shadow-lg">
                         <PencilIcon className="w-4 h-4" />
                         <select
                           id="examTYpe"
@@ -204,19 +196,15 @@ const SignUp = () => {
                         }
                         error={errors.examType}
                       />
-                    </div>
-                    <button
-                      className="p-2.5 text-lg rounded-full bg-secondary text-white w-11/12  my-3"
-                      type="submit"
-                      onClick={handleSubmit}
-                      disabled={loading}
-                    >
-                      {loading ? <Loader width={25} height={25} /> : "SignUp"}
-                    </button>
-                    <div className="text-sm">
-                      <Link to={"/forgot-password"}>Forgot Password</Link>
-                    </div>
-                    {/* <div className="flex items-center gap-2 mt-4 mb-2 w-11/12 ">
+                      <button
+                        className="p-2.5 text-lg rounded-full bg-secondary text-white my-4 w-full shadow-lg"
+                        type="submit"
+                        onClick={handleSubmit}
+                        disabled={loading}
+                      >
+                        {loading ? <Loader width={25} height={25} /> : "SignUp"}
+                      </button>
+                      {/* <div className="flex items-center gap-2 mt-4 mb-2 w-11/12 ">
                       <div className="bg-secondary h-0.5 w-full"></div>
                       <h1 className="text-sm text-secondary">or</h1>
                       <div className="bg-secondary h-0.5 w-full"></div>
@@ -229,11 +217,15 @@ const SignUp = () => {
                         Facebook
                       </button>
                     </div> */}
-                    <div className="text-sm my-3">
-                      Don't have and account ?{" "}
-                      <Link to={"/login"} className="text-primary font-semibold">
-                        Sign In
-                      </Link>
+                      <div className="text-sm my-3 w-full text-center">
+                        Don't have and account ?{" "}
+                        <Link
+                          to={"/login"}
+                          className="text-primary font-semibold"
+                        >
+                          Sign In
+                        </Link>
+                      </div>
                     </div>
                   </>
                 );
