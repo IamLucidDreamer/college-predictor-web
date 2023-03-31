@@ -1,10 +1,13 @@
 
 import { SET_USER } from "../actionTypes/index";
 
-const reducer = (state, action) => {
+const initialeValue = {}
+
+const reducer = (state = {}, action) => {
     switch (action.type) {
         case SET_USER:
-            return { ...state, ...action.payload };
+            console.log(action.payload);
+            return { ...state, ...action.payload.user };
         default:
             return state;
     }

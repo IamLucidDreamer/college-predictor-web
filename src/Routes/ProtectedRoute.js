@@ -6,12 +6,10 @@ function ProtectedRoute({ children }) {
         if (authToken) {
             return <>{children}</>;
         }
-        // Redirect to login domain\
         redirectToLogin()
         return null;
     } catch (error) {
         console.error("Error : ", error);
-        // Redirect to login domain
         redirectToLogin();
         return null;
     }

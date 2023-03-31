@@ -4,8 +4,11 @@ import AppLogo from "../../components/images/AppLogo";
 import Footer from "../../components/shared/Footer";
 import Header from "../../components/shared/Header";
 import Card from "./Card";
+import { useSelector } from "react-redux";
 
 export default function Dashboard() {
+  const user = useSelector((state) => state.user);
+  console.log(user, "user");
   return (
     <>
       <Header />

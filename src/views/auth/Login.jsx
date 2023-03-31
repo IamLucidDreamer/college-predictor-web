@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Formik } from "formik";
 import * as Yup from "yup";
 import { KeyIcon, UserIcon } from "@heroicons/react/outline";
@@ -10,7 +10,10 @@ import { login } from "../../services/authService";
 import AuthLayout from "../layout/AuthLayout";
 import AppLogo from "../../components/images/AppLogo";
 import image from "../../assets/images/login.png";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { setUser } from "../../store/actions/userActions";
+import { getAuthToken } from "../../helpers/auth";
 
 const loginValidation = Yup.object({
   email: Yup.string()
@@ -22,7 +25,15 @@ const loginValidation = Yup.object({
 });
 
 const Login = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    if (getAuthToken.length !== 0) {
+      navigate("/dashboard");
+    }
+  },[]);
 
   const handleLogin = async (values) => {
     setLoading(true);
@@ -30,9 +41,10 @@ const Login = () => {
       const response = await login(values.email, values.password);
       const { status } = response;
       if (status >= 200 && status < 300) {
-        toast.success("Login Was Success");
+        dispatch(setUser(response?.data?.user));
         localStorage.setItem("authToken", response?.data?.token);
-        window.location.replace("/dashboard");
+        navigate("/dashboard");
+        toast.success("Login Was Success");
       }
     } catch (err) {
       console.error("Error : ", err);

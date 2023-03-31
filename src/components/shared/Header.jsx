@@ -84,7 +84,7 @@ const DrawerMenu = ({ openModal, closeModal, navigate }) => {
                     <button className="my-4">Updates</button>
                     <button className="my-4">About</button>
                     <button className="my-4">Profile</button>
-                    <button onclick={() =>{ clearAuth() ; navigate("/") }} className="my-8">
+                    <button onClick={() =>{console.log("hi"); console.log(clearAuth()) ; navigate("/") }} className="z-50 my-8 hover:bg-red-500">
                       Logout
                     </button>
                   </nav>

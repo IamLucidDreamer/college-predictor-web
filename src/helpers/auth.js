@@ -13,5 +13,5 @@ export const redirectToLogin = () => {
 }
 
 export const clearAuth = () => {
-    localStorage.delete("authToken")
+    localStorage.clear()
 }

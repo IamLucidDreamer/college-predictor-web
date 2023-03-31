@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Formik } from "formik";
 import * as Yup from "yup";
 
@@ -18,6 +18,7 @@ import {
   PencilIcon,
 } from "@heroicons/react/outline";
 import { phoneCodes } from "../../helpers/phoneNumberCode";
+import { getAuthToken } from "../../helpers/auth";
 
 const signUpalidation = Yup.object({
   name: Yup.string()
@@ -41,6 +42,12 @@ const signUpalidation = Yup.object({
 const SignUp = () => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    if (getAuthToken.length !== 0) {
+      navigate("/dashboard");
+    }
+  },[]);
 
   const handleSignUp = async (values) => {
     setLoading(true);
