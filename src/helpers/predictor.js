@@ -58,3 +58,8 @@ export const updatedFieldValue = (masterData, values, setData) => {
         index) => newObject[val].indexOf(item) === index))
     setData(newObject)
 }
+
+export const getFeildColor = (value) => {
+    var hue = ((1 - value) * 280).toString(10);
+    return ["hsl(", value, ",100%,50%)"].join("");
+}

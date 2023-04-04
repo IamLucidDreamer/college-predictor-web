@@ -10,7 +10,8 @@ const HomePage = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (getAuthToken.length !== 0) {
+    const authToken = getAuthToken();
+    if (authToken?.length) {
       navigate("/dashboard");
     }
   }, []);

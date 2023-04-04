@@ -111,7 +111,7 @@ const VerifyOTP = () => {
                           state?.values?.countryCode || ""
                         }${state?.values?.phoneNumber || ""}`}
                       </h1>
-                      <div className="text-secondary items-center rounded-full my-3">
+                      <div className="text-secondary items-center rounded-lg my-3">
                         <OTPInput
                           style={{
                             justifyContent: "space-between",
@@ -141,7 +141,7 @@ const VerifyOTP = () => {
                       />
                     </div>
                     <button
-                      className="p-2.5 text-lg rounded-full bg-secondary text-white w-11/12 my-3 shadow-lg"
+                      className="p-2.5 text-lg rounded-lg bg-secondary text-white w-11/12 my-3 shadow-lg"
                       type="submit"
                       onClick={handleSubmit}
                       disabled={loading}

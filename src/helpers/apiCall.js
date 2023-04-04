@@ -1,13 +1,13 @@
 import axios from 'axios';
 import { getAuthToken } from './auth';
 
-const BASE_URL = process.env.REACT_APP_BASE_URL;
+const BASE_URL = "https://backend.in.ngrok.io/api";
 
 export const server = axios.create({
   baseURL: `${BASE_URL}`,
   timeout: 600000,
   headers: {
-    'Access-Control-Allow-Origin': process.env.REACT_APP_BASE_URL,
+    'Access-Control-Allow-Origin': "https://backend.in.ngrok.io/",
     'Cache-Control': 'no-cache',
     Pragma: 'no-cache',
     Expires: '0',

@@ -18,9 +18,12 @@ const VerifyOTP = lazy(() => import("../views/auth/VerifyOTP"))
 const CompleteProfile = lazy(() => import("../views/auth/CompleteProfile"))
 
 const DashboardHomePage = lazy(() => import("../views/dashboardPages/HomePage"))
+const DashboardPredictor = lazy(() => import("../views/dashboardPages/Predictor"))
 const DashboardBlogs = lazy(() => import("../views/dashboardPages/Blogs"))
 const DashboardProfile = lazy(() => import("../views/dashboardPages/Profile"))
 const DashboardUpdates = lazy(() => import("../views/dashboardPages/UpdatesPage"))
+const DashboardAbout = lazy(() => import("../views/dashboardPages/About"))
+const DashboardColleges = lazy(() => import("../views/dashboardPages/Colleges"))
 
 
 const router = createBrowserRouter([
@@ -53,6 +56,10 @@ const router = createBrowserRouter([
                 element: <DashboardHomePage />,
             },
             {
+                path: "/dashboard/colleges",
+                element: <DashboardColleges />,
+            },
+            {
                 path: "/dashboard/blogs",
                 element: <DashboardBlogs />,
             },
@@ -63,8 +70,20 @@ const router = createBrowserRouter([
         ],
     },
     {
+        path: "/dashboard/predictor",
+        element: <DashboardPredictor />,
+    },
+    {
         path: "/profile",
         element: <ProtectedRoute><DashboardProfile /></ProtectedRoute>,
+    },
+    {
+        path: "/about",
+        element: <ProtectedRoute><DashboardAbout /></ProtectedRoute>,
+    },
+    {
+        path: "*",
+        element: <ProtectedRoute><DashboardHomePage /></ProtectedRoute>,
     }
 ]);
 

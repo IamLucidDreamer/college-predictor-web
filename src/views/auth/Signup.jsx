@@ -44,7 +44,8 @@ const SignUp = () => {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    if (getAuthToken.length !== 0) {
+    const authToken = getAuthToken();
+    if (authToken?.length) {
       navigate("/dashboard");
     }
   },[]);
@@ -102,12 +103,12 @@ const SignUp = () => {
                 return (
                   <>
                     <div className="w-11/12">
-                      <div className="bg-gray-100 text-secondary flex gap-3 items-center px-3 rounded-full my-5 shadow-lg">
+                      <div className="bg-gray-100 text-secondary flex gap-3 items-center px-3 rounded-lg my-5 shadow-lg">
                         <UserIcon className="w-5 h-5" />
                         <input
                           id="name"
                           placeholder="John Doe"
-                          className="p-2.5 text-lg rounded-full bg-gray-100 w-full focus:outline-none"
+                          className="p-2.5 text-lg rounded-lg bg-gray-100 w-full focus:outline-none"
                           type="text"
                           value={values.name}
                           onChange={handleChange}
@@ -117,12 +118,12 @@ const SignUp = () => {
                         show={touched.name && errors.name ? true : false}
                         error={errors.name}
                       />
-                      <div className="bg-gray-100 text-secondary flex gap-3 items-center px-3 rounded-full my-5 shadow-lg">
+                      <div className="bg-gray-100 text-secondary flex gap-3 items-center px-3 rounded-lg my-5 shadow-lg">
                         <MailIcon className="w-5 h-5" />
                         <input
                           id="email"
                           placeholder="name@example.com"
-                          className="p-2.5 text-lg rounded-full bg-gray-100 w-full focus:outline-none"
+                          className="p-2.5 text-lg rounded-lg bg-gray-100 w-full focus:outline-none"
                           type="email"
                           value={values.email}
                           onChange={handleChange}
@@ -132,11 +133,11 @@ const SignUp = () => {
                         show={touched.email && errors.email ? true : false}
                         error={errors.email}
                       />
-                      <div className="bg-gray-100 text-secondary flex gap-3 items-center px-3 rounded-full my-5 shadow-lg">
+                      <div className="bg-gray-100 text-secondary flex gap-3 items-center px-3 rounded-lg my-5 shadow-lg">
                         <PhoneIcon className="w-6 h-6" />
                         <select
                           id="countryCode"
-                          className="p-2.5 text-lg rounded-full bg-gray-100 focus:outline-none w-20"
+                          className="p-2.5 text-lg rounded-lg bg-gray-100 focus:outline-none w-20"
                           name="countryCode"
                           value={values.countryCode}
                           onChange={handleChange}
@@ -150,7 +151,7 @@ const SignUp = () => {
                         <input
                           id="phoneNumber"
                           placeholder="956905xxxx"
-                          className="p-2.5 text-lg rounded-full bg-gray-100 w-full focus:outline-none"
+                          className="p-2.5 text-lg rounded-lg bg-gray-100 w-full focus:outline-none"
                           type="tel"
                           value={values.phoneNumber}
                           onChange={handleChange}
@@ -164,12 +165,12 @@ const SignUp = () => {
                         }
                         error={errors.phoneNumber}
                       />
-                      <div className="bg-gray-100 text-secondary flex gap-3 items-center px-3 rounded-full my-5 shadow-lg">
+                      <div className="bg-gray-100 text-secondary flex gap-3 items-center px-3 rounded-lg my-5 shadow-lg">
                         <KeyIcon className="w-4 h-4" />
                         <input
                           id="password"
                           placeholder="Password"
-                          className="p-2.5 text-lg rounded-full bg-gray-100 w-full focus:outline-none"
+                          className="p-2.5 text-lg rounded-lg bg-gray-100 w-full focus:outline-none"
                           type="password"
                           value={values.password}
                           onChange={handleChange}
@@ -181,11 +182,11 @@ const SignUp = () => {
                         }
                         error={errors.password}
                       />
-                      <div className="bg-gray-100 text-secondary flex gap-3 items-center px-3 rounded-full my-5 shadow-lg">
+                      <div className="bg-gray-100 text-secondary flex gap-3 items-center px-3 rounded-lg my-5 shadow-lg">
                         <PencilIcon className="w-4 h-4" />
                         <select
                           id="examTYpe"
-                          className="p-2.5 text-lg rounded-full bg-gray-100 w-full focus:outline-none"
+                          className="p-2.5 text-lg rounded-lg bg-gray-100 w-full focus:outline-none"
                           name="examType"
                           value={values.examType}
                           onChange={handleChange}
@@ -204,7 +205,7 @@ const SignUp = () => {
                         error={errors.examType}
                       />
                       <button
-                        className="p-2.5 text-lg rounded-full bg-secondary text-white my-4 w-full shadow-lg"
+                        className="p-2.5 text-lg rounded-lg bg-secondary text-white my-4 w-full shadow-lg"
                         type="submit"
                         onClick={handleSubmit}
                         disabled={loading}
@@ -217,10 +218,10 @@ const SignUp = () => {
                       <div className="bg-secondary h-0.5 w-full"></div>
                     </div>
                     <div className="flex justify-around w-11/12  mb-2">
-                      <button className="rounded-full w-32 p-1 border-2 border-secondary">
+                      <button className="rounded-lg w-32 p-1 border-2 border-secondary">
                         Google
                       </button>
-                      <button className="rounded-full w-32 p-1 border-2 border-secondary">
+                      <button className="rounded-lg w-32 p-1 border-2 border-secondary">
                         Facebook
                       </button>
                     </div> */}

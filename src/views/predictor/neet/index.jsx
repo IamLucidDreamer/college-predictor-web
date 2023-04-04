@@ -5,13 +5,17 @@ import Select from "react-select";
 import { Formik } from "formik";
 import { serverUnauth } from "../../../helpers/apiCall";
 import { toast } from "react-toastify";
-import { getFeidlValue, updatedFieldValue } from "../../../helpers/predictor";
+import {
+  getFeidlValue,
+  getFeildColor,
+  updatedFieldValue,
+} from "../../../helpers/predictor";
 
 const NeetIndex = () => {
   const [activeType, setActiveType] = useState(0);
   const [activeCategoryType, setActiveCategoryType] = useState(0);
   return (
-    <div className="m-2 lg:m-4 shadow-lg rounded-lg">
+    <div className="m-2 lg:m-4 shadow-lg rounded-lg bg-white">
       <div className="flex">
         <button
           onClick={() => setActiveType(1)}
@@ -31,7 +35,7 @@ const NeetIndex = () => {
         </button>
       </div>
 
-      <div className="p-4 my-4">
+      <div className="p-2 lg:p-4 my-4">
         {activeType === 1 && (
           <div className="flex gap-2">
             <button
@@ -60,8 +64,10 @@ const NeetIndex = () => {
             </button>
           </div>
         )}
-        {activeCategoryType === 1 && <PredictorAllIndia />}
-        {activeCategoryType === 2 && <PredictorStateUttarPradesh />}
+        {activeType === 1 && activeCategoryType === 1 && <PredictorAllIndia />}
+        {activeType === 1 && activeCategoryType === 2 && (
+          <PredictorStateUttarPradesh />
+        )}
       </div>
     </div>
   );
@@ -204,29 +210,47 @@ const PredictorAllIndia = () => {
                     </button>
                   )}
                   <div ref={targetRef}>
+                    <div className="flex justify-between">
+                        <div className="w-3/12">Qouta</div>
+                        <div className="w-1/12">Alloted PH</div>
+                        <div className="w-2/12">Allotted Category</div>
+                        <div className="w-1/12">Round</div>
+                        <div className="w-2/12">Course</div>
+                        <div className="w-2/12">Closing Rank</div>
+                        <div className="w-1/12">Percentage </div>
+                    </div>
                     {Object.entries(predictData).map((value, index) => {
                       const key = value[0];
                       const val = value[1];
                       return (
                         <div
                           key={val?.id}
-                          className="p-4 m-4 shadow-lg rounded-lg"
+                          className="p-2 lg:p-4 m-2 lg:m-4 shadow-lg rounded-lg"
                         >
                           <div className="flex items-center justify-start gap-4">
                             <div className="font-semibold">{index + 1} )</div>
                             <div className="w-10/12 font-semibold">{key}</div>
                           </div>
                           {val.map((valMap) => (
-                            <div className="flex gap-5 my-2 pl-5 border-b-2 py-0.5">
-                              <div className="w-4/12">{valMap.quota}</div>
+                            <div
+                              className="flex gap-2 justify-between lg:gap-5 my-2 pl-5 border-b-2 py-0.5 px-1"
+                              style={{
+                                boxShadow: `0 1px 2px 0 ${getFeildColor(
+                                  valMap?.percentage
+                                )}`,
+                              }}
+                            >
+                              <div className="w-3/12">{valMap.quota}</div>
                               <div className="w-1/12">{valMap.allottedPH}</div>
                               <div className="w-2/12">
                                 {valMap.allottedCategory}
                               </div>
                               <div className="w-1/12">{valMap.round}</div>
                               <div className="w-2/12">{valMap.course}</div>
-                              <div className="w-1/12">{valMap.closingRank}</div>
-                              <div className="w-1/12">{valMap.percentage}% </div>
+                              <div className="w-2/12">{valMap.closingRank}</div>
+                              <div className="w-1/12">
+                                {valMap.percentage}%{" "}
+                              </div>
                             </div>
                           ))}
                         </div>
