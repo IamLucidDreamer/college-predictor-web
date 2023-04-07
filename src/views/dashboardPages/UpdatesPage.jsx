@@ -28,7 +28,7 @@ const DashboardUpdates = () => {
             <Card
               title={val?.title}
               description={val?.description}
-              image={val?.image}
+              imageMain={val?.imageMain}
               document={val?.document}
               createdAt={val?.createdAt}
             />
@@ -47,7 +47,7 @@ const DashboardUpdates = () => {
 
 export default DashboardUpdates;
 
-const Card = ({ title, description, image, document, createdAt }) => {
+const Card = ({ title, description, imageMain, document, createdAt }) => {
   return (
     <div className="bg-white shadow-md rounded-lg py-2 px-2 md:px-4 lg:px-6">
       <div className="flow-root">
@@ -56,8 +56,8 @@ const Card = ({ title, description, image, document, createdAt }) => {
             <div className="flex flex-col lg:flex-row items-center gap-4">
               <div className="flex-shrink-0">
                 <img
-                  className="w-28 h-28 rounded-2xl"
-                  src={image}
+                  className="w-28 h-28 rounded-2xl object-cover"
+                  src={imageMain}
                   alt="Lana image"
                 />
               </div>

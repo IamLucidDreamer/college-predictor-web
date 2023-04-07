@@ -10,11 +10,27 @@ const Header = () => {
   const navigate = useNavigate();
 
   const [open, setOpen] = useState(false);
+  const [top, setTop] = useState(false);
 
   const user = useSelector((state) => state?.user);
 
+  useEffect(() => {
+    window.addEventListener("scroll", () => {
+      if (window.pageYOffset > 100) {
+        setTop(true);
+      } else {
+        setTop(false);
+      }
+    });
+    return () => window.removeEventListener("scroll", setTop(false));
+  }, []);
+
   return (
-    <div className="bg-white shadow-lg sticky top-0 z-50">
+    <div
+      className={`bg-white sticky top-0 z-50 duration-500 ${
+        top ? "shadow-lg" : "shadow-none"
+      }`}
+    >
       <div className="container mx-auto px-2 lg:px-10 py-3">
         <div className="flex items-center justify-between">
           <Link to={"/dashboard"}>
@@ -56,9 +72,15 @@ const Header = () => {
                 }
                 className="w-8 h-8 rounded-full"
               />
-              <h1 className="hidden group-hover:block group-hover:pl-0 pl-2 truncate w-24">
+              <button
+                className="hidden group-hover:block group-hover:pl-0 pl-2 truncate w-24"
+                onClick={() => {
+                  clearAuth();
+                  navigate("/");
+                }}
+              >
                 Logout
-              </h1>
+              </button>
             </div>
           </nav>
           <button

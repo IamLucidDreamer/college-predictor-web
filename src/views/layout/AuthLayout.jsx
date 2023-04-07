@@ -8,7 +8,7 @@ const AuthLayout = ({ imageLink, title, description, form }) => {
         className="w-7/12 rounded-r-3xl bg-cover bg-no-repeat bg-center hidden lg:block"
         style={{ backgroundImage: `url(${imageLink})` }}
       >
-        <div className="min-h-screen flex items-center justify-center bg-primary bg-opacity-50 rounded-r-3xl shadow-2xl shadow-primary">
+        <div className="min-h-screen flex items-center justify-center bg-primary bg-opacity-80 rounded-r-3xl shadow-2xl shadow-primary">
           <div className="w-2/3 max-w-xl mt-64">
             <h1 className="text-white text-5xl my-8">{title}</h1>
             <p className="text-white text-xl">{description}</p>
