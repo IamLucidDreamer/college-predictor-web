@@ -1,13 +1,13 @@
 import axios from 'axios';
 import { getAuthToken } from './auth';
 
-const BASE_URL = "https://backend.in.ngrok.io/api";
+const BASE_URL = "http://localhost:8004/college-api";
 
 export const server = axios.create({
   baseURL: `${BASE_URL}`,
   timeout: 600000,
   headers: {
-    'Access-Control-Allow-Origin': "https://backend.in.ngrok.io/",
+    'Access-Control-Allow-Origin': BASE_URL,
     'Cache-Control': 'no-cache',
     Pragma: 'no-cache',
     Expires: '0',
@@ -30,7 +30,7 @@ export const serverUnauth = axios.create({
   baseURL: `${BASE_URL}`,
   timeout: 600000,
   headers: {
-    'Access-Control-Allow-Origin': process.env.REACT_APP_RAILS_HOST,
+    'Access-Control-Allow-Origin': BASE_URL,
     'Cache-Control': 'no-cache',
     Pragma: 'no-cache',
     Expires: '0',
