@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import ReactToPdf from "react-to-pdf";
-// import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
+import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 
 import Select from "react-select";
 import { Formik } from "formik";
@@ -164,97 +164,95 @@ const PredictorAllIndia = ({ initialValues, requiredValues, apiRoute }) => {
   const handleDragEnd = (result) => {
     if (!result.destination) return;
 
-    const items = Array.from(data);
+    const items = Object.entries(predictData);
     const [reorderedItem] = items.splice(result.source.index, 1);
     items.splice(result.destination.index, 0, reorderedItem);
 
-    setData(items);
+    setPredictData(Object.fromEntries(items));
   };
 
+  console.log(predictData, "hello");
+
   return (
-    // <DragDropContext onDragEnd={handleDragEnd}>
-    <Formik
-      initialValues={initialValues}
-      // validationSchema={predictorValidation}
-      onSubmit={(values) => handleSubmit(values)}
-    >
-      {({ values, handleSubmit, setFieldValue }) => {
-        return (
-          <div className="flex flex-col my-3">
-            {Object.keys(values)?.map((val, index) => {
-              console.log(val, index);
-              if (val === "rank") {
-                return;
-              }
-              return (
-                <div className="p-2 w-full md:w-8/12 xl:w-6/12 rounded-full mx-auto">
-                  <h1 className="text-left my-1 font-semibold">
-                    {val
-                      .replace(/([A-Z])/g, " $1")
-                      .charAt(0)
-                      .toUpperCase() + val.replace(/([A-Z])/g, " $1").slice(1)}
-                  </h1>
-                  <Select
-                    onMenuOpen={() =>
-                      getFeidlValue(
-                        val,
-                        values,
-                        values[val],
-                        setLoading,
-                        setData,
-                        setMasterData,
-                        "/neet-dropdown"
-                      )
-                    }
-                    isLoading={loading}
-                    key={val}
-                    placeholder={`Select ${
-                      val
+    <DragDropContext onDragEnd={handleDragEnd}>
+      <Formik
+        initialValues={initialValues}
+        // validationSchema={predictorValidation}
+        onSubmit={(values) => handleSubmit(values)}
+      >
+        {({ values, handleSubmit, setFieldValue }) => {
+          return (
+            <div className="flex flex-col my-3">
+              {Object.keys(values)?.map((val, index) => {
+                console.log(val, index);
+                if (val === "rank") {
+                  return;
+                }
+                return (
+                  <div className="p-2 w-full md:w-8/12 xl:w-6/12 rounded-full mx-auto">
+                    <h1 className="text-left my-1 font-semibold">
+                      {val
                         .replace(/([A-Z])/g, " $1")
                         .charAt(0)
-                        .toUpperCase() + val.replace(/([A-Z])/g, " $1").slice(1)
-                    }`}
-                    isMulti
-                    options={data[val]?.map((value) => {
-                      return { value: value, label: value };
-                    })}
-                    onChange={(e) => {
-                      setFieldValue(
-                        val,
-                        e.map((ele) => {
-                          return ele.value;
-                        })
-                      );
-                      updatedFieldValue(masterData, values, setData);
-                    }}
-                  />
-                </div>
-              );
-            })}
-            <div className="p-2 w-full md:w-8/12 xl:w-6/12 rounded-full mx-auto">
-              <h1 className="text-left my-1 font-semibold">Rank</h1>
-              <input
-                type="number"
-                placeholder="Enter Rank"
-                onChange={(e) => setFieldValue("rank", e.target.value)}
-                className="block w-full border-2 border-gray-200 rounded px-3 py-1.5 "
-              />
-              <button
-                type="submit"
-                onClick={handleSubmit}
-                className="text-base lg:text-lg rounded-lg bg-secondary text-white py-2 my-3 w-full mt-10"
-              >
-                Predict
-              </button>
-            </div>
-            <ReactToPdf scale={0.85}>
-              {({ toPdf, targetRef }) => (
-                // <Droppable droppableId="table">
-                //   {(provided) => {
-                <div
-                // ref={provided.innerRef}
-                // {...provided.droppableProps}
+                        .toUpperCase() +
+                        val.replace(/([A-Z])/g, " $1").slice(1)}
+                    </h1>
+                    <Select
+                      onMenuOpen={() =>
+                        getFeidlValue(
+                          val,
+                          values,
+                          values[val],
+                          setLoading,
+                          setData,
+                          setMasterData,
+                          "/neet-dropdown"
+                        )
+                      }
+                      isLoading={loading}
+                      key={val}
+                      placeholder={`Select ${
+                        val
+                          .replace(/([A-Z])/g, " $1")
+                          .charAt(0)
+                          .toUpperCase() +
+                        val.replace(/([A-Z])/g, " $1").slice(1)
+                      }`}
+                      isMulti
+                      options={data[val]?.map((value) => {
+                        return { value: value, label: value };
+                      })}
+                      onChange={(e) => {
+                        setFieldValue(
+                          val,
+                          e.map((ele) => {
+                            return ele.value;
+                          })
+                        );
+                        updatedFieldValue(masterData, values, setData);
+                      }}
+                    />
+                  </div>
+                );
+              })}
+              <div className="p-2 w-full md:w-8/12 xl:w-6/12 rounded-full mx-auto">
+                <h1 className="text-left my-1 font-semibold">Rank</h1>
+                <input
+                  type="number"
+                  placeholder="Enter Rank"
+                  onChange={(e) => setFieldValue("rank", e.target.value)}
+                  className="block w-full border-2 border-gray-200 rounded px-3 py-1.5 "
+                />
+                <button
+                  type="submit"
+                  onClick={handleSubmit}
+                  className="text-base lg:text-lg rounded-lg bg-secondary text-white py-2 my-3 w-full mt-10"
                 >
+                  Predict
+                </button>
+              </div>
+              <ReactToPdf scale={0.85}>
+                {({ toPdf, targetRef }) => (
                   <div>
                     {Object.entries(predictData).length !== 0 && (
                       <button
@@ -275,70 +273,86 @@ const PredictorAllIndia = ({ initialValues, requiredValues, apiRoute }) => {
                         <div className="w-2/12">Closing Rank</div>
                         <div className="w-1/12">Percentage </div>
                       </div>
-
-                      {Object.entries(predictData).map((value, index) => {
-                        const key = value[0];
-                        const val = value[1];
-                        return (
-                          // <Draggable
-                          //   draggableId={key}
-                          //   index={index}
-                          //   key={key}
-                          // >
-                          //   {(provided) => (
+                      <Droppable droppableId="Data-Table">
+                        {(provided) => (
                           <div
-                            // ref={provided.innerRef}
-                            // {...provided.draggableProps}
-                            // {...provided.dragHandleProps}
-                            className="p-2 lg:p-4 m-2 lg:m-4 shadow-lg rounded-lg"
+                            ref={provided.innerRef}
+                            {...provided.droppableProps}
                           >
-                            <div className="flex items-center justify-start gap-4">
-                              <div className="font-semibold">{index + 1} )</div>
-                              <div className="w-10/12 font-semibold">{key}</div>
-                            </div>
-                            {val.map((valMap) => (
-                              <div
-                                className="flex gap-2 justify-between lg:gap-5 my-2 pl-5 border-b-2 py-0.5 px-1"
-                                style={{
-                                  boxShadow: `0 1px 2px 0 ${getFeildColor(
-                                    valMap?.percentage
-                                  )}`,
-                                }}
-                              >
-                                <div className="w-3/12">{valMap.quota}</div>
-                                <div className="w-1/12">
-                                  {valMap.allottedPH}
-                                </div>
-                                <div className="w-2/12">
-                                  {valMap.allottedCategory}
-                                </div>
-                                <div className="w-1/12">{valMap.round}</div>
-                                <div className="w-2/12">{valMap.course}</div>
-                                <div className="w-2/12">
-                                  {valMap.closingRank}
-                                </div>
-                                <div className="w-1/12">
-                                  {valMap.percentage}%{" "}
-                                </div>
-                              </div>
-                            ))}
+                            <h1>{provided.placeholder}</h1>
+                            {Object.entries(predictData).map((value, index) => {
+                              const key = value[0];
+                              const val = value[1];
+                              return (
+                                <Draggable
+                                  draggableId={key}
+                                  index={index}
+                                  key={key}
+                                >
+                                  {(provided) => (
+                                    <div
+                                      ref={provided.innerRef}
+                                      {...provided.draggableProps}
+                                      {...provided.dragHandleProps}
+                                      className="p-2 lg:p-4 m-2 lg:m-4 shadow-lg rounded-lg"
+                                    >
+                                      <div className="flex items-center justify-start gap-4">
+                                        <div className="font-semibold">
+                                          {index + 1} )
+                                        </div>
+                                        <div className="w-10/12 font-semibold">
+                                          {key}
+                                        </div>
+                                      </div>
+                                      {val.map((valMap) => (
+                                        <div
+                                          className="flex gap-2 justify-between lg:gap-5 my-2 pl-5 border-b-2 py-0.5 px-1"
+                                          style={{
+                                            boxShadow: `0 1px 2px 0 ${getFeildColor(
+                                              valMap?.percentage
+                                            )}`,
+                                          }}
+                                        >
+                                          <div className="w-3/12">
+                                            {valMap.quota}
+                                          </div>
+                                          <div className="w-1/12">
+                                            {valMap.allottedPH}
+                                          </div>
+                                          <div className="w-2/12">
+                                            {valMap.allottedCategory}
+                                          </div>
+                                          <div className="w-1/12">
+                                            {valMap.round}
+                                          </div>
+                                          <div className="w-2/12">
+                                            {valMap.course}
+                                          </div>
+                                          <div className="w-2/12">
+                                            {valMap.closingRank}
+                                          </div>
+                                          <div className="w-1/12">
+                                            {valMap.percentage}%{" "}
+                                          </div>
+                                        </div>
+                                      ))}
+                                    </div>
+                                  )}
+                                </Draggable>
+                              );
+                            })}
                           </div>
-                          //   )}
-                          // </Draggable>
-                        );
-                      })}
+                        )}
+                      </Droppable>
                     </div>
                   </div>
-                </div>
-                //   }}
-                // </Droppable>
-              )}
-            </ReactToPdf>
-          </div>
-        );
-      }}
-    </Formik>
-    // </DragDropContext>
+                )}
+              </ReactToPdf>
+            </div>
+          );
+        }}
+      </Formik>
+    </DragDropContext>
   );
 };
 

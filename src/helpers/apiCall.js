@@ -1,13 +1,13 @@
 import axios from 'axios';
 import { getAuthToken } from './auth';
 
-const BASE_URL = "http://localhost:8004/college-api";
+const BASE_URL = process.env.REACT_APP_BASE_URL;
 
 export const server = axios.create({
   baseURL: `${BASE_URL}`,
   timeout: 600000,
   headers: {
-    'Access-Control-Allow-Origin': BASE_URL,
+    'Access-Control-Allow-Origin': process.env.REACT_APP_BASE_URL,
     'Cache-Control': 'no-cache',
     Pragma: 'no-cache',
     Expires: '0',
@@ -30,7 +30,7 @@ export const serverUnauth = axios.create({
   baseURL: `${BASE_URL}`,
   timeout: 600000,
   headers: {
-    'Access-Control-Allow-Origin': BASE_URL,
+    'Access-Control-Allow-Origin': process.env.REACT_APP_BASE_URL,
     'Cache-Control': 'no-cache',
     Pragma: 'no-cache',
     Expires: '0',

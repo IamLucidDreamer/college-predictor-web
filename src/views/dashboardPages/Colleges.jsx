@@ -80,7 +80,7 @@ const Colleges = () => {
         <MainHeading text={"Top Colleges in Your State"} />
       </div>
       <div className="flex justify-between items-start gap-6">
-        <div className="w-full flex flex-wrap gap-8 justify-center lg:justify-evenly my-4">
+        <div className="flex flex-wrap gap-8 justify-center lg:justify-evenly my-4">
           {dataTopState?.map((val) => {
             return (
               <CollgeCard
@@ -101,7 +101,7 @@ export default Colleges;
 
 const CollgeCard = ({ coverImage, collegeIcon, collegeName, location }) => {
   return (
-    <div className="relative rounded-lg bg-white shadow-md md:flex-row">
+    <div className="relative rounded-lg bg-white shadow-md md:flex-row max-w-md">
       <img
         style={{ width: "400px", height: "220px" }}
         className="rounded-lg object-cover"
@@ -116,20 +116,22 @@ const CollgeCard = ({ coverImage, collegeIcon, collegeName, location }) => {
           alt=""
         />
       </div>
-      <p className="text-secondary font-semibold text-xl text-center mt-4">
-        {collegeName}
-      </p>
-      <p className="mb-2 text-sm text-secondary text-center">{location}</p>
-      <div className="flex justify-center gap-4 items-center p-3 pb-5">
-        <button
-          className="border-secondary text-secondary px-2.5 py-1 rounded-lg text-sm"
-          style={{ borderWidth: "1px" }}
-        >
-          Read More
-        </button>
-        <button className="bg-primary text-white px-2.5 py-1.5 rounded-lg text-sm">
-          Apply Now
-        </button>
+      <div className="px-2">
+        <p className="text-secondary font-semibold text-xl text-center mt-4">
+          {collegeName}
+        </p>
+        <p className="mb-2 text-sm text-secondary text-center">{location}</p>
+        <div className="flex justify-center gap-4 items-center p-3 pb-5">
+          <button
+            className="border-secondary text-secondary px-2.5 py-1 rounded-lg text-sm"
+            style={{ borderWidth: "1px" }}
+          >
+            Read More
+          </button>
+          <button className="bg-primary text-white px-2.5 py-1.5 rounded-lg text-sm">
+            Apply Now
+          </button>
+        </div>
       </div>
     </div>
   );
