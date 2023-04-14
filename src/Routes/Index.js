@@ -17,7 +17,7 @@ const Login = lazy(() => import("../views/auth/Login"))
 const VerifyOTP = lazy(() => import("../views/auth/VerifyOTP"))
 const CompleteProfile = lazy(() => import("../views/auth/CompleteProfile"))
 
-const DashboardHomePage = lazy(() => import("../views/dashboardPages/HomePage"))
+const MainPage = lazy(() => import("../views/dashboardPages/HomePage"))
 const DashboardPredictor = lazy(() => import("../views/dashboardPages/Predictor"))
 const DashboardBlogs = lazy(() => import("../views/dashboardPages/Blogs"))
 const DashboardBlogsDetails = lazy(() => import("../views/dashboardPages/BlogsDetails"))
@@ -49,13 +49,13 @@ const router = createBrowserRouter([
         element: <CompleteProfile />,
     },
     {
+        path: "/home",
+        element: <MainPage />,
+    },
+    {
         path: "/dashboard",
         element: <ProtectedRoute><Dashboard /></ProtectedRoute>,
         children: [
-            {
-                path: "/dashboard",
-                element: <DashboardHomePage />,
-            },
             {
                 path: "/dashboard/colleges",
                 element: <DashboardColleges />,
@@ -88,7 +88,7 @@ const router = createBrowserRouter([
     },
     {
         path: "*",
-        element: <ProtectedRoute><DashboardHomePage /></ProtectedRoute>,
+        element: <Login />,
     }
 ]);
 
