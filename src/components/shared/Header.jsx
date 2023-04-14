@@ -144,11 +144,23 @@ const DrawerMenu = ({ openModal, closeModal, navigate }) => {
                     />
                   </div>
                   <nav className="flex flex-col text-secondary font-semibold text-xl">
-                    <button className="my-4">Colleges</button>
-                    <button className="my-4">Blogs</button>
-                    <button className="my-4">Updates</button>
-                    <button className="my-4">About</button>
-                    <button className="my-4">Profile</button>
+                    <Link to={"/dashboard/predictor"}>
+                      <button className="my-4">Predictor</button>
+                    </Link>
+                    <Link to={"/dashboard/colleges"}>
+                      <button className="my-4">Colleges</button>
+                    </Link>
+                    <Link to={"/dashboard/blogs"}>
+                      <button className="my-4">Blogs</button>
+                    </Link>
+                    <Link to={"/dashboard/updates"}>
+                      <button className="my-4">Updates</button>
+                    </Link>
+                    <Link to={"/about"}>
+                      <button className="my-4">About</button>
+                    </Link>
+                    {/* <button className="my-4">Profile</button>
+                    </Link> */}
                     <button
                       onClick={() => {
                         clearAuth();
