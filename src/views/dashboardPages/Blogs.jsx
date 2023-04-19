@@ -6,6 +6,7 @@ import Updates from "../layout/Updates";
 import dayjs from "dayjs";
 import { truncate } from "../../helpers";
 import MainHeading from "../../components/shared/MainHeading";
+import { useNavigate } from "react-router-dom";
 
 const BlogPage = () => {
   const [data, setData] = useState([]);
@@ -35,6 +36,7 @@ const BlogPage = () => {
                 description={val?.description}
                 imageSecondary={val?.imageSecondary}
                 createdAt={val?.createdAt}
+                id={val?._id}
               />
             );
           })}
@@ -47,7 +49,8 @@ const BlogPage = () => {
 
 export default BlogPage;
 
-const BlogCard = ({ title, description, imageSecondary, createdAt }) => {
+const BlogCard = ({ title, description, imageSecondary, id, createdAt }) => {
+  const navigate = useNavigate();
   return (
     <div className="flex flex-col rounded-lg bg-white shadow-md md:max-w-5xl md:flex-row w-full">
       <img
@@ -69,7 +72,10 @@ const BlogCard = ({ title, description, imageSecondary, createdAt }) => {
           >
             {dayjs(createdAt).format("YYYY-MM-DD  HH:mm")}
           </p>
-          <button className="bg-primary px-2.5 py-1.5 rounded-lg text-white font-semibold text-sm">
+          <button
+            className="bg-primary px-2.5 py-1.5 rounded-lg text-white font-semibold text-sm"
+            onClick={() => navigate(`/dashboard/blogs/${id}`)}
+          >
             Read More
           </button>
         </div>

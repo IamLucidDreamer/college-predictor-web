@@ -1,5 +1,7 @@
 import React from "react";
 
+import Corousal from "nuka-carousel";
+
 import Header from "../../components/shared/Header";
 import Footer from "../../components/shared/Footer";
 
@@ -12,7 +14,27 @@ const HomePage = () => {
   return (
     <div>
       <Header />
-
+      <Corousal
+        defaultControlsConfig={{ nextButtonText: ">", prevButtonText: "<" }}
+        autoplay={true}
+        autoplayInterval={6000}
+        wrapAround={true}
+        dragging={true}
+        cellAlign="center"
+        slidesToShow={3}
+        className="relative min"
+      >
+        <img
+          src="https://cdn.pixabay.com/photo/2014/06/03/19/38/board-361516__480.jpg"
+          className="min-h-[30vh] max-h-[30vh] bg-red-500 mx-auto w-full object-cover"
+        />
+        <div className="min-h-[30vh] bg-green-500 mx-auto"></div>
+        <img
+          src="https://cdn.pixabay.com/photo/2014/06/03/19/38/board-361516__480.jpg"
+          className="min-h-[30vh] max-h-[30vh] bg-red-500 mx-auto w-full object-cover"
+        />
+        <div className="min-h-[30vh] bg-yellow-500 mx-auto"></div>
+      </Corousal>
       {/* Download App Section */}
       <div class="bg-primary bg-opacity-10 w-full py-20">
         <div class="p-4 w-full text-center sm:p-8">
