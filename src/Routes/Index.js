@@ -25,6 +25,7 @@ const DashboardProfile = lazy(() => import("../views/dashboardPages/Profile"))
 const DashboardUpdates = lazy(() => import("../views/dashboardPages/UpdatesPage"))
 const DashboardAbout = lazy(() => import("../views/dashboardPages/About"))
 const DashboardColleges = lazy(() => import("../views/dashboardPages/Colleges"))
+const DashboardCollegeDetails = lazy(() => import("../views/dashboardPages/CollegeProfile"))
 
 
 const router = createBrowserRouter([
@@ -59,6 +60,10 @@ const router = createBrowserRouter([
             {
                 path: "/dashboard/colleges",
                 element: <DashboardColleges />,
+            },
+            {
+                path: "/dashboard/colleges/:collegeId",
+                element: <DashboardCollegeDetails />,
             },
             {
                 path: "/dashboard/blogs",
