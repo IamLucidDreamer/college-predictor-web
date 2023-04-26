@@ -61,49 +61,57 @@ const CollegeProfile = () => {
                     />
                   </svg>
                 </span>
-                <span>Similar Profiles</span>
+                <span>INSTITUTE FEE</span>
               </div>
-              <div class="grid grid-cols-3">
-                <div class="text-center my-2">
-                  <img
-                    class="h-16 w-16 rounded-full mx-auto"
-                    src="https://cdn.australianageingagenda.com.au/wp-content/uploads/2015/06/28085920/Phil-Beckett-2-e1435107243361.jpg"
-                    alt=""
-                  />
-                  <a href="#" class="text-main-color">
-                    Kojstantin
-                  </a>
-                </div>
-                <div class="text-center my-2">
-                  <img
-                    class="h-16 w-16 rounded-full mx-auto"
-                    src="https://avatars2.githubusercontent.com/u/24622175?s=60&amp;v=4"
-                    alt=""
-                  />
-                  <a href="#" class="text-main-color">
-                    James
-                  </a>
-                </div>
-                <div class="text-center my-2">
-                  <img
-                    class="h-16 w-16 rounded-full mx-auto"
-                    src="https://lavinephotography.com.au/wp-content/uploads/2017/01/PROFILE-Photography-112.jpg"
-                    alt=""
-                  />
-                  <a href="#" class="text-main-color">
-                    Natie
-                  </a>
-                </div>
-                <div class="text-center my-2">
-                  <img
-                    class="h-16 w-16 rounded-full mx-auto"
-                    src="https://bucketeer-e05bbc84-baa3-437e-9518-adb32be77984.s3.amazonaws.com/public/images/f04b52da-12f2-449f-b90c-5e4d5e2b1469_361x361.png"
-                    alt=""
-                  />
-                  <a href="#" class="text-main-color">
-                    Casey
-                  </a>
-                </div>
+              <div className="mt-2">
+                <h2 className="text-sm">Caution Money (One Time, Refundable)</h2>
+                <span className="text-teal-600">₹5,000</span>
+                <h2 className="text-sm">One Time Fees</h2>
+                <span className="text-teal-600">₹3,900</span>
+                <h2 className="text-sm">Tuition Fee (per Semester)</h2>
+                <span className="text-teal-600">₹1,00,000</span>
+                <h2 className="text-sm">Other fees (per Semester)</h2>
+                <span className="text-teal-600">₹4,500</span>
+                <h2 className="text-sm">Annual Fees</h2>
+                <span className="text-teal-600">₹2,390</span>
+              </div>
+            </div>
+
+            <div class="mt-4 bg-white p-3 hover:shadow">
+              <div class="flex items-center space-x-3 font-semibold text-gray-900 text-xl leading-8">
+                <span class="text-green-500">
+                  <svg
+                    class="h-5 fill-current"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"
+                    />
+                  </svg>
+                </span>
+                <span>HOSTEL FEE</span>
+              </div>
+              <div className="mt-2">
+                <h2 className="text-sm">Hostel Caution Money (One Time, Refundable)</h2>
+                <span className="text-teal-600">₹4,000</span>
+                <h2 className="text-sm">Mess Caution Money (One Time, Refundable)</h2>
+                <span className="text-teal-600">₹3,000</span>
+                <h2 className="text-sm">One Time Fees</h2>
+                <span className="text-teal-600">₹2,000</span>
+                <h2 className="text-sm">Hostel Seat Rent (per Semester)</h2>
+                <span className="text-teal-600">₹500</span>
+                <h2 className="text-sm">Electricity & Water charges (per Semester)</h2>
+                <span className="text-teal-600">₹1,500</span>
+                <h2 className="text-sm">Other fees (per Semester)</h2>
+                <span className="text-teal-600">₹8,500</span>
+                <h2 className="text-sm">Mess Advance (per Semester)</h2>
+                <span className="text-teal-600">₹14,000</span>
               </div>
             </div>
           </div>
@@ -132,40 +140,24 @@ const CollegeProfile = () => {
               <div class="text-gray-700">
                 <div class="grid md:grid-cols-2 text-sm">
                   <div class="grid grid-cols-2">
-                    <div class="px-4 py-2 font-semibold">First Name</div>
-                    <div class="px-4 py-2">Jane</div>
+                    <div class="px-4 py-2 font-semibold">Institute Name</div>
+                    <div class="px-4 py-2">Indian Institute of Technology, Bhubaneswar</div>
                   </div>
                   <div class="grid grid-cols-2">
-                    <div class="px-4 py-2 font-semibold">Last Name</div>
-                    <div class="px-4 py-2">Doe</div>
+                    <div class="px-4 py-2 font-semibold">Also Known As</div>
+                    <div class="px-4 py-2">IIT BBS</div>
                   </div>
                   <div class="grid grid-cols-2">
-                    <div class="px-4 py-2 font-semibold">Gender</div>
-                    <div class="px-4 py-2">Female</div>
+                    <div class="px-4 py-2 font-semibold">Institute Type</div>
+                    <div class="px-4 py-2">Government</div>
                   </div>
                   <div class="grid grid-cols-2">
-                    <div class="px-4 py-2 font-semibold">Contact No.</div>
-                    <div class="px-4 py-2">+11 998001001</div>
+                    <div class="px-4 py-2 font-semibold">Established</div>
+                    <div class="px-4 py-2">2008</div>
                   </div>
                   <div class="grid grid-cols-2">
-                    <div class="px-4 py-2 font-semibold">Current Address</div>
-                    <div class="px-4 py-2">Beech Creek, PA, Pennsylvania</div>
-                  </div>
-                  <div class="grid grid-cols-2">
-                    <div class="px-4 py-2 font-semibold">Permanant Address</div>
-                    <div class="px-4 py-2">Arlington Heights, IL, Illinois</div>
-                  </div>
-                  <div class="grid grid-cols-2">
-                    <div class="px-4 py-2 font-semibold">Email.</div>
-                    <div class="px-4 py-2">
-                      <a class="text-blue-800" href="mailto:jane@example.com">
-                        jane@example.com
-                      </a>
-                    </div>
-                  </div>
-                  <div class="grid grid-cols-2">
-                    <div class="px-4 py-2 font-semibold">Birthday</div>
-                    <div class="px-4 py-2">Feb 06, 1998</div>
+                    <div class="px-4 py-2 font-semibold">Location</div>
+                    <div class="px-4 py-2">Bhubaneswar, Odisha</div>
                   </div>
                 </div>
               </div>
@@ -196,24 +188,26 @@ const CollegeProfile = () => {
                         />
                       </svg>
                     </span>
-                    <span class="tracking-wide">Experience</span>
+                    <span class="tracking-wide">COURSES OFFERED</span>
                   </div>
                   <ul class="list-inside space-y-2">
                     <li>
-                      <div class="text-teal-600">Owner at Her Company Inc.</div>
-                      <div class="text-gray-500 text-xs">March 2020 - Now</div>
+                      <div class="text-teal-600">Civil Engineering</div>
                     </li>
                     <li>
-                      <div class="text-teal-600">Owner at Her Company Inc.</div>
-                      <div class="text-gray-500 text-xs">March 2020 - Now</div>
+                      <div class="text-teal-600">Computer Science and Engineering</div>
                     </li>
                     <li>
-                      <div class="text-teal-600">Owner at Her Company Inc.</div>
-                      <div class="text-gray-500 text-xs">March 2020 - Now</div>
+                      <div class="text-teal-600">Electrical Engineering</div>
                     </li>
                     <li>
-                      <div class="text-teal-600">Owner at Her Company Inc.</div>
-                      <div class="text-gray-500 text-xs">March 2020 - Now</div>
+                      <div class="text-teal-600">Electronics and Communication Engineering</div>
+                    </li>
+                    <li>
+                      <div class="text-teal-600">Mechanical Engineering</div>
+                    </li>
+                    <li>
+                      <div class="text-teal-600">Metallurgical and Materials Engineering</div>
                     </li>
                   </ul>
                 </div>
@@ -240,18 +234,68 @@ const CollegeProfile = () => {
                         />
                       </svg>
                     </span>
-                    <span class="tracking-wide">Education</span>
+                    <span class="tracking-wide">TOP RECRUITERS</span>
                   </div>
-                  <ul class="list-inside space-y-2">
-                    <li>
-                      <div class="text-teal-600">Masters Degree in Oxford</div>
-                      <div class="text-gray-500 text-xs">March 2020 - Now</div>
-                    </li>
-                    <li>
-                      <div class="text-teal-600">Bachelors Degreen in LPU</div>
-                      <div class="text-gray-500 text-xs">March 2020 - Now</div>
-                    </li>
-                  </ul>
+                  <div className="flex gap-12">
+                    <ul class="list-inside space-y-2">
+                      <li>
+                        <div class="text-teal-600">Adobe</div>
+                      </li>
+                      <li>
+                        <div class="text-teal-600">Amazon</div>
+                      </li>
+                      <li>
+                        <div class="text-teal-600">BEL</div>
+                      </li>
+                      <li>
+                        <div class="text-teal-600">Byjus</div>
+                      </li>
+                      <li>
+                        <div class="text-teal-600">C-DAC</div>
+                      </li>
+                      <li>
+                        <div class="text-teal-600">D.E.Shaw</div>
+                      </li>
+                      <li>
+                        <div class="text-teal-600">Flipkart</div>
+                      </li>
+                      <li>
+                        <div class="text-teal-600">FlyFin</div>
+                      </li>
+                      <li>
+                        <div class="text-teal-600">GAIL</div>
+                      </li>
+                    </ul>
+                    <ul class="list-inside space-y-2">
+                      <li>
+                        <div class="text-teal-600">Adobe</div>
+                      </li>
+                      <li>
+                        <div class="text-teal-600">Amazon</div>
+                      </li>
+                      <li>
+                        <div class="text-teal-600">BEL</div>
+                      </li>
+                      <li>
+                        <div class="text-teal-600">Byjus</div>
+                      </li>
+                      <li>
+                        <div class="text-teal-600">C-DAC</div>
+                      </li>
+                      <li>
+                        <div class="text-teal-600">D.E.Shaw</div>
+                      </li>
+                      <li>
+                        <div class="text-teal-600">Flipkart</div>
+                      </li>
+                      <li>
+                        <div class="text-teal-600">FlyFin</div>
+                      </li>
+                      <li>
+                        <div class="text-teal-600">GAIL</div>
+                      </li>
+                    </ul>
+                  </div>
                 </div>
               </div>
             </div>

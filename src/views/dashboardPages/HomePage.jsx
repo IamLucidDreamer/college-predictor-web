@@ -35,18 +35,13 @@ const HomePage = () => {
             <h1 className="text-5xl text-white font-semibold">
               Search for Colleges Across India
             </h1>
-            <div className="relative w-full lg:w-1/3">
+            <div className="w-full lg:w-1/2 flex items-center justify-between gap-2 bg-white p-2.5 rounded-xl">
               <input
-                type="search"
-                id="location-search"
-                className="block p-2.5 w-full z-20 text-sm text-gray-900 bg-gray-50 rounded-r-lg border-l-gray-50 border-l-2 border border-gray-300 focus:ring-primary focus:border-primary"
+                className="focus:outline-none w-full"
+                type="text"
                 placeholder="Search for city or address"
-                required
               />
-              <button
-                type="submit"
-                className="absolute top-0 right-0 p-2.5 text-sm font-medium text-white bg-blue-700 rounded-r-lg border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300"
-              >
+              <button className="text-sm text-slate-400">
                 <svg
                   aria-hidden="true"
                   className="w-5 h-5"
@@ -62,13 +57,15 @@ const HomePage = () => {
                     d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
                   ></path>
                 </svg>
-                <span className="sr-only">Search</span>
               </button>
             </div>
           </div>
         </div>
       </div>
-      <div className="mx-auto max-w-screen-lg">
+      <div className="mx-auto max-w-screen-lg mt-[-6rem]">
+        <h2 className="text-center text-white">
+          Latest Updates & Notifications
+        </h2>
         <Corousal
           defaultControlsConfig={{ nextButtonText: ">", prevButtonText: "<" }}
           autoplay={true}
@@ -79,21 +76,157 @@ const HomePage = () => {
           slidesToShow={3}
           className=""
         >
-          <img
-            src="https://cdn.pixabay.com/photo/2014/06/03/19/38/board-361516__480.jpg"
-            className="min-h-[30vh] max-h-[30vh] bg-red-500 mx-auto w-full object-cover"
-          />
-          <div className="min-h-[30vh] bg-green-500 mx-auto"></div>
-          <img
-            src="https://cdn.pixabay.com/photo/2014/06/03/19/38/board-361516__480.jpg"
-            className="min-h-[30vh] max-h-[30vh] bg-red-500 mx-auto w-full object-cover"
-          />
-          <div className="min-h-[30vh] bg-yellow-500 mx-auto"></div>
+          <div className="bg-white rounded-lg p-3 mx-2 flex items-center gap-2 border-b-2 border-green-500">
+            <img
+              className="w-[5rem]"
+              src="https://th.bing.com/th/id/OIP.UivuSmnBJX5p18zf5qCrKgHaHa?pid=ImgDet&rs=1"
+              alt=""
+            />
+            <div>
+              <h2 className="font-bold">National Testing</h2>
+              <p className="text-sm">
+                Lorem ipsum dolor sit amet consectetur....
+              </p>
+            </div>
+          </div>
+          <div className="bg-white rounded-lg p-3 mx-2 flex items-center gap-2 border-b-2 border-green-500">
+            <img
+              className="w-[5rem]"
+              src="https://th.bing.com/th/id/OIP.UivuSmnBJX5p18zf5qCrKgHaHa?pid=ImgDet&rs=1"
+              alt=""
+            />
+            <div>
+              <h2 className="font-bold">National Testing</h2>
+              <p className="text-sm">
+                Lorem ipsum dolor sit amet consectetur....
+              </p>
+            </div>
+          </div>
+          <div className="bg-white rounded-lg p-3 mx-2 flex items-center gap-2 border-b-2 border-green-500">
+            <img
+              className="w-[5rem]"
+              src="https://th.bing.com/th/id/OIP.UivuSmnBJX5p18zf5qCrKgHaHa?pid=ImgDet&rs=1"
+              alt=""
+            />
+            <div>
+              <h2 className="font-bold">National Testing</h2>
+              <p className="text-sm">
+                Lorem ipsum dolor sit amet consectetur....
+              </p>
+            </div>
+          </div>
         </Corousal>
       </div>
-      <div>
-        <h1 className="">India's Leading Education Portal for all you academic needs</h1>
-        <h2 className="">India's Leading Education Portal for all you academic needs</h2>
+      <div className="my-10 text-center p-5">
+        <h1 className="font-semibold text-2xl">
+          India's Leading Education Portal for all you academic needs
+        </h1>
+        <h2 className="mt-2">
+          India's Leading Education Portal for all you academic needs
+        </h2>
+        <div className="mt-10 flex flex-col md:flex-row justify-center gap-4">
+          <div className="lg:w-1/6 bg-gray-200 p-8 py-14 rounded">
+            <h2 className="font-semibold text-lg">Colleges</h2>
+            <p>Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet.</p>
+          </div>
+          <div className="lg:w-1/6 bg-gray-200 p-8 py-14 rounded">
+            <h2 className="font-semibold text-lg">Colleges</h2>
+            <p>Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet.</p>
+          </div>
+          <div className="lg:w-1/6 bg-gray-200 p-8 py-14 rounded">
+            <h2 className="font-semibold text-lg">Colleges</h2>
+            <p>Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet.</p>
+          </div>
+        </div>
+      </div>
+      <div className="py-10 text-center p-5 bg-gray-200">
+        <h1 className="font-semibold text-2xl">
+          Counselling
+        </h1>
+        <h2 className="mt-2">
+          India's Leading Education Portal for all you academic needs
+        </h2>
+        <div className="mt-10 flex flex-col md:flex-row items-center justify-center gap-3">
+          <div className="w-full md:w-3/5 xl:w-1/2 2xl:w-1/3 relative">
+            <img className="rounded-lg" src="https://cdn.pixabay.com/photo/2017/06/20/22/14/man-2425121_960_720.jpg" alt="" />
+            <div className="absolute bottom-14 -left-8 p-3 py-6 w-[17rem] bg-white rounded-lg flex items-center gap-2">
+              <img className="w-[3rem]" src="https://th.bing.com/th/id/OIP.UivuSmnBJX5p18zf5qCrKgHaHa?pid=ImgDet&rs=1" alt="" />
+              <div>
+                <h2 className="font-bold">Colleges</h2>
+                <p className="text-sm">India's Leading Education Portal for all you</p>
+              </div>
+            </div>
+          </div>
+          <div className="text-left flex flex-col gap-3">
+            <div className="p-3 py-6 w-[17rem] bg-white rounded-lg flex items-center gap-2">
+              <img className="w-[3rem]" src="https://th.bing.com/th/id/OIP.UivuSmnBJX5p18zf5qCrKgHaHa?pid=ImgDet&rs=1" alt="" />
+              <div>
+                <h2 className="font-bold">Colleges</h2>
+                <p className="text-sm">India's Leading Education Portal for all you</p>
+              </div>
+            </div>
+            <div className="p-3 py-6 w-[17rem] bg-white rounded-lg flex items-center gap-2">
+              <img className="w-[3rem]" src="https://th.bing.com/th/id/OIP.UivuSmnBJX5p18zf5qCrKgHaHa?pid=ImgDet&rs=1" alt="" />
+              <div>
+                <h2 className="font-bold">Colleges</h2>
+                <p className="text-sm">India's Leading Education Portal for all you</p>
+              </div>
+            </div>
+            <div className="p-3 py-6 w-[17rem] bg-white rounded-lg flex items-center gap-2">
+              <img className="w-[3rem]" src="https://th.bing.com/th/id/OIP.UivuSmnBJX5p18zf5qCrKgHaHa?pid=ImgDet&rs=1" alt="" />
+              <div>
+                <h2 className="font-bold">Colleges</h2>
+                <p className="text-sm">India's Leading Education Portal for all you</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className="py-10 text-center p-5">
+        <h1 className="font-semibold text-2xl">
+          Top Colleges
+        </h1>
+        <div className="mt-10 flex flex-col md:flex-row justify-center gap-7">
+          <div className="w-full md:w-1/5 rounded-lg bg-gray-200">
+            <div className="relative">
+              <img className="rounded-t-lg" src="https://cdn.pixabay.com/photo/2020/11/19/08/03/college-5757815_960_720.jpg" alt="" />
+            <div className="w-[4rem] absolute -bottom-5 left-0 right-0 mx-auto">
+              <img className="w-[4rem] h-[4rem] rounded-full" src="https://th.bing.com/th/id/OIP.UivuSmnBJX5p18zf5qCrKgHaHa?pid=ImgDet&rs=1" alt="" />
+            </div>
+            </div>
+            <div className="py-5">
+              <h2 className="font-semibold text-lg">SRM University Chennai</h2>
+              <h3 className="text-sm">Lorem ipsum dolor sit.</h3>
+              <span className="text-white text-xs bg-green-400 rounded-full px-4">active</span>
+            </div>
+          </div>
+          <div className="w-full md:w-1/5 rounded-lg bg-gray-200">
+            <div className="relative">
+              <img className="rounded-t-lg" src="https://cdn.pixabay.com/photo/2020/11/19/08/03/college-5757815_960_720.jpg" alt="" />
+            <div className="w-[4rem] absolute -bottom-5 left-0 right-0 mx-auto">
+              <img className="w-[4rem] h-[4rem] rounded-full" src="https://th.bing.com/th/id/OIP.UivuSmnBJX5p18zf5qCrKgHaHa?pid=ImgDet&rs=1" alt="" />
+            </div>
+            </div>
+            <div className="py-5">
+              <h2 className="font-semibold text-lg">SRM University Chennai</h2>
+              <h3 className="text-sm">Lorem ipsum dolor sit.</h3>
+              <span className="text-white text-xs bg-green-400 rounded-full px-4">active</span>
+            </div>
+          </div>
+          <div className="w-full md:w-1/5 rounded-lg bg-gray-200">
+            <div className="relative">
+              <img className="rounded-t-lg" src="https://cdn.pixabay.com/photo/2020/11/19/08/03/college-5757815_960_720.jpg" alt="" />
+            <div className="w-[4rem] absolute -bottom-5 left-0 right-0 mx-auto">
+              <img className="w-[4rem] h-[4rem] rounded-full" src="https://th.bing.com/th/id/OIP.UivuSmnBJX5p18zf5qCrKgHaHa?pid=ImgDet&rs=1" alt="" />
+            </div>
+            </div>
+            <div className="py-5">
+              <h2 className="font-semibold text-lg">SRM University Chennai</h2>
+              <h3 className="text-sm">Lorem ipsum dolor sit.</h3>
+              <span className="text-white text-xs bg-green-400 rounded-full px-4">active</span>
+            </div>
+          </div>
+        </div>
       </div>
       {/* Download App Section */}
       <div className="bg-primary bg-opacity-10 w-full py-20">
