@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import ReactToPdf from "react-to-pdf";
+// import ReactToPdf from "react-to-pdf";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 
 import Select from "react-select";
@@ -251,10 +251,10 @@ const PredictorAllIndia = ({ initialValues, requiredValues, apiRoute }) => {
                   Predict
                 </button>
               </div>
-              <ReactToPdf scale={0.85}>
-                {({ toPdf, targetRef }) => (
+              {/* <ReactToPdf scale={0.85}>
+                {({ toPdf, targetRef }) => ( */}
                   <div>
-                    {Object.entries(predictData).length !== 0 && (
+                    {/* {Object.entries(predictData).length !== 0 && (
                       <button
                         onClick={toPdf}
                         className="text-base lg:text-lg rounded-lg bg-secondary text-white py-2 my-3 w-4/12 mt-10"
@@ -262,8 +262,8 @@ const PredictorAllIndia = ({ initialValues, requiredValues, apiRoute }) => {
                         {" "}
                         TO PDF
                       </button>
-                    )}
-                    <div ref={targetRef}>
+                    )} */}
+                    <div>
                       <div className="flex justify-between">
                         <div className="w-3/12">Qouta</div>
                         <div className="w-1/12">Alloted PH</div>
@@ -346,8 +346,8 @@ const PredictorAllIndia = ({ initialValues, requiredValues, apiRoute }) => {
                       </Droppable>
                     </div>
                   </div>
-                )}
-              </ReactToPdf>
+                {/* )}
+              </ReactToPdf> */}
             </div>
           );
         }}

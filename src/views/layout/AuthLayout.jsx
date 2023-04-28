@@ -1,10 +1,30 @@
-import React from "react";
+import React, { useEffect } from "react";
 import bgAuth from "../../assets/images/auth_bg_mobile.png";
+import { useRef } from "react";
+import { gsap } from "gsap";
 
 const AuthLayout = ({ imageLink, title, description, form }) => {
+  const myRef = useRef(null);
+  const formRef = useRef(null);
+
+  useEffect(() => {
+    gsap.from(myRef.current, {
+      duration: 1,
+      ease: "power2.out",
+      opacity: 0,
+      x: "-100%",
+    });
+    gsap.from(formRef.current, { duration: 1, opacity: 0.2 });
+    return () => {
+      gsap.to(myRef.current, { duration: 1, opacity: 0, x: -75 });
+      gsap.to(formRef.current, { duration: 1, opacity: 20 });
+    };
+  }, []);
+
   return (
     <div className="max-h-screen w-full bg-white overflow-hidden flex">
       <div
+        ref={myRef}
         className="w-7/12 rounded-r-3xl bg-cover bg-no-repeat bg-center hidden lg:block"
         style={{ backgroundImage: `url(${imageLink})` }}
       >
@@ -16,6 +36,7 @@ const AuthLayout = ({ imageLink, title, description, form }) => {
         </div>
       </div>
       <div
+        ref={formRef}
         className="w-full lg:w-5/12  bg-no-repeat bg-cover bg-center"
         style={{
           backgroundImage: `url(${window.innerWidth < 1024 ? bgAuth : ""})`,
