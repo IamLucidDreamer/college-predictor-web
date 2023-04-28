@@ -49,7 +49,7 @@ const Login = () => {
       }
     } catch (err) {
       console.error("Error : ", err);
-      toast.error(err?.message || "Something went Wrong");
+      toast.error(err?.response?.data?.error || "Something went Wrong");
     }
     setLoading(false);
   };
