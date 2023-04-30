@@ -74,7 +74,7 @@ const SignUp = () => {
     <>
       <AuthLayout
         imageLink={image}
-        title={"Sign In"}
+        title={"Sign Up"}
         description={
           "loren inpusm dolor sadf acudan favascaec acffe sdclaf cudan sdcfa oasd fdSS."
         }
@@ -194,7 +194,7 @@ const SignUp = () => {
                           <option value={0} disabled>
                             Select Exam
                           </option>
-                          <option value={1}>JEE</option>
+                          <option value={1} disabled >JEE (Comming Soon)</option>
                           <option value={2}>NEET</option>
                         </select>
                       </div>
@@ -210,7 +210,7 @@ const SignUp = () => {
                         onClick={handleSubmit}
                         disabled={loading}
                       >
-                        {loading ? <Loader width={25} height={25} /> : "SignUp"}
+                        {loading ? <Loader width={25} height={25} /> : "Sign Up"}
                       </button>
                       {/* <div className="flex items-center gap-2 mt-4 mb-2 w-11/12 ">
                       <div className="bg-secondary h-0.5 w-full"></div>
@@ -226,7 +226,7 @@ const SignUp = () => {
                       </button>
                     </div> */}
                       <div className="text-sm my-3 w-full text-center">
-                        Don't have and account ?{" "}
+                        Already Have an account ?{" "}
                         <Link
                           to={"/login"}
                           className="text-primary font-semibold"

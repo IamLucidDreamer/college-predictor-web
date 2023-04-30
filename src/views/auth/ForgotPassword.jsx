@@ -1,29 +1,29 @@
 import React, { useEffect, useState } from "react";
 import { Formik } from "formik";
 import * as Yup from "yup";
-import { KeyIcon, UserIcon } from "@heroicons/react/outline";
-import { toast } from "react-toastify";
 
 import CustomValidationErrorMessage from "../../components/errors/CustomValidationErrorMessage";
 import Loader from "../../components/loader/index";
-import { login } from "../../services/authService";
+import { sendOtp } from "../../services/authService";
+import { toast } from "react-toastify";
 import AuthLayout from "../layout/AuthLayout";
 import AppLogo from "../../components/images/AppLogo";
-import image from "../../assets/images/login.png";
+import image from "../../assets/images/signup.jpg";
 import { Link, useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { setUser } from "../../store/actions/userActions";
+import {
+  PhoneIcon,
+} from "@heroicons/react/outline";
+import { phoneCodes } from "../../helpers/phoneNumberCode";
 import { getAuthToken } from "../../helpers/auth";
 
-const loginValidation = Yup.object({
-  username: Yup.string().required("This field is Required"),
-  password: Yup.string()
-    .required("Password field is required")
-    .min(8, "The Password lenght should be atleast 8 characters"),
+const forgotPasswordValidation = Yup.object({
+  phoneNumber: Yup.string()
+    .min(10, "Phone Number should be of atleast 10 digits")
+    .max(10, "Phone Number should not be more than 10 digits")
+    .required("Phone Number field is required"),
 });
 
-const Login = () => {
-  const dispatch = useDispatch();
+const ForgotPassword = () => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
 
@@ -34,23 +34,18 @@ const Login = () => {
     }
   }, []);
 
-  const handleLogin = async (values) => {
+  const handleSendOTP = async (values) => {
     setLoading(true);
     try {
-      if (/^(\d+-)*(\d+)$/.test(values.username)) {
-        values.phoneNumber = values.username;
-        delete values.username;
-      } else {
-        values.email = values.username;
-        delete values.username;
-      }
-      const response = await login(values);
+      const response = await sendOtp(
+        `${values.countryCode}${values.phoneNumber}`
+      );
       const { status } = response;
       if (status >= 200 && status < 300) {
-        dispatch(setUser(response?.data?.user));
-        localStorage.setItem("authToken", response?.data?.token);
-        navigate("/profile");
-        toast.success("Login Was Success");
+        toast.success(
+          `OTP Sent Succesfully to ${values.countryCode}${values.phoneNumber}`
+        );
+        navigate("/new-password", { state: { values } });
       }
     } catch (err) {
       console.error("Error : ", err);
@@ -58,17 +53,17 @@ const Login = () => {
     }
     setLoading(false);
   };
+
   return (
     <>
       <AuthLayout
-        show={true}
         imageLink={image}
-        title={"Sign In"}
+        title={"Forgot Password"}
         description={
-          "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nesciunt sapiente ducimus."
+          "loren inpusm dolor sadf acudan favascaec acffe sdclaf cudan sdcfa oasd fdSS."
         }
         form={
-          <div className="w-11/12 lg:w-10/12 xl:w-2/3 max-w-2xl flex flex-col items-center justify-center">
+          <div className="w-11/12 lg:w-10/12 xl:w-2/3 max-w-2xl flex flex-col items-center justify-center pt-4">
             <AppLogo
               width={"250px"}
               height={"250px"}
@@ -76,53 +71,52 @@ const Login = () => {
             />
             <Formik
               initialValues={{
-                username: "",
-                password: "",
+                countryCode: "+91",
+                phoneNumber: "",
               }}
-              validationSchema={loginValidation}
-              onSubmit={(values) => handleLogin(values)}
+              validationSchema={forgotPasswordValidation}
+              onSubmit={(values) => {
+                handleSendOTP(values);
+              }}
             >
               {({ values, touched, errors, handleChange, handleSubmit }) => {
                 return (
                   <>
-                    <div className="w-11/12 ">
+                    <div className="w-11/12">
                       <div className="bg-gray-100 text-secondary flex gap-3 items-center px-3 rounded-lg my-5 shadow-lg">
-                        <UserIcon className="w-5 h-5" />
+                        <PhoneIcon className="w-6 h-6" />
+                        <select
+                          id="countryCode"
+                          className="p-2.5 text-lg rounded-lg bg-gray-100 focus:outline-none w-20"
+                          name="countryCode"
+                          value={values.countryCode}
+                          onChange={handleChange}
+                        >
+                          {phoneCodes?.map((val) => (
+                            <option value={val?.dial_code}>
+                              {val?.dial_code}
+                            </option>
+                          ))}
+                        </select>
                         <input
-                          id="username"
-                          placeholder="Email or Phone Number"
+                          id="phoneNumber"
+                          placeholder="956905xxxx"
                           className="p-2.5 text-lg rounded-lg bg-gray-100 w-full focus:outline-none"
-                          type="username"
-                          value={values.username}
+                          type="tel"
+                          value={values.phoneNumber}
                           onChange={handleChange}
                         />
                       </div>
                       <CustomValidationErrorMessage
                         show={
-                          touched.username && errors.username ? true : false
+                          touched.phoneNumber && errors.phoneNumber
+                            ? true
+                            : false
                         }
-                        error={errors.username}
+                        error={errors.phoneNumber}
                       />
-                      <div className="bg-gray-100 text-secondary flex gap-3 items-center px-3 rounded-lg my-5 shadow-lg">
-                        <KeyIcon className="w-5 h-5" />
-                        <input
-                          id="password"
-                          placeholder="Password"
-                          className="p-2.5 text-lg rounded-lg bg-gray-100 w-full focus:outline-none"
-                          type="password"
-                          value={values.password}
-                          onChange={handleChange}
-                        />
-                      </div>
-                      <CustomValidationErrorMessage
-                        show={
-                          touched.password && errors.password ? true : false
-                        }
-                        error={errors.password}
-                      />
-
                       <button
-                        className="p-2.5 text-lg rounded-lg bg-secondary text-white w-full my-3 shadow-lg"
+                        className="p-2.5 text-lg rounded-lg bg-secondary text-white my-4 w-full shadow-lg"
                         type="submit"
                         onClick={handleSubmit}
                         disabled={loading}
@@ -130,12 +124,9 @@ const Login = () => {
                         {loading ? (
                           <Loader width={25} height={25} />
                         ) : (
-                          "Sign In"
+                          "Send OTP"
                         )}
                       </button>
-                      <div className="text-sm w-full text-right my-1 px-3">
-                        <Link to={"/forgot-password"}>Forgot Password</Link>
-                      </div>
                       {/* <div className="flex items-center gap-2 mt-4 mb-2 w-11/12 ">
                       <div className="bg-secondary h-0.5 w-full"></div>
                       <h1 className="text-sm text-secondary">or</h1>
@@ -149,7 +140,7 @@ const Login = () => {
                         Facebook
                       </button>
                     </div> */}
-                      <div className="text-sm my-3 text-center">
+                      <div className="text-sm my-3 w-full text-center">
                         Don't have and account ?{" "}
                         <Link
                           to={"/signup"}
@@ -170,4 +161,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default ForgotPassword;

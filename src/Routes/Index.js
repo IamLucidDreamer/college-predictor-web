@@ -10,11 +10,13 @@ import Dashboard from "../views/layout/Dashboard";
 import UserProfile from "../views/layout/UserProfile";
 import Card from "../views/layout/Card";
 
-const HomePage = lazy(() => import("../views/index"))
+const LandingPAgeApp = lazy(() => import("../views/index"))
 const SignUp = lazy(() => import("../views/auth/Signup"));
 const Predictor = lazy(() => import("../views/predictor"))
 const Login = lazy(() => import("../views/auth/Login"))
 const VerifyOTP = lazy(() => import("../views/auth/VerifyOTP"))
+const ForgotPassword = lazy(() => import("../views/auth/ForgotPassword"))
+const NewPassword = lazy(() => import("../views/auth/NewPassword"))
 const CompleteProfile = lazy(() => import("../views/auth/CompleteProfile"))
 
 const MainPage = lazy(() => import("../views/dashboardPages/HomePage"))
@@ -31,7 +33,7 @@ const DashboardCollegeDetails = lazy(() => import("../views/dashboardPages/Colle
 const router = createBrowserRouter([
     {
         path: "/",
-        element: <HomePage />,
+        element: <MainPage />,
     },
     {
         path: "/login",
@@ -46,12 +48,20 @@ const router = createBrowserRouter([
         element: <VerifyOTP />,
     },
     {
+        path: "/forgot-password",
+        element: <ForgotPassword />,
+    },
+    {
+        path: "/new-password",
+        element: <NewPassword />,
+    },
+    {
         path: "/complete-profile",
         element: <CompleteProfile />,
     },
     {
         path: "/home",
-        element: <MainPage />,
+        element: <LandingPAgeApp />,
     },
     {
         path: "/dashboard",
@@ -81,7 +91,7 @@ const router = createBrowserRouter([
     },
     {
         path: "/dashboard/predictor",
-        element: <DashboardPredictor />,
+        element: <ProtectedRoute><DashboardPredictor /></ProtectedRoute>,
     },
     {
         path: "/profile",
@@ -89,7 +99,7 @@ const router = createBrowserRouter([
     },
     {
         path: "/about",
-        element: <ProtectedRoute><DashboardAbout /></ProtectedRoute>,
+        element: <DashboardAbout />,
     },
     {
         path: "*",

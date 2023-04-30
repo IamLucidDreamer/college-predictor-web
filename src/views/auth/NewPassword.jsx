@@ -6,21 +6,29 @@ import { toast } from "react-toastify";
 
 import CustomValidationErrorMessage from "../../components/errors/CustomValidationErrorMessage";
 import Loader from "../../components/loader/index";
-import { sendOtp, signup } from "../../services/authService";
+import { forgotPassword, sendOtp } from "../../services/authService";
 import AuthLayout from "../layout/AuthLayout";
 import AppLogo from "../../components/images/AppLogo";
 import image from "../../assets/images/login.png";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { setUser } from "../../store/actions/userActions";
 import { useDispatch } from "react-redux";
+import { KeyIcon, CheckIcon } from "@heroicons/react/outline";
 
-const loginValidation = Yup.object({
+const newPassworValidation = Yup.object({
   otp: Yup.string()
     .min(6, "OTP must be 6 digits")
     .required("The OTP is required"),
+  newPassword: Yup.string()
+    .required("Password field is required")
+    .min(8, "The Password length should be atleast 8 characters"),
+  confirmPassword: Yup.string().oneOf(
+    [Yup.ref("newPassword"), null],
+    "Passwords must match"
+  ),
 });
 
-const VerifyOTP = () => {
+const NewPassword = () => {
   const { state } = useLocation();
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -30,7 +38,7 @@ const VerifyOTP = () => {
 
   useEffect(() => {
     if (!state) {
-      navigate("/signup");
+      navigate("/forgot-password");
     }
   }, []);
 
@@ -53,11 +61,11 @@ const VerifyOTP = () => {
     setResendLoading(false);
   };
 
-  const handleSignUp = async (values) => {
+  const handleNewPassword = async (values) => {
     setLoading(true);
     const data = { ...state.values, ...values };
     try {
-      const response = await signup(data);
+      const response = await forgotPassword(data);
       const { status } = response;
       if (status >= 200 && status < 300) {
         dispatch(setUser(response?.data?.data));
@@ -77,7 +85,7 @@ const VerifyOTP = () => {
       <AuthLayout
         show={true}
         imageLink={image}
-        title={"Verify OTP"}
+        title={"Set Password"}
         description={
           "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nesciunt sapiente ducimus."
         }
@@ -91,9 +99,11 @@ const VerifyOTP = () => {
             <Formik
               initialValues={{
                 otp: "",
+                newPassword: "",
+                confirmPassword: "",
               }}
-              validationSchema={loginValidation}
-              onSubmit={(values) => handleSignUp(values)}
+              validationSchema={newPassworValidation}
+              onSubmit={(values) => handleNewPassword(values)}
             >
               {({
                 values,
@@ -139,6 +149,44 @@ const VerifyOTP = () => {
                         show={touched.otp && errors.otp ? true : false}
                         error={errors.otp}
                       />
+                      <div className="bg-gray-100 text-secondary flex gap-3 items-center px-3 rounded-lg my-5 shadow-lg">
+                        <KeyIcon className="w-4 h-4" />
+                        <input
+                          id="newPassword"
+                          placeholder="New Password"
+                          className="p-2.5 text-lg rounded-lg bg-gray-100 w-full focus:outline-none"
+                          type="password"
+                          value={values.newPassword}
+                          onChange={handleChange}
+                        />
+                      </div>
+                      <CustomValidationErrorMessage
+                        show={
+                          touched.newPassword && errors.newPassword
+                            ? true
+                            : false
+                        }
+                        error={errors.newPassword}
+                      />
+                      <div className="bg-gray-100 text-secondary flex gap-3 items-center px-3 rounded-lg my-5 shadow-lg">
+                        <CheckIcon className="w-4 h-4" />
+                        <input
+                          id="confirmPassword"
+                          placeholder="Confirm Password"
+                          className="p-2.5 text-lg rounded-lg bg-gray-100 w-full focus:outline-none"
+                          type="password"
+                          value={values.confirmPassword}
+                          onChange={handleChange}
+                        />
+                      </div>
+                      <CustomValidationErrorMessage
+                        show={
+                          touched.confirmPassword && errors.confirmPassword
+                            ? true
+                            : false
+                        }
+                        error={errors.confirmPassword}
+                      />
                     </div>
                     <button
                       className="p-2.5 text-lg rounded-lg bg-secondary text-white w-11/12 my-3 shadow-lg"
@@ -146,7 +194,7 @@ const VerifyOTP = () => {
                       onClick={handleSubmit}
                       disabled={loading}
                     >
-                      {loading ? <Loader width={25} height={25} /> : "Verify"}
+                      {loading ? <Loader width={25} height={25} /> : "Submit"}
                     </button>
                     <div className="text-sm flex w-full justify-end px-5">
                       <ResendOTP
@@ -170,4 +218,4 @@ const VerifyOTP = () => {
   );
 };
 
-export default VerifyOTP;
+export default NewPassword;

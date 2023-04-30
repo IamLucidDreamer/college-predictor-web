@@ -20,12 +20,18 @@ export const signup = async (values) => await new Promise((resolve, reject) => {
         .catch(reject);
 });
 
-export const login = async (email, password) => await new Promise((resolve, reject) => {
+export const forgotPassword = async (values) => await new Promise((resolve, reject) => {
     serverUnauth
-        .post('/signin', {
-            email: email,
-            password: password,
+        .post('/forgot-password', values)
+        .then((response) => {
+            resolve(response);
         })
+        .catch(reject);
+});
+
+export const login = async (values) => await new Promise((resolve, reject) => {
+    serverUnauth
+        .post('/signin', values)
         .then((response) => {
             resolve(response);
         })

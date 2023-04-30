@@ -1,7 +1,7 @@
 import React, { Fragment, useEffect, useState } from "react";
 import AppLogo from "../images/AppLogo";
 import { Transition, Dialog } from "@headlessui/react";
-import { XIcon } from "@heroicons/react/outline";
+import { UserCircleIcon, XIcon } from "@heroicons/react/outline";
 import { clearAuth } from "../../helpers/auth";
 import { Link, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
@@ -66,12 +66,16 @@ const Header = () => {
               <h1 className="group-hover:hidden group-hover:pl-0 pl-2 truncate w-24 duration-500">
                 {user?.name}
               </h1>
-              <img
-                src={
-                  "https://documents-careerkick.s3.ap-south-1.amazonaws.com/my image.jfif"
-                }
-                className="w-8 h-8 rounded-full"
-              />
+              {user?.profileImage ? (
+                <img
+                  src={
+                    "https://documents-careerkick.s3.ap-south-1.amazonaws.com/my image.jfif"
+                  }
+                  className="w-8 h-8 rounded-full"
+                />
+              ) : (
+                <UserCircleIcon className="w-8 h-8 text-primary" />
+              )}
               <button
                 className="hidden group-hover:block group-hover:pl-0 pl-2 truncate w-24"
                 onClick={() => {

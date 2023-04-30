@@ -6,7 +6,7 @@ import image from "../assets/images/onboarding.png";
 import AppLogo from "../components/images/AppLogo";
 import { getAuthToken } from "../helpers/auth";
 
-const HomePage = () => {
+const LandingPAgeApp = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -57,4 +57,4 @@ const HomePage = () => {
   );
 };
 
-export default HomePage;
+export default LandingPAgeApp;
