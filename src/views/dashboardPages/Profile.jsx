@@ -9,6 +9,7 @@ import { server } from "../../helpers/apiCall";
 import { Formik } from "formik";
 import * as Yup from "yup";
 import Loader from "../../components/loader/index";
+import { State, City } from "country-state-city";
 
 const editProfileValidation = Yup.object({
 });
@@ -20,6 +21,7 @@ const Profile = () => {
   const [img, setImg] = useState([]);
   const [src, setSrc] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [stateCode, setStateCode] = useState();
 
   const convertImage = (e) => {
     setImg(e.target.files[0]);
@@ -39,6 +41,8 @@ const Profile = () => {
       .finally(() => setLoading(false));
   };
 
+  // console.log(City.getCitiesOfState("IN", "MH"));
+
   return (
     <Formik
       initialValues={{
@@ -47,6 +51,7 @@ const Profile = () => {
         dob: user?.dob || "",
         email: user?.email || "",
         gender: user?.gender || "",
+        state: user?.state || "",
         address: user?.address || "",
         phone: user?.phoneNumber || "",
         examType: user?.examType || "",
@@ -57,6 +62,11 @@ const Profile = () => {
       onSubmit={(values) => handleSubmitForm(values)}
     >
       {({ values, touched, errors, handleChange, handleSubmit }) => {
+
+        State.getStatesOfCountry("IN").find((item) => {
+          if(item.name === values.state) setStateCode(item.isoCode)
+        })
+
         return (
           <div className="w-full">
             <Header />
@@ -119,119 +129,165 @@ const Profile = () => {
                       value={values.phone}
                     />
                   </div>
-                  <div className="my-2 w-full max-w-none  lg:max-w-screen-xs">
-                    <h1 className="text-gray-500">Name</h1>
-                    <input
-                      id="name"
-                      name="name"
-                      placeholder="Enter Your Name"
-                      disabled={!edit}
-                      className={`w-full font-semibold text-lg bg-transparent p-1 border rounded-md focus:outline-primary ${
-                        edit ? "border-primary" : "border-transparent"
-                      }`}
-                      value={values.name}
-                      onChange={handleChange}
-                    />
-                  </div>
-                  {user?.dob ||
-                    (edit && (
+                  <div className="lg:flex gap-8 w-full">
+                    <div className="lg:w-1/2">
                       <div className="my-2 w-full max-w-none  lg:max-w-screen-xs">
-                        <h1 className="text-gray-500">Date of Birth</h1>
+                        <h1 className="text-gray-500">Name</h1>
                         <input
-                          id="dob"
-                          name="dob"
+                          id="name"
+                          name="name"
+                          placeholder="Enter Your Name"
                           disabled={!edit}
                           className={`w-full font-semibold text-lg bg-transparent p-1 border rounded-md focus:outline-primary ${
                             edit ? "border-primary" : "border-transparent"
                           }`}
-                          value={values.dob}
+                          value={values.name}
                           onChange={handleChange}
                         />
                       </div>
-                    ))}
-                  {user?.gender ||
-                    (edit && (
+                      {user?.dob ||
+                        (edit && (
+                          <div className="my-2 w-full max-w-none  lg:max-w-screen-xs">
+                            <h1 className="text-gray-500">Date of Birth</h1>
+                            <input
+                              id="dob"
+                              name="dob"
+                              disabled={!edit}
+                              className={`w-full font-semibold text-lg bg-transparent p-1 border rounded-md focus:outline-primary ${
+                                edit ? "border-primary" : "border-transparent"
+                              }`}
+                              value={values.dob}
+                              onChange={handleChange}
+                            />
+                          </div>
+                        ))}
+                      {user?.gender ||
+                        (edit && (
+                          <div className="my-2 w-full max-w-none  lg:max-w-screen-xs">
+                            <h1 className="text-gray-500">Gender</h1>
+                            <select
+                              id="gender"
+                              name="gender"
+                              disabled={!edit}
+                              className={`w-full font-semibold text-lg bg-transparent p-1 border rounded-md focus:outline-primary ${
+                                edit ? "border-primary" : "border-transparent"
+                              }`}
+                              value={values.gender}
+                              onChange={handleChange}
+                            >
+                              <option value="male">Male</option>
+                              <option value="female">Female</option>
+                            </select>
+                          </div>
+                        ))}
+                      {user?.state ||
+                        (edit && (
+                          <div className="my-2 w-full max-w-none  lg:max-w-screen-xs">
+                            <h1 className="text-gray-500">State</h1>
+                            <select
+                              id="state"
+                              name="state"
+                              disabled={!edit}
+                              className={`w-full font-semibold text-lg bg-transparent p-1 border rounded-md focus:outline-primary ${
+                                edit ? "border-primary" : "border-transparent"
+                              }`}
+                              value={values.state}
+                              onChange={handleChange}
+                            >
+                              {State.getStatesOfCountry("IN").map((item) => (
+                                <option value={item.name}>{item.name}</option>
+                              ))}
+                            </select>
+                          </div>
+                        ))}
+                      {user?.city ||
+                        (edit && (
+                          <div className="my-2 w-full max-w-none  lg:max-w-screen-xs">
+                            <h1 className="text-gray-500">City</h1>
+                            <select
+                              id="city"
+                              name="city"
+                              disabled={!edit}
+                              className={`w-full font-semibold text-lg bg-transparent p-1 border rounded-md focus:outline-primary ${
+                                edit ? "border-primary" : "border-transparent"
+                              }`}
+                              value={values.city}
+                              onChange={handleChange}
+                            >
+                              {City.getCitiesOfState("IN", stateCode).map((item) => (
+                                <option value={item.name}>{item.name}</option>
+                              ))}
+                            </select>
+                          </div>
+                        ))}
+                    </div>
+                    <div className="lg:w-1/2">
+                      {user?.address ||
+                        (edit && (
+                          <div className="my-2 w-full max-w-none  lg:max-w-screen-xs">
+                            <h1 className="text-gray-500">Address</h1>
+                            <input
+                              id="address"
+                              name="address"
+                              disabled={!edit}
+                              className={`w-full font-semibold text-lg bg-transparent p-1 border rounded-md focus:outline-primary ${
+                                edit ? "border-primary" : "border-transparent"
+                              }`}
+                              value={values.address}
+                              onChange={handleChange}
+                            />
+                          </div>
+                        ))}
                       <div className="my-2 w-full max-w-none  lg:max-w-screen-xs">
-                        <h1 className="text-gray-500">Gender</h1>
+                        <h1 className="text-gray-500">Exam</h1>
                         <select
-                          id="gender"
-                          name="gender"
+                          id="examType"
+                          name="examType"
                           disabled={!edit}
+                          value={values.examType}
+                          onChange={handleChange}
                           className={`w-full font-semibold text-lg bg-transparent p-1 border rounded-md focus:outline-primary ${
                             edit ? "border-primary" : "border-transparent"
                           }`}
-                          value={values.gender}
-                          onChange={handleChange}
                         >
-                          <option value="male">Male</option>
-                          <option value="female">Female</option>
+                          <option value={1}>JEE</option>
+                          <option value={2}>NEET</option>
                         </select>
                       </div>
-                    ))}
-                  {user?.address ||
-                    (edit && (
-                      <div className="my-2 w-full max-w-none  lg:max-w-screen-xs">
-                        <h1 className="text-gray-500">Address</h1>
-                        <input
-                          id="address"
-                          name="address"
-                          disabled={!edit}
-                          className={`w-full font-semibold text-lg bg-transparent p-1 border rounded-md focus:outline-primary ${
-                            edit ? "border-primary" : "border-transparent"
-                          }`}
-                          value={values.address}
-                          onChange={handleChange}
-                        />
-                      </div>
-                    ))}
-                  <div className="my-2 w-full max-w-none  lg:max-w-screen-xs">
-                    <h1 className="text-gray-500">Exam</h1>
-                    <select
-                      id="examType"
-                      name="examType"
-                      disabled={!edit}
-                      value={values.examType}
-                      onChange={handleChange}
-                      className={`w-full font-semibold text-lg bg-transparent p-1 border rounded-md focus:outline-primary ${
-                        edit ? "border-primary" : "border-transparent"
-                      }`}
-                    >
-                      <option value={1}>JEE</option>
-                      <option value={2}>NEET</option>
-                    </select>
+                      {user?.tenthMark ||
+                        (edit && (
+                          <div className="my-2 w-full max-w-none  lg:max-w-screen-xs">
+                            <h1 className="text-gray-500">10th Marks (%)</h1>
+                            <input
+                              id="tenthMark"
+                              name="tenthMark"
+                              disabled={!edit}
+                              className={`w-full font-semibold text-lg bg-transparent p-1 border rounded-md focus:outline-primary ${
+                                edit ? "border-primary" : "border-transparent"
+                              }`}
+                              value={values.tenthMark}
+                              onChange={handleChange}
+                            />
+                          </div>
+                        ))}
+                      {user?.twelthMarks ||
+                        (edit && (
+                          <div className="my-2 w-full max-w-none lg:max-w-screen-xs">
+                            <h1 className="text-gray-500">12th Marks (%)</h1>
+                            <input
+                              id="twelthMarks"
+                              name="twelthMarks"
+                              disabled={!edit}
+                              className={`w-full font-semibold text-lg bg-transparent p-1 border rounded-md focus:outline-primary ${
+                                edit ? "border-primary" : "border-transparent"
+                              }`}
+                              value={values.twelthMarks}
+                              onChange={handleChange}
+                            />
+                          </div>
+                        ))}
+                    </div>
                   </div>
-                  {user?.tenthMark ||
-                    (edit && (
-                      <div className="my-2 w-full max-w-none  lg:max-w-screen-xs">
-                        <h1 className="text-gray-500">10th Marks (%)</h1>
-                        <input
-                          id="tenthMark"
-                          name="tenthMark"
-                          disabled={!edit}
-                          className={`w-full font-semibold text-lg bg-transparent p-1 border rounded-md focus:outline-primary ${
-                            edit ? "border-primary" : "border-transparent"
-                          }`}
-                          value={values.tenthMark}
-                          onChange={handleChange}
-                        />
-                      </div>
-                    ))}
-                  {user?.twelthMarks ||
-                    (edit && (
-                      <div className="my-2 w-full max-w-none lg:max-w-screen-xs">
-                        <h1 className="text-gray-500">12th Marks (%)</h1>
-                        <input
-                          id="twelthMarks"
-                          name="twelthMarks"
-                          disabled={!edit}
-                          className={`w-full font-semibold text-lg bg-transparent p-1 border rounded-md focus:outline-primary ${
-                            edit ? "border-primary" : "border-transparent"
-                          }`}
-                          value={values.twelthMarks}
-                          onChange={handleChange}
-                        />
-                      </div>
-                    ))}
                 </div>
                 <div className="flex gap-4 mb-5 w-full md:w-2/3 items-center justify-around">
                   {edit ? (
@@ -250,7 +306,7 @@ const Profile = () => {
                       onClick={handleSubmit}
                       disabled={loading}
                     >
-                      {loading ? <Loader width={25} height={25} /> : "Sign In"}
+                      {loading ? <Loader width={25} height={25} /> : "Save Changes"}
                     </button>
                   ) : null}
                 </div>
