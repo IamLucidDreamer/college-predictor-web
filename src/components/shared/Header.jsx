@@ -11,6 +11,7 @@ const Header = () => {
 
   const [open, setOpen] = useState(false);
   const [top, setTop] = useState(false);
+  const [hover, setHover] = useState(false);
 
   const user = useSelector((state) => state?.user);
 
@@ -62,7 +63,7 @@ const Header = () => {
                 About
               </button>
             </Link>
-            <div className="flex gap-2 items-center capitalize rounded-full border-2 border-secondary border-opacity-50 text-sm group w-32 duration-500">
+            {/* <div className="flex gap-2 items-center capitalize rounded-full border-2 border-secondary border-opacity-50 text-sm group w-32 duration-500">
               <h1 className="group-hover:hidden group-hover:pl-0 pl-2 truncate w-24 duration-500">
                 {user?.name}
               </h1>
@@ -85,6 +86,30 @@ const Header = () => {
               >
                 Logout
               </button>
+            </div> */}
+            <div className="relative">
+              <div className="w-45 flex gap-2 items-center capitalize rounded-full border-2 border-secondary border-opacity-50 cursor-pointer" onMouseEnter={() => setHover(true)} onMouseLeave={() => setHover(false)}>
+                <h1 className="group-hover:hidden group-hover:pl-0 pl-2 truncate w-24 duration-500">
+                  {user?.name}
+                </h1>
+                <UserCircleIcon className="w-8 h-8 text-primary" />
+              </div>
+              {hover ? <div className="w-full bg-white px-2 absolute -bottom-14 rounded-lg border-2 border-secondary border-opacity-50" onMouseEnter={() => setHover(true)} onMouseLeave={() => setHover(false)}>
+                <div>
+                  <button className="hover:opacity-60" onClick={() => navigate("/profile")}>
+                    Profile
+                  </button>
+                </div>
+                <div>
+                  <button className="hover:opacity-60"
+                   onClick={() => {
+                    clearAuth();
+                    navigate("/");
+                  }}>
+                    Logout
+                  </button>
+                </div>
+              </div> : null}
             </div>
           </nav>
           <button
