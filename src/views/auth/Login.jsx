@@ -47,6 +47,7 @@ const Login = () => {
       const response = await login(values);
       const { status } = response;
       if (status >= 200 && status < 300) {
+        delete response?.data?.user?.encrypted_password
         dispatch(setUser(response?.data?.user));
         localStorage.setItem("authToken", response?.data?.token);
         navigate("/profile");
