@@ -8,3 +8,10 @@ export const setUser = (user) => ({
         user,
     },
 });
+
+export const logout = (user) => ({
+    type: SET_USER,
+    payload: {
+        user: null
+    },
+});

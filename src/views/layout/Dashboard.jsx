@@ -7,7 +7,7 @@ import Card from "./Card";
 import { useSelector } from "react-redux";
 
 export default function Dashboard() {
-  const user = useSelector((state) => state.user);
+  const user = useSelector((state) => state?.user);
   console.log(user, "user");
   return (
     <>

@@ -1,17 +1,29 @@
 import React, { Fragment, useEffect, useState } from "react";
 import AppLogo from "../images/AppLogo";
 import { Transition, Dialog } from "@headlessui/react";
-import { UserCircleIcon, XIcon } from "@heroicons/react/outline";
-import { clearAuth } from "../../helpers/auth";
+import {
+  OfficeBuildingIcon,
+  UserCircleIcon,
+  XIcon,
+  AcademicCapIcon,
+  ArrowCircleRightIcon,
+} from "@heroicons/react/outline";
+import { clearAuth, getAuthToken } from "../../helpers/auth";
 import { Link, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { logout } from "../../store/actions/userActions";
+import { useDispatch } from "react-redux";
+import { LibraryIcon } from "@heroicons/react/outline";
+import { BellIcon } from "@heroicons/react/outline";
+import { DocumentTextIcon } from "@heroicons/react/outline";
+import { InformationCircleIcon } from "@heroicons/react/outline";
 
 const Header = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const [open, setOpen] = useState(false);
   const [top, setTop] = useState(false);
-  const [hover, setHover] = useState(false);
 
   const user = useSelector((state) => state?.user);
 
@@ -87,30 +99,41 @@ const Header = () => {
                 Logout
               </button>
             </div> */}
-            <div className="relative">
-              <div className="w-45 flex gap-2 items-center capitalize rounded-full border-2 border-secondary border-opacity-50 cursor-pointer" onMouseEnter={() => setHover(true)} onMouseLeave={() => setHover(false)}>
-                <h1 className="group-hover:hidden group-hover:pl-0 pl-2 truncate w-24 duration-500">
-                  {user?.name}
-                </h1>
-                <UserCircleIcon className="w-8 h-8 text-primary" />
-              </div>
-              {hover ? <div className="w-full bg-white px-2 absolute -bottom-14 rounded-lg border-2 border-secondary border-opacity-50" onMouseEnter={() => setHover(true)} onMouseLeave={() => setHover(false)}>
-                <div>
-                  <button className="hover:opacity-60" onClick={() => navigate("/profile")}>
+            {user ? (
+              <div className="relative group">
+                <div className="w-45 flex gap-2 items-center capitalize rounded-full border-2 border-secondary border-opacity-50 cursor-pointer">
+                  <h1 className="pl-2 truncate w-24 duration-500">
+                    {user?.name}
+                  </h1>
+                  <UserCircleIcon className="w-8 h-8 text-primary" />
+                </div>
+                <div className="w-full bg-white px-2 absolute -bottom-16 rounded shadow-md hidden duration-300 group-hover:block">
+                  <button
+                    className="hover:opacity-60 w-full text-left py-1"
+                    onClick={() => navigate("/profile")}
+                  >
                     Profile
                   </button>
-                </div>
-                <div>
-                  <button className="hover:opacity-60"
-                   onClick={() => {
-                    clearAuth();
-                    navigate("/");
-                  }}>
+                  <button
+                    className="hover:opacity-60 w-full text-left py-1"
+                    onClick={() => {
+                      dispatch(logout(null));
+                      clearAuth();
+                      navigate("/");
+                    }}
+                  >
                     Logout
                   </button>
                 </div>
-              </div> : null}
-            </div>
+              </div>
+            ) : (
+              <button
+                onClick={() => navigate("/profile")}
+                className="flex gap-2 items-center capitalize rounded-full border-2 border-secondary border-opacity-50 cursor-pointer"
+              >
+                <UserCircleIcon className="w-8 h-8 text-primary" />
+              </button>
+            )}
           </nav>
           <button
             className="lg:hidden h-7 flex flex-col justify-between items-stretch"
@@ -174,32 +197,56 @@ const DrawerMenu = ({ openModal, closeModal, navigate }) => {
                   </div>
                   <nav className="flex flex-col text-secondary font-semibold text-xl">
                     <Link to={"/dashboard/predictor"}>
-                      <button className="my-4">Predictor</button>
+                      <button className="my-4 flex gap-2 items-center">
+                        <AcademicCapIcon className="w-5 h-5" />
+                        Predictor
+                      </button>
                     </Link>
                     <Link to={"/dashboard/colleges"}>
-                      <button className="my-4">Colleges</button>
+                      <button className="my-4 flex gap-2 items-center">
+                        <LibraryIcon className="w-5 h-5" /> Colleges
+                      </button>
                     </Link>
                     <Link to={"/dashboard/blogs"}>
-                      <button className="my-4">Blogs</button>
+                      <button className="my-4 flex gap-2 items-center">
+                        <DocumentTextIcon className="w-5 h-5" />
+                        Blogs
+                      </button>
                     </Link>
                     <Link to={"/dashboard/updates"}>
-                      <button className="my-4">Updates</button>
+                      <button className="my-4 flex gap-2 items-center">
+                        <BellIcon className="w-5 h-5" />
+                        Updates
+                      </button>
                     </Link>
                     <Link to={"/about"}>
-                      <button className="my-4">About</button>
+                      <button className="my-4 flex gap-2 items-center">
+                        <InformationCircleIcon className="w-5 h-5" />
+                        About
+                      </button>
+                    </Link>
+                    <Link to={"/profile"}>
+                      <button className="my-4 flex gap-2 items-center">
+                        <UserCircleIcon className="w-5 h-5" />
+                        Profile
+                      </button>
                     </Link>
                     {/* <button className="my-4">Profile</button>
                     </Link> */}
                     <button
+                      className="my-4 flex gap-2 items-center"
                       onClick={() => {
                         clearAuth();
                         navigate("/");
                       }}
-                      className="z-50 my-8 hover:bg-red-500"
                     >
+                      <ArrowCircleRightIcon className="w-5 h-5" />
                       Logout
                     </button>
                   </nav>
+                </div>
+                <div className="absolute bottom-0 w-full mb-2">
+                  <AppLogo logotType={1} width={"175px"} classname="mx-auto" />
                 </div>
               </div>
             </Transition.Child>

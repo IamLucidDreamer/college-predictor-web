@@ -11,11 +11,10 @@ import * as Yup from "yup";
 import Loader from "../../components/loader/index";
 import { State, City } from "country-state-city";
 
-const editProfileValidation = Yup.object({
-});
+const editProfileValidation = Yup.object({});
 
 const Profile = () => {
-  const user = useSelector((state) => state.user);
+  const user = useSelector((state) => state?.user);
 
   const [edit, setEdit] = useState(false);
   const [img, setImg] = useState([]);
@@ -30,6 +29,7 @@ const Profile = () => {
 
   const handleSubmitForm = (values) => {
     setLoading(true);
+    delete values.email;
     const form = new FormData();
     form.append("profileImage", img);
     form.append("data", JSON.stringify(values));
@@ -48,7 +48,7 @@ const Profile = () => {
       initialValues={{
         profileImage: user?.profileImage || null,
         name: user?.name || "",
-        dob: user?.dob || "",
+        dateOfBirth: user?.dateOfBirth || "",
         email: user?.email || "",
         gender: user?.gender || "",
         state: user?.state || "",
@@ -62,10 +62,9 @@ const Profile = () => {
       onSubmit={(values) => handleSubmitForm(values)}
     >
       {({ values, touched, errors, handleChange, handleSubmit }) => {
-
         State.getStatesOfCountry("IN").find((item) => {
-          if(item.name === values.state) setStateCode(item.isoCode)
-        })
+          if (item.name === values.state) setStateCode(item.isoCode);
+        });
 
         return (
           <div className="w-full">
@@ -85,7 +84,7 @@ const Profile = () => {
                 >
                   {values?.profileImage || src ? (
                     <img
-                      src={values.profileImage || src}
+                      src={src || values.profileImage}
                       className="rounded-full w-32 h-32 lg:w-52 lg:h-52 -mt-16 lg:-mt-28 border-8 border-white"
                     />
                   ) : (
@@ -145,99 +144,106 @@ const Profile = () => {
                           onChange={handleChange}
                         />
                       </div>
-                      {user?.dob ||
-                        (edit && (
-                          <div className="my-2 w-full max-w-none  lg:max-w-screen-xs">
-                            <h1 className="text-gray-500">Date of Birth</h1>
-                            <input
-                              id="dob"
-                              name="dob"
-                              disabled={!edit}
-                              className={`w-full font-semibold text-lg bg-transparent p-1 border rounded-md focus:outline-primary ${
-                                edit ? "border-primary" : "border-transparent"
-                              }`}
-                              value={values.dob}
-                              onChange={handleChange}
-                            />
-                          </div>
-                        ))}
-                      {user?.gender ||
-                        (edit && (
-                          <div className="my-2 w-full max-w-none  lg:max-w-screen-xs">
-                            <h1 className="text-gray-500">Gender</h1>
-                            <select
-                              id="gender"
-                              name="gender"
-                              disabled={!edit}
-                              className={`w-full font-semibold text-lg bg-transparent p-1 border rounded-md focus:outline-primary ${
-                                edit ? "border-primary" : "border-transparent"
-                              }`}
-                              value={values.gender}
-                              onChange={handleChange}
-                            >
-                              <option value="male">Male</option>
-                              <option value="female">Female</option>
-                            </select>
-                          </div>
-                        ))}
-                      {user?.state ||
-                        (edit && (
-                          <div className="my-2 w-full max-w-none  lg:max-w-screen-xs">
-                            <h1 className="text-gray-500">State</h1>
-                            <select
-                              id="state"
-                              name="state"
-                              disabled={!edit}
-                              className={`w-full font-semibold text-lg bg-transparent p-1 border rounded-md focus:outline-primary ${
-                                edit ? "border-primary" : "border-transparent"
-                              }`}
-                              value={values.state}
-                              onChange={handleChange}
-                            >
-                              {State.getStatesOfCountry("IN").map((item) => (
+                      {(user?.dateOfBirth || edit) && (
+                        <div className="my-2 w-full max-w-none  lg:max-w-screen-xs">
+                          <h1 className="text-gray-500">Date of Birth</h1>
+                          <input
+                            id="dateOfBirth"
+                            name="dateOfBirth"
+                            disabled={!edit}
+                            type="date"
+                            className={`w-full font-semibold text-lg bg-transparent p-1 border rounded-md focus:outline-primary ${
+                              edit ? "border-primary" : "border-transparent"
+                            }`}
+                            value={values.dateOfBirth}
+                            onChange={handleChange}
+                          />
+                        </div>
+                      )}
+                      {(user?.gender || edit) && (
+                        <div className="my-2 w-full max-w-none  lg:max-w-screen-xs">
+                          <h1 className="text-gray-500">Gender</h1>
+                          <select
+                            id="gender"
+                            name="gender"
+                            disabled={!edit}
+                            className={`w-full font-semibold text-lg bg-transparent p-1 border rounded-md focus:outline-primary ${
+                              edit ? "border-primary" : "border-transparent"
+                            }`}
+                            value={values.gender}
+                            onChange={handleChange}
+                          >
+                            <option value="" disabled>
+                              Select GEnder
+                            </option>
+                            <option value="male">Male</option>
+                            <option value="female">Female</option>
+                          </select>
+                        </div>
+                      )}
+                      {(user?.state || edit) && (
+                        <div className="my-2 w-full max-w-none  lg:max-w-screen-xs">
+                          <h1 className="text-gray-500">State</h1>
+                          <select
+                            id="state"
+                            name="state"
+                            disabled={!edit}
+                            className={`w-full font-semibold text-lg bg-transparent p-1 border rounded-md focus:outline-primary ${
+                              edit ? "border-primary" : "border-transparent"
+                            }`}
+                            value={values.state}
+                            onChange={handleChange}
+                          >
+                            <option value="" disabled>
+                              Select State
+                            </option>
+                            {State.getStatesOfCountry("IN").map((item) => (
+                              <option value={item.name}>{item.name}</option>
+                            ))}
+                          </select>
+                        </div>
+                      )}
+                      {(user?.city || edit) && (
+                        <div className="my-2 w-full max-w-none  lg:max-w-screen-xs">
+                          <h1 className="text-gray-500">City</h1>
+                          <select
+                            id="city"
+                            name="city"
+                            disabled={!edit}
+                            className={`w-full font-semibold text-lg bg-transparent p-1 border rounded-md focus:outline-primary ${
+                              edit ? "border-primary" : "border-transparent"
+                            }`}
+                            value={values.city}
+                            onChange={handleChange}
+                          >
+                            <option value="" disabled>
+                              Select City
+                            </option>
+                            {City.getCitiesOfState("IN", stateCode).map(
+                              (item) => (
                                 <option value={item.name}>{item.name}</option>
-                              ))}
-                            </select>
-                          </div>
-                        ))}
-                      {user?.city ||
-                        (edit && (
-                          <div className="my-2 w-full max-w-none  lg:max-w-screen-xs">
-                            <h1 className="text-gray-500">City</h1>
-                            <select
-                              id="city"
-                              name="city"
-                              disabled={!edit}
-                              className={`w-full font-semibold text-lg bg-transparent p-1 border rounded-md focus:outline-primary ${
-                                edit ? "border-primary" : "border-transparent"
-                              }`}
-                              value={values.city}
-                              onChange={handleChange}
-                            >
-                              {City.getCitiesOfState("IN", stateCode).map((item) => (
-                                <option value={item.name}>{item.name}</option>
-                              ))}
-                            </select>
-                          </div>
-                        ))}
+                              )
+                            )}
+                          </select>
+                        </div>
+                      )}
                     </div>
                     <div className="lg:w-1/2">
-                      {user?.address ||
-                        (edit && (
-                          <div className="my-2 w-full max-w-none  lg:max-w-screen-xs">
-                            <h1 className="text-gray-500">Address</h1>
-                            <input
-                              id="address"
-                              name="address"
-                              disabled={!edit}
-                              className={`w-full font-semibold text-lg bg-transparent p-1 border rounded-md focus:outline-primary ${
-                                edit ? "border-primary" : "border-transparent"
-                              }`}
-                              value={values.address}
-                              onChange={handleChange}
-                            />
-                          </div>
-                        ))}
+                      {(user?.address || edit) && (
+                        <div className="my-2 w-full max-w-none  lg:max-w-screen-xs">
+                          <h1 className="text-gray-500">Address</h1>
+                          <input
+                            id="address"
+                            name="address"
+                            disabled={!edit}
+                            className={`w-full font-semibold text-lg bg-transparent p-1 border rounded-md focus:outline-primary ${
+                              edit ? "border-primary" : "border-transparent"
+                            }`}
+                            value={values.address}
+                            onChange={handleChange}
+                          />
+                        </div>
+                      )}
                       <div className="my-2 w-full max-w-none  lg:max-w-screen-xs">
                         <h1 className="text-gray-500">Exam</h1>
                         <select
@@ -250,42 +256,45 @@ const Profile = () => {
                             edit ? "border-primary" : "border-transparent"
                           }`}
                         >
-                          <option value={1}>JEE</option>
+                          <option value="" disabled>
+                            Select Exam
+                          </option>
+                          <option value={1} disabled>
+                            JEE (Comming Soon)
+                          </option>
                           <option value={2}>NEET</option>
                         </select>
                       </div>
-                      {user?.tenthMark ||
-                        (edit && (
-                          <div className="my-2 w-full max-w-none  lg:max-w-screen-xs">
-                            <h1 className="text-gray-500">10th Marks (%)</h1>
-                            <input
-                              id="tenthMark"
-                              name="tenthMark"
-                              disabled={!edit}
-                              className={`w-full font-semibold text-lg bg-transparent p-1 border rounded-md focus:outline-primary ${
-                                edit ? "border-primary" : "border-transparent"
-                              }`}
-                              value={values.tenthMark}
-                              onChange={handleChange}
-                            />
-                          </div>
-                        ))}
-                      {user?.twelthMarks ||
-                        (edit && (
-                          <div className="my-2 w-full max-w-none lg:max-w-screen-xs">
-                            <h1 className="text-gray-500">12th Marks (%)</h1>
-                            <input
-                              id="twelthMarks"
-                              name="twelthMarks"
-                              disabled={!edit}
-                              className={`w-full font-semibold text-lg bg-transparent p-1 border rounded-md focus:outline-primary ${
-                                edit ? "border-primary" : "border-transparent"
-                              }`}
-                              value={values.twelthMarks}
-                              onChange={handleChange}
-                            />
-                          </div>
-                        ))}
+                      {(user?.tenthMark || edit) && (
+                        <div className="my-2 w-full max-w-none  lg:max-w-screen-xs">
+                          <h1 className="text-gray-500">10th Marks (%)</h1>
+                          <input
+                            id="tenthMark"
+                            name="tenthMark"
+                            disabled={!edit}
+                            className={`w-full font-semibold text-lg bg-transparent p-1 border rounded-md focus:outline-primary ${
+                              edit ? "border-primary" : "border-transparent"
+                            }`}
+                            value={values.tenthMark}
+                            onChange={handleChange}
+                          />
+                        </div>
+                      )}
+                      {(user?.twelthMarks || edit) && (
+                        <div className="my-2 w-full max-w-none lg:max-w-screen-xs">
+                          <h1 className="text-gray-500">12th Marks (%)</h1>
+                          <input
+                            id="twelthMarks"
+                            name="twelthMarks"
+                            disabled={!edit}
+                            className={`w-full font-semibold text-lg bg-transparent p-1 border rounded-md focus:outline-primary ${
+                              edit ? "border-primary" : "border-transparent"
+                            }`}
+                            value={values.twelthMarks}
+                            onChange={handleChange}
+                          />
+                        </div>
+                      )}
                     </div>
                   </div>
                 </div>
@@ -306,7 +315,11 @@ const Profile = () => {
                       onClick={handleSubmit}
                       disabled={loading}
                     >
-                      {loading ? <Loader width={25} height={25} /> : "Save Changes"}
+                      {loading ? (
+                        <Loader width={25} height={25} />
+                      ) : (
+                        "Save Changes"
+                      )}
                     </button>
                   ) : null}
                 </div>
