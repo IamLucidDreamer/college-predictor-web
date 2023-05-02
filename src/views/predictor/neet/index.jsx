@@ -264,7 +264,7 @@ const PredictorAllIndia = ({ initialValues, requiredValues, apiRoute }) => {
                       </button>
                     )} */}
                     <div>
-                      <div className="flex justify-between">
+                      <div className="flex justify-between p-4">
                         <div className="w-3/12">Qouta</div>
                         <div className="w-1/12">Alloted PH</div>
                         <div className="w-2/12">Allotted Category</div>

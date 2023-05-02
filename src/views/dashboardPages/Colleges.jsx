@@ -80,7 +80,7 @@ const Colleges = () => {
         <MainHeading text={"Top Colleges in Your State"} />
       </div>
       <div className="flex justify-between items-start gap-6">
-        <div className="flex flex-wrap gap-8 justify-center lg:justify-evenly my-4">
+        <div className="w-full flex gap-8 justify-center lg:justify-evenly my-4 max-w-screen overflow-x-scroll no-scrollbar">
           {dataTopState?.map((val) => {
             return (
               <CollgeCard

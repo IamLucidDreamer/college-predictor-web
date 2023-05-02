@@ -542,8 +542,8 @@ const UpdateCards = ({ updates }) => {
     <div className="bg-white rounded-lg p-3 mx-2 flex items-center gap-2 border-b-4 border-primary z-30">
       <img className="w-14 h-14 rounded-full" src={updates?.imageMain} alt="" />
       <div>
-        <h2 className="font-bold">{updates?.title}</h2>
-        <p className="text-sm truncate">{updates?.description}</p>
+        <h2 className="font-bold break-words">{updates?.title.substring(0,25)}{updates?.title.length > 20 ? "..." : null}</h2>
+        <p className="text-sm truncate">{updates?.description.substring(0,30)}{updates?.description.length > 30 ? "..." : null}</p>
       </div>
     </div>
   );
