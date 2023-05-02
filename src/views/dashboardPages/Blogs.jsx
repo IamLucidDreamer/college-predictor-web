@@ -10,8 +10,10 @@ import { useNavigate } from "react-router-dom";
 
 const BlogPage = () => {
   const [data, setData] = useState([]);
+  const [lading, setLoading] = useState(false);
 
-  useEffect(() => {
+  const requestCaller = () => {
+    setLoading(true);
     serverUnauth
       .get(`/blog/get-all`)
       .then((res) => {
@@ -19,7 +21,14 @@ const BlogPage = () => {
       })
       .catch((err) => {
         console.log(err);
+      })
+      .finally(() => {
+        setLoading(false);
       });
+  };
+
+  useEffect(() => {
+    requestCaller();
   }, []);
 
   return (
@@ -29,17 +38,30 @@ const BlogPage = () => {
       </div>
       <div className="flex justify-between items-start gap-6">
         <div className="w-full lg:w-3/4 flex flex-col gap-y-8">
-          {data?.map((val) => {
-            return (
-              <BlogCard
-                title={val?.title}
-                description={val?.description}
-                imageSecondary={val?.imageSecondary}
-                createdAt={val?.createdAt}
-                id={val?._id}
-              />
-            );
-          })}
+          {lading ? (
+            <>
+              <BlogLaodingCard />
+              <BlogLaodingCard />
+              <BlogLaodingCard />
+              <BlogLaodingCard />
+              <BlogLaodingCard />
+              <BlogLaodingCard />
+              <BlogLaodingCard />
+              <BlogLaodingCard />
+            </>
+          ) : (
+            data?.map((val) => {
+              return (
+                <BlogCard
+                  title={val?.title}
+                  description={val?.description}
+                  imageSecondary={val?.imageSecondary}
+                  createdAt={val?.createdAt}
+                  id={val?._id}
+                />
+              );
+            })
+          )}
         </div>
         <Updates />
       </div>
@@ -78,6 +100,27 @@ const BlogCard = ({ title, description, imageSecondary, id, createdAt }) => {
           >
             Read More
           </button>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+const BlogLaodingCard = () => {
+  return (
+    <div class="bg-white p-2 sm:p-4 sm:h-64 rounded-2xl shadow-lg flex flex-col sm:flex-row gap-5 select-none ">
+      <div class="h-52 sm:h-full sm:w-72 rounded-xl bg-gray-200 animate-pulse"></div>
+      <div class="flex flex-col flex-1 gap-5 sm:p-2">
+        <div class="flex flex-1 flex-col gap-3">
+          <div class="bg-gray-200 w-full animate-pulse h-14 rounded-2xl"></div>
+          <div class="bg-gray-200 w-full animate-pulse h-3 rounded-2xl"></div>
+          <div class="bg-gray-200 w-full animate-pulse h-3 rounded-2xl"></div>
+          <div class="bg-gray-200 w-full animate-pulse h-3 rounded-2xl"></div>
+          <div class="bg-gray-200 w-full animate-pulse h-3 rounded-2xl"></div>
+        </div>
+        <div class="mt-auto flex gap-3">
+          <div class="bg-gray-200 w-32 h-8 animate-pulse rounded-full"></div>
+          <div class="bg-gray-200 w-20 h-8 animate-pulse rounded-full ml-auto"></div>
         </div>
       </div>
     </div>
