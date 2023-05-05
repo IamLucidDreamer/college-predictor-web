@@ -47,7 +47,7 @@ const Header = () => {
     >
       <div className="container mx-auto px-2 lg:px-10 py-3">
         <div className="flex items-center justify-between">
-          <Link to={"/dashboard"}>
+          <Link to={"/"}>
             <AppLogo logotType={1} width={"175px"} />
           </Link>
           <nav className="hidden lg:flex gap-10 text-secondary font-semibold items-center uppercase">
@@ -120,7 +120,7 @@ const Header = () => {
                     onClick={() => {
                       dispatch(logout(null));
                       clearAuth();
-                      navigate("/");
+                      navigate("/login");
                     }}
                   >
                     Logout
