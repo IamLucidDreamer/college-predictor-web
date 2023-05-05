@@ -1,12 +1,27 @@
 import React from "react";
+import { useEffect } from "react";
+import { useLocation, useParams } from "react-router-dom";
 
 const CollegeProfile = () => {
+  const { state } = useLocation();
+  console.log(state, "asdf");
+  const { collegeId } = useParams();
+  const { data } = state;
+  useEffect(() => {
+    if (!state) {
+    }
+  }, []);
+
   return (
     <div class="bg-gray-100">
-      <div className="bg-blue-900 p-20 pb-10 text-white text-center">
-        <img className="mx-auto w-40 h-40 border-4 border-white" src="https://img.collegepravesh.com/2016/06/IIT-Bhubaneswar-Logo.png" alt="" />
-        <h1 className="mt-5 text-2xl font-semibold">Indian Institute of Technology, Bhubaneswar</h1>
-        <h2 className="mt-2 text-xs">Indian Institute of Technology, Argul Campus, Jatani, Khordha, Bhubaneswar, Odisha - 752050</h2>
+      <div className="bg-primary p-20 pb-10 text-white text-center">
+        <img
+          className="mx-auto w-40 h-40 border-4 border-white"
+          src="https://img.collegepravesh.com/2016/06/IIT-Bhubaneswar-Logo.png"
+          alt=""
+        />
+        <h1 className="mt-5 text-2xl font-semibold">{data?.displayName}</h1>
+        <h2 className="mt-2 text-xs">{data?.collegeName}</h2>
       </div>
       <div class="container mx-auto my-5 p-5">
         <div class="md:flex no-wrap md:-mx-2 ">
@@ -50,7 +65,9 @@ const CollegeProfile = () => {
                 <span>INSTITUTE FEE</span>
               </div>
               <div className="mt-2">
-                <h2 className="text-sm">Caution Money (One Time, Refundable)</h2>
+                <h2 className="text-sm">
+                  Caution Money (One Time, Refundable)
+                </h2>
                 <span className="text-teal-600">₹5,000</span>
                 <h2 className="text-sm">One Time Fees</h2>
                 <span className="text-teal-600">₹3,900</span>
@@ -84,15 +101,21 @@ const CollegeProfile = () => {
                 <span>HOSTEL FEE</span>
               </div>
               <div className="mt-2">
-                <h2 className="text-sm">Hostel Caution Money (One Time, Refundable)</h2>
+                <h2 className="text-sm">
+                  Hostel Caution Money (One Time, Refundable)
+                </h2>
                 <span className="text-teal-600">₹4,000</span>
-                <h2 className="text-sm">Mess Caution Money (One Time, Refundable)</h2>
+                <h2 className="text-sm">
+                  Mess Caution Money (One Time, Refundable)
+                </h2>
                 <span className="text-teal-600">₹3,000</span>
                 <h2 className="text-sm">One Time Fees</h2>
                 <span className="text-teal-600">₹2,000</span>
                 <h2 className="text-sm">Hostel Seat Rent (per Semester)</h2>
                 <span className="text-teal-600">₹500</span>
-                <h2 className="text-sm">Electricity & Water charges (per Semester)</h2>
+                <h2 className="text-sm">
+                  Electricity & Water charges (per Semester)
+                </h2>
                 <span className="text-teal-600">₹1,500</span>
                 <h2 className="text-sm">Other fees (per Semester)</h2>
                 <span className="text-teal-600">₹8,500</span>
@@ -127,7 +150,9 @@ const CollegeProfile = () => {
                 <div class="grid md:grid-cols-2 text-sm">
                   <div class="grid grid-cols-2">
                     <div class="px-4 py-2 font-semibold">Institute Name</div>
-                    <div class="px-4 py-2">Indian Institute of Technology, Bhubaneswar</div>
+                    <div class="px-4 py-2">
+                      Indian Institute of Technology, Bhubaneswar
+                    </div>
                   </div>
                   <div class="grid grid-cols-2">
                     <div class="px-4 py-2 font-semibold">Also Known As</div>
@@ -181,19 +206,25 @@ const CollegeProfile = () => {
                       <div class="text-teal-600">Civil Engineering</div>
                     </li>
                     <li>
-                      <div class="text-teal-600">Computer Science and Engineering</div>
+                      <div class="text-teal-600">
+                        Computer Science and Engineering
+                      </div>
                     </li>
                     <li>
                       <div class="text-teal-600">Electrical Engineering</div>
                     </li>
                     <li>
-                      <div class="text-teal-600">Electronics and Communication Engineering</div>
+                      <div class="text-teal-600">
+                        Electronics and Communication Engineering
+                      </div>
                     </li>
                     <li>
                       <div class="text-teal-600">Mechanical Engineering</div>
                     </li>
                     <li>
-                      <div class="text-teal-600">Metallurgical and Materials Engineering</div>
+                      <div class="text-teal-600">
+                        Metallurgical and Materials Engineering
+                      </div>
                     </li>
                   </ul>
                 </div>

@@ -5,6 +5,7 @@ import { serverUnauth } from "../../helpers/apiCall";
 import Updates from "../layout/Updates";
 import dayjs from "dayjs";
 import MainHeading from "../../components/shared/MainHeading";
+import { useNavigate } from "react-router-dom";
 
 const Colleges = () => {
   const [data, setData] = useState([]);
@@ -38,6 +39,8 @@ const Colleges = () => {
       });
   }, []);
 
+  console.log(data, "hii");
+
   return (
     <div className="p-4 sm:p-8 mx-auto container">
       <div className="flex items-center justify-between mb-4">
@@ -48,6 +51,7 @@ const Colleges = () => {
           {data?.map((val) => {
             return (
               <CollgeCard
+                data={val}
                 coverImage={val.collegeCover}
                 collegeIcon={val.collegeIcon}
                 collegeName={val.collegeName}
@@ -66,6 +70,7 @@ const Colleges = () => {
             return (
               <div className="min-w-max">
                 <CollgeCard
+                  data={val}
                   coverImage={val.collegeCover}
                   collegeIcon={val.collegeIcon}
                   collegeName={val.collegeName}
@@ -84,6 +89,7 @@ const Colleges = () => {
           {dataTopState?.map((val) => {
             return (
               <CollgeCard
+                data={val}
                 coverImage={val.collegeCover}
                 collegeIcon={val.collegeIcon}
                 collegeName={val.collegeName}
@@ -99,9 +105,22 @@ const Colleges = () => {
 
 export default Colleges;
 
-const CollgeCard = ({ coverImage, collegeIcon, collegeName, location }) => {
+const CollgeCard = ({
+  data,
+  coverImage,
+  collegeIcon,
+  collegeName,
+  location,
+}) => {
+  const navigate = useNavigate();
   return (
-    <div className="relative rounded-lg bg-white shadow-md md:flex-row max-w-md">
+    <button
+      onClick={(e) => {
+        e.stopPropagation();
+        navigate(`/dashboard/colleges/${data?._id}`, { state: { data: data } });
+      }}
+      className="relative rounded-lg bg-white shadow-md md:flex-row max-w-md"
+    >
       <img
         style={{ width: "400px", height: "220px" }}
         className="rounded-lg object-cover"
@@ -133,6 +152,6 @@ const CollgeCard = ({ coverImage, collegeIcon, collegeName, location }) => {
           </button>
         </div>
       </div>
-    </div>
+    </button>
   );
 };

@@ -20,9 +20,9 @@ const BlogsDetails = () => {
 
   return (
     <div className="flex items-start justify-between gap-4 mt-12">
-      <div className="bg-gray-50 w-3/4">
-        <div className=" px-10 pyb-6 mx-auto">
-          <div className="max-w-6xl px-10 py-6 mx-auto bg-gray-50">
+      <div className="bg-gray-50 w-full lg:w-3/4">
+        <div className="px-2 lg:px-10 mx-auto">
+          <div className="max-w-6xl pb-6 mx-auto bg-gray-50">
             <a href="#_" className="block transition duration-200 ease-out">
               <img
                 className="object-cover w-full shadow-sm"
@@ -31,31 +31,18 @@ const BlogsDetails = () => {
               />
             </a>
 
-            <div className="mt-4">
+            <div className="mt-8">
               <a
                 href="#"
-                className="sm:text-3xl md:text-3xl lg:text-3xl xl:text-4xl font-bold text-secondary  hover:underline"
+                className="text-xl sm:text-3xl md:text-3xl lg:text-3xl xl:text-4xl font-bold text-secondary hover:underline"
               >
                 {blogDetail?.title}
               </a>
-
-              {/* <div className="font-light text-gray-600">
-                <a href="#" className="flex items-center mt-6 mb-6">
-                  <img
-                    src="https://avatars.githubusercontent.com/u/71964085?v=4"
-                    alt="avatar"
-                    className="hidden object-cover w-14 h-14 mx-4 rounded-full sm:block"
-                  />
-                  <h1 className="font-bold text-gray-700 hover:underline">
-                    By James Amos
-                  </h1>
-                </a>
-              </div> */}
             </div>
 
-            <div className="max-w-4xl  mx-auto text-2xl text-gray-700 mt-4">
+            <div className="max-w-4xl mx-auto text-lg md:text-2xl text-gray-700 mt-4">
               <div>
-                <p className="mt-2 p-8 whitespace-pre-line">
+                <p className="p-0 lg:p-4 lg:pt-0 whitespace-pre-line">
                   {blogDetail?.description}
                 </p>
               </div>

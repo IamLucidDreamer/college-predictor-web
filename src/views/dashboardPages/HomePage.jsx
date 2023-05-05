@@ -13,6 +13,7 @@ import Predictor from "../predictor";
 import NeetIndex from "../predictor/neet";
 import BlogPage from "./Blogs";
 import { serverUnauth } from "../../helpers/apiCall";
+import { AcademicCapIcon, BookOpenIcon } from "@heroicons/react/outline";
 
 const HomePage = () => {
   const [updates, setUpdates] = useState([]);
@@ -96,27 +97,30 @@ const HomePage = () => {
         </div>
       </div>
       <div className="mx-auto max-w-screen-lg -mt-24 z-50 relative">
-        <h2 className="text-center text-white text-xl sm:text-3xl mb-2 font-semibold">
+        <h2 className="text-center text-white text-xl sm:text-3xl mb-4 font-semibold">
           Latest Updates & Notifications
         </h2>
-        <Corousal
-          defaultControlsConfig={{ nextButtonText: ">", prevButtonText: "<" }}
-          autoplay={true}
-          autoplayInterval={6000}
-          wrapAround={true}
-          dragging={true}
-          cellAlign="center"
-          slidesToShow={window.innerWidth > 768 ? 3 : 1}
-          className=""
-        >
-          {updates.map((val) => (
-            <UpdateCards updates={val} />
-          ))}
-        </Corousal>
+        {updates.length !== 0 && (
+          <Corousal
+            defaultControlsConfig={{ nextButtonText: ">", prevButtonText: "<" }}
+            autoplay={true}
+            autoplayInterval={6000}
+            wrapAround={true}
+            dragging={true}
+            cellAlign="center"
+            slidesToShow={window.innerWidth > 768 ? 3 : 1}
+            className=""
+          >
+            {updates.map((val) => (
+              <UpdateCards updates={val} />
+            ))}
+          </Corousal>
+        )}
       </div>
-      <div className="my-10 text-center p-5">
+      <div className="my-10 text-center py-16">
         <h1 className="font-semibold text-3xl">
-          India's Leading Education Portal for all you academic needs
+          India's Leading Education Portal for all you{" "}
+          <span className="font-semibold text-primary">academic needs</span>
         </h1>
         <h2 className="mt-2">
           India's Leading Education Portal for all you academic needs
@@ -136,69 +140,57 @@ const HomePage = () => {
           </div>
         </div>
       </div>
-      <div className="py-10 text-center p-5 bg-gray-200">
+      <div className="text-center p-5 bg-gray-200 py-20">
         <h1 className="font-semibold text-3xl">Counselling</h1>
         <h2 className="mt-2">
           India's Leading Education Portal for all you academic needs
         </h2>
         <div className="mt-10 flex flex-col md:flex-row items-center justify-center gap-3">
-          <div className="w-full md:w-4/5 xl:w-3/5 2xl:w-1/3 relative">
+          <div className="w-full lg:w-3/5 relative">
             <img
               className="rounded-lg"
               src="https://cdn.pixabay.com/photo/2017/06/20/22/14/man-2425121_960_720.jpg"
               alt=""
             />
-            <div className="absolute bottom-14 -left-8 p-3 py-6 w-[17rem] bg-white rounded-lg flex items-center gap-2">
-              <img
-                className="w-[3rem]"
-                src="https://th.bing.com/th/id/OIP.UivuSmnBJX5p18zf5qCrKgHaHa?pid=ImgDet&rs=1"
-                alt=""
-              />
+            <div className="absolute bottom-14 -left-8 p-3 w-60 sm:w-96 bg-white rounded-lg flex items-center gap-2 shadow-xl">
+              <AcademicCapIcon className="w-28 h-28 text-primary" />
               <div>
-                <h2 className="font-bold">Colleges</h2>
-                <p className="text-sm">
-                  India's Leading Education Portal for all you
+                <h2 className="font-bold text-left">Career Counselling</h2>
+                <p className="text-sm text-left">
+                  Helps you to know and understand yourself in order to make
+                  Career, Educational, and Life Decisions
                 </p>
               </div>
             </div>
           </div>
-          <div className="text-left flex flex-col gap-3">
-            <div className="p-3 py-6 w-[17rem] bg-white rounded-lg flex items-center gap-2">
-              <img
-                className="w-[3rem]"
-                src="https://th.bing.com/th/id/OIP.UivuSmnBJX5p18zf5qCrKgHaHa?pid=ImgDet&rs=1"
-                alt=""
-              />
+          <div className="text-left flex flex-col gap-4">
+            <div className="p-1 w-60 sm:w-96 bg-white rounded-lg flex items-center gap-2 shadow-xl">
+              <BookOpenIcon className="w-28 h-28 text-primary" />
               <div>
-                <h2 className="font-bold">Colleges</h2>
+                <h2 className="font-bold">Educational Counselling</h2>
                 <p className="text-sm">
-                  India's Leading Education Portal for all you
+                  Provides assistance and guidance to students in making the
+                  right choices in their studies.
                 </p>
               </div>
             </div>
-            <div className="p-3 py-6 w-[17rem] bg-white rounded-lg flex items-center gap-2">
-              <img
-                className="w-[3rem]"
-                src="https://th.bing.com/th/id/OIP.UivuSmnBJX5p18zf5qCrKgHaHa?pid=ImgDet&rs=1"
-                alt=""
-              />
+            <div className="p-1 w-60 sm:w-96 bg-white rounded-lg flex items-center gap-2 shadow-xl">
+              <BookOpenIcon className="w-28 h-28 text-primary" />
               <div>
-                <h2 className="font-bold">Colleges</h2>
+                <h2 className="font-bold">Psychometric Testing</h2>
                 <p className="text-sm">
-                  India's Leading Education Portal for all you
+                  Analyses Capabilities, Aptitude, and also understand of which
+                  career field is suitable for him.
                 </p>
               </div>
             </div>
-            <div className="p-3 py-6 w-[17rem] bg-white rounded-lg flex items-center gap-2">
-              <img
-                className="w-[3rem]"
-                src="https://th.bing.com/th/id/OIP.UivuSmnBJX5p18zf5qCrKgHaHa?pid=ImgDet&rs=1"
-                alt=""
-              />
+            <div className="p-1 w-60 sm:w-96 bg-white rounded-lg flex items-center gap-2 shadow-xl">
+              <BookOpenIcon className="w-28 h-28 text-primary" />
               <div>
-                <h2 className="font-bold">Colleges</h2>
+                <h2 className="font-bold">Course Selection</h2>
                 <p className="text-sm">
-                  India's Leading Education Portal for all you
+                  Stimulates students to focus on learning more about the field
+                  they are interested in to study in a College/University.
                 </p>
               </div>
             </div>
@@ -289,7 +281,7 @@ const HomePage = () => {
             Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quia
             architecto error adipisci nam.
           </p>
-          <div className="justify-center items-center space-y-4 sm:flex sm:space-y-0 sm:space-x-8">
+          <div className="flex justify-center items-center space-y-0 space-x-8">
             <a
               href="#"
               className="w-[150px] sm:w-auto flex bg-gray-800 hover:bg-gray-700 focus:ring-4 focus:ring-gray-300 text-white rounded-lg items-center justify-center px-4 py-2.5"
@@ -310,7 +302,7 @@ const HomePage = () => {
                 ></path>
               </svg>
               <div className="text-left">
-                <div className="mb-1 text-xs">Download from</div>
+                <div className="mb-1 text-xs">Get it On</div>
                 <div className="-mt-1 font-sans text-sm font-semibold">
                   App Store
                 </div>
@@ -539,11 +531,17 @@ export default HomePage;
 
 const UpdateCards = ({ updates }) => {
   return (
-    <div className="bg-white rounded-lg p-3 mx-2 flex items-center gap-2 border-b-4 border-primary z-30">
-      <img className="w-14 h-14 rounded-full" src={updates?.imageMain} alt="" />
-      <div>
-        <h2 className="font-bold">{updates?.title}</h2>
-        <p className="text-sm truncate">{updates?.description}</p>
+    <div className="bg-white rounded-lg p-3 mx-2 border-b-4 border-primary z-30">
+      <div className="flex overflow-hidden gap-2 items-center">
+        <img
+          className="w-14 h-14 rounded-full"
+          src={updates?.imageMain}
+          alt=""
+        />
+        <div className="">
+          <h2 className="font-bold text-sm truncate">{updates?.title}</h2>
+          <p className="text-xs truncate">{updates?.description}</p>
+        </div>
       </div>
     </div>
   );

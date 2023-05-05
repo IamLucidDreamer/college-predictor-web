@@ -43,6 +43,7 @@ const Header = () => {
       className={`bg-white sticky top-0 z-50 duration-500 ${
         top ? "shadow-lg" : "shadow-none"
       }`}
+      style={{ zIndex: 99999 }}
     >
       <div className="container mx-auto px-2 lg:px-10 py-3">
         <div className="flex items-center justify-between">
