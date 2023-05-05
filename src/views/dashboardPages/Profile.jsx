@@ -10,10 +10,14 @@ import { Formik } from "formik";
 import * as Yup from "yup";
 import Loader from "../../components/loader/index";
 import { State, City } from "country-state-city";
+import { setUser } from "../../store/actions/userActions";
+import { useDispatch } from "react-redux";
+import { toast } from "react-toastify";
 
 const editProfileValidation = Yup.object({});
 
 const Profile = () => {
+  const dispatch = useDispatch();
   const user = useSelector((state) => state?.user);
 
   const [edit, setEdit] = useState(false);
@@ -36,8 +40,14 @@ const Profile = () => {
 
     server
       .put("/user/update", form)
-      .then((res) => console.log(res, "This is res"))
-      .catch((err) => console.log(err))
+      .then((res) => {
+        toast.success(res?.data?.message);
+        dispatch(setUser(res?.data?.data));
+        setEdit(false)
+      })
+      .catch((err) => {
+        toast.error(err?.response?.data?.error);
+      })
       .finally(() => setLoading(false));
   };
 
@@ -52,10 +62,11 @@ const Profile = () => {
         email: user?.email || "",
         gender: user?.gender || "",
         state: user?.state || "",
+        city: user?.city || "",
         address: user?.address || "",
         phone: user?.phoneNumber || "",
         examType: user?.examType || "",
-        tenthMark: user?.tenthMark || "",
+        tenthMarks: user?.tenthMarks || "",
         twelthMarks: user?.twelthMarks || "",
       }}
       validationSchema={editProfileValidation}
@@ -76,7 +87,7 @@ const Profile = () => {
               }}
             ></div>
             <div className="container mx-auto px-2 sm:px-4 lg:px-8">
-              <div className="border-2 border-white">
+              <div className="">
                 <div
                   className={`relative flex items-end justify-between ${
                     edit ? "w-fit" : "w-full"
@@ -104,7 +115,7 @@ const Profile = () => {
                   ) : null}
                   {!edit ? (
                     <button
-                      className="bg-secondary text-white p-3 rounded-full mb-4"
+                      className="bg-secondary text-white p-2 rounded-full mb-4 mt-1"
                       onClick={() => setEdit(!edit)}
                     >
                       <PencilAltIcon className="w-6 h-6 text-white" />
@@ -204,7 +215,7 @@ const Profile = () => {
                         </div>
                       )}
                       {(user?.city || edit) && (
-                        <div className="my-2 w-full max-w-none  lg:max-w-screen-xs">
+                        <div className="my-2 w-full max-w-none lg:max-w-screen-xs">
                           <h1 className="text-gray-500">City</h1>
                           <select
                             id="city"
@@ -265,17 +276,17 @@ const Profile = () => {
                           <option value={2}>NEET</option>
                         </select>
                       </div>
-                      {(user?.tenthMark || edit) && (
+                      {(user?.tenthMarks || edit) && (
                         <div className="my-2 w-full max-w-none  lg:max-w-screen-xs">
                           <h1 className="text-gray-500">10th Marks (%)</h1>
                           <input
-                            id="tenthMark"
-                            name="tenthMark"
+                            id="tenthMarks"
+                            name="tenthMarks"
                             disabled={!edit}
                             className={`w-full font-semibold text-lg bg-transparent p-1 border rounded-md focus:outline-primary ${
                               edit ? "border-primary" : "border-transparent"
                             }`}
-                            value={values.tenthMark}
+                            value={values.tenthMarks}
                             onChange={handleChange}
                           />
                         </div>

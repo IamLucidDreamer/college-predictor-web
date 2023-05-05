@@ -4,8 +4,10 @@ import * as dayjs from "dayjs";
 
 const DashboardUpdates = () => {
   const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(false);
 
-  useEffect(() => {
+  const requestCaller = () => {
+    setLoading(true);
     serverUnauth
       .get(`/updates/get-all`)
       .then((res) => {
@@ -13,8 +15,16 @@ const DashboardUpdates = () => {
       })
       .catch((err) => {
         console.log(err);
+      })
+      .finally(() => {
+        setLoading(false);
       });
+  };
+
+  useEffect(() => {
+    requestCaller();
   }, []);
+
   return (
     <div className="p-4 sm:p-8 mx-auto container">
       <div className="flex items-center justify-between mb-4">
@@ -23,17 +33,29 @@ const DashboardUpdates = () => {
         </h5>
       </div>
       <div className="flex flex-col gap-6 my-2">
-        {data?.map((val) => {
-          return (
-            <Card
-              title={val?.title}
-              description={val?.description}
-              imageMain={val?.imageMain}
-              document={val?.document}
-              createdAt={val?.createdAt}
-            />
-          );
-        })}
+        {loading ? (
+          <>
+            <UpdateLaodingCard />
+            <UpdateLaodingCard />
+            <UpdateLaodingCard />
+            <UpdateLaodingCard />
+            <UpdateLaodingCard />
+            <UpdateLaodingCard />
+            <UpdateLaodingCard />
+          </>
+        ) : (
+          data?.map((val) => {
+            return (
+              <Card
+                title={val?.title}
+                description={val?.description}
+                imageMain={val?.imageMain}
+                document={val?.document}
+                createdAt={val?.createdAt}
+              />
+            );
+          })
+        )}
       </div>
       {/* <button
         onClick={() => {}}
@@ -65,11 +87,11 @@ const Card = ({ title, description, imageMain, document, createdAt }) => {
                 <p className="text-secondary font-semibold text-xl mb-4">
                   {title}
                 </p>
-                <p className="font-medium text-secondaryr mb-2 ">{description}</p>
+                <p className="font-medium text-secondaryr mb-2 ">
+                  {description}
+                </p>
                 <p className="text-sm text-gray-700 truncate">
-                  {dayjs(createdAt).format(
-                    "YYYY-MM-DD  HH:mm"
-                  )}
+                  {dayjs(createdAt).format("YYYY-MM-DD  HH:mm")}
                 </p>
               </div>
               {document && (
@@ -83,6 +105,24 @@ const Card = ({ title, description, imageMain, document, createdAt }) => {
               )}
             </div>
           </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+const UpdateLaodingCard = () => {
+  return (
+    <div class="bg-white p-2 sm:p-4 sm:h-32 rounded-2xl shadow-lg flex flex-col sm:flex-row gap-5 select-none ">
+      <div class="h-52 sm:h-full sm:w-72 rounded-xl bg-gray-200 animate-pulse"></div>
+      <div class="flex flex-col flex-1 gap-5 sm:p-2">
+        <div class="flex flex-1 flex-col gap-3">
+          <div class="bg-gray-200 w-full animate-pulse h-6 rounded-2xl"></div>
+          <div class="bg-gray-200 w-full animate-pulse h-2 rounded-2xl"></div>
+        </div>
+        <div class="mt-auto flex gap-3">
+          <div class="bg-gray-200 w-32 h-4 animate-pulse rounded-full"></div>
+          <div class="bg-gray-200 w-20 h-4 animate-pulse rounded-full ml-auto"></div>
         </div>
       </div>
     </div>
