@@ -100,7 +100,7 @@ const Header = () => {
                 Logout
               </button>
             </div> */}
-            {user ? (
+            {user?.name ? (
               <div className="relative group">
                 <div className="w-45 flex gap-2 items-center capitalize rounded-full border-2 border-secondary border-opacity-50 cursor-pointer">
                   <h1 className="pl-2 truncate w-24 duration-500">

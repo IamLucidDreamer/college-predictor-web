@@ -16,6 +16,8 @@ import Loader from "../../../components/loader/index";
 
 // Images
 import mbbsImage from "../../../assets/images/test_mbbs.webp";
+import MainHeading from "../../../components/shared/MainHeading";
+import { ArrowLeftIcon } from "@heroicons/react/outline";
 
 const NeetIndex = () => {
   const [activeType, setActiveType] = useState(0);
@@ -66,9 +68,16 @@ const NeetIndex = () => {
         )}
       </div>
       <div className="m-2 lg:m-4 shadow-lg rounded-lg bg-white">
-        <h1 className="text-2xl mb-2 text-secondary font-semibold p-4 pb-0">
-          Select Exam Type
-        </h1>
+        <div className="p-4 pb-0 flex gap-3 items-center mb-2">
+          {activeType !== 0 && (
+            <button onClick={() => setActiveType(0)}>
+              <ArrowLeftIcon className="w-5 h-5" />
+            </button>
+          )}
+          <h1 className="text-2xl text-secondary font-semibold">
+            Select Exam Type
+          </h1>
+        </div>
         <div className="flex items-center justify-center">
           <div
             className={`duration-500 ${
@@ -142,7 +151,7 @@ const NeetIndex = () => {
         {activeType === 1 && (
           <PredictorAllIndia
             initialValues={{
-              examType: ["NEET/All India"],
+              examType: [],
               year: [],
               course: [],
               round: [],
@@ -178,6 +187,7 @@ const PredictorAllIndia = ({ initialValues, displayValues }) => {
   const [loading, setLoading] = useState(false);
   const [predictData, setPredictData] = useState({});
   const [predictLoading, setpredictLoading] = useState(false);
+  const [predictorRan, setPredictorRan] = useState(false);
 
   // Need To refactor this Function.
   const handleSubmit = (values) => {
@@ -187,6 +197,10 @@ const PredictorAllIndia = ({ initialValues, displayValues }) => {
       if (value.length !== 0) {
         reqObject[key] = value;
       }
+    }
+    if (reqObject.examType.length === 0) {
+      toast.warning("Please Select a Valida Exam Type");
+      return;
     }
     serverUnauth
       .post("/predict-neet", reqObject)
@@ -205,6 +219,7 @@ const PredictorAllIndia = ({ initialValues, displayValues }) => {
           }
         });
         setPredictData(newObject);
+        setPredictorRan(true);
       })
       .catch((err) => {
         console.log(err);
@@ -226,12 +241,14 @@ const PredictorAllIndia = ({ initialValues, displayValues }) => {
     <DragDropContext onDragEnd={handleDragEnd}>
       <Formik
         initialValues={initialValues}
-        // validationSchema={predictorValidation}
+        validationSchema={Yup.object({
+          rank: Yup.string().required("This field is Required"),
+        })}
         onSubmit={(values) => handleSubmit(values)}
       >
-        {({ values, handleSubmit, setFieldValue }) => {
+        {({ values, handleSubmit, setFieldValue, touched, errors }) => {
           return (
-            <div className="flex flex-col my-3">
+            <div className="flex flex-col my-3 mx-auto">
               {Object.keys(values)?.map((val, index) => {
                 if (val === "rank") {
                   return;
@@ -291,6 +308,9 @@ const PredictorAllIndia = ({ initialValues, displayValues }) => {
                   onChange={(e) => setFieldValue("rank", e.target.value)}
                   className="block w-full border-2 border-gray-200 rounded px-3 py-1.5 "
                 />
+                {touched.rank && errors.rank && (
+                  <h1 className="text-sm text-red-300 mt-2">{errors.rank}</h1>
+                )}
                 <button
                   type="submit"
                   onClick={handleSubmit}
@@ -305,7 +325,7 @@ const PredictorAllIndia = ({ initialValues, displayValues }) => {
                 </button>
               </div>
               <div>
-                {Object.keys(predictData).length > 0 && (
+                {Object.keys(predictData).length > 0 || !predictorRan ? (
                   <div className="overflow-x-scroll mt-4">
                     <div className="flex justify-between bg-gray-100 items-center">
                       {Object.keys(predictData)?.length > 0 &&
@@ -403,6 +423,8 @@ const PredictorAllIndia = ({ initialValues, displayValues }) => {
                       )}
                     </Droppable>
                   </div>
+                ) : (
+                  <h1 className="text-3xl font-semibold">Top Colleges</h1>
                 )}
               </div>
             </div>
