@@ -34,7 +34,7 @@ const Login = () => {
     }
   }, []);
 
-  const handleLogin = async (values) => {
+  const handleLogin = async (values, resetForm) => {
     setLoading(true);
     try {
       if (/^(\d+-)*(\d+)$/.test(values.username)) {
@@ -47,10 +47,10 @@ const Login = () => {
       const response = await login(values);
       const { status } = response;
       if (status >= 200 && status < 300) {
-        delete response?.data?.user?.encrypted_password
+        delete response?.data?.user?.encrypted_password;
         dispatch(setUser(response?.data?.user));
         localStorage.setItem("authToken", response?.data?.token);
-        navigate("/profile");
+        navigate("/dashboard/predictor");
         toast.success("Login Was Success");
       }
     } catch (err) {
@@ -58,6 +58,7 @@ const Login = () => {
       toast.error(err?.response?.data?.error || "Something went Wrong");
     }
     setLoading(false);
+    resetForm();
   };
   return (
     <>
@@ -81,7 +82,9 @@ const Login = () => {
                 password: "",
               }}
               validationSchema={loginValidation}
-              onSubmit={(values) => handleLogin(values)}
+              onSubmit={(values, { resetForm }) =>
+                handleLogin(values, resetForm)
+              }
             >
               {({ values, touched, errors, handleChange, handleSubmit }) => {
                 return (
@@ -126,7 +129,7 @@ const Login = () => {
                         className="p-2.5 text-lg rounded-lg bg-secondary text-white w-full my-3 shadow-lg"
                         type="submit"
                         onClick={handleSubmit}
-                        disabled={loading}
+                        disabled={loading ? true : false}
                       >
                         {loading ? (
                           <Loader width={25} height={25} />

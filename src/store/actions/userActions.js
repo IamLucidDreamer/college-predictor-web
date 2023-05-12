@@ -1,5 +1,5 @@
 import {
-    SET_USER
+    SET_USER, LOGOUT
 } from '../actionTypes/index';
 
 export const setUser = (user) => ({
@@ -10,8 +10,5 @@ export const setUser = (user) => ({
 });
 
 export const logout = (user) => ({
-    type: SET_USER,
-    payload: {
-        user: null
-    },
+    type: LOGOUT,
 });

@@ -62,7 +62,7 @@ const VerifyOTP = () => {
       if (status >= 200 && status < 300) {
         dispatch(setUser(response?.data?.data));
         localStorage.setItem("authToken", response?.data?.token);
-        navigate("/dashboard/predictor");
+        navigate("/profile");
         toast.success("Welcome to Career Kick");
       }
     } catch (err) {

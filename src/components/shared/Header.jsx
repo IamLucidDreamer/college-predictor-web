@@ -118,7 +118,7 @@ const Header = () => {
                   <button
                     className="hover:opacity-60 w-full text-left py-1"
                     onClick={() => {
-                      dispatch(logout(null));
+                      dispatch(logout());
                       clearAuth();
                       navigate("/login");
                     }}
@@ -158,6 +158,8 @@ const Header = () => {
 export default Header;
 
 const DrawerMenu = ({ openModal, closeModal, navigate }) => {
+  const dispatch = useDispatch();
+
   return (
     <Transition show={openModal} as={Fragment}>
       <Dialog
@@ -237,6 +239,7 @@ const DrawerMenu = ({ openModal, closeModal, navigate }) => {
                     <button
                       className="my-4 flex gap-2 items-center"
                       onClick={() => {
+                        dispatch(logout());
                         clearAuth();
                         navigate("/");
                       }}

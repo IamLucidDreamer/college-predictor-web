@@ -9,7 +9,7 @@ const Predictor = () => {
     <div>
       <Header />
       <div className="text-4x">
-        <div className="flex flex-col justify-center gap-2 w-full container mx-auto p-4">
+        <div className="flex flex-col justify-center gap-2 w-full container mx-auto p-1 lg:p-4">
           <div className="flex items-center justify-between mb-4">
             <MainHeading text={"Predictor"} />
           </div>

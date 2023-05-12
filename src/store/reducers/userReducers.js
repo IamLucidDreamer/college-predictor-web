@@ -1,13 +1,14 @@
 
-import { SET_USER } from "../actionTypes/index";
+import { SET_USER, LOGOUT } from "../actionTypes/index";
 
 const initialeValue = {}
 
 const reducer = (state = {}, action) => {
     switch (action.type) {
         case SET_USER:
-            console.log(action.payload);
             return { ...state, ...action.payload.user };
+        case LOGOUT:
+            return null
         default:
             return state;
     }
