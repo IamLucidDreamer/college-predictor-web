@@ -13,7 +13,7 @@ import Predictor from "../predictor";
 import NeetIndex from "../predictor/neet";
 import BlogPage from "./Blogs";
 import { serverUnauth } from "../../helpers/apiCall";
-import { AcademicCapIcon, BookOpenIcon } from "@heroicons/react/outline";
+import { AcademicCapIcon, BookOpenIcon, ChartPieIcon, NewspaperIcon } from "@heroicons/react/outline";
 
 const HomePage = () => {
   const [updates, setUpdates] = useState([]);
@@ -175,7 +175,7 @@ const HomePage = () => {
               </div>
             </div>
             <div className="p-1 w-60 sm:w-96 bg-white rounded-lg flex items-center gap-2 shadow-xl">
-              <BookOpenIcon className="w-28 h-28 text-primary" />
+              <ChartPieIcon className="w-28 h-28 text-primary" />
               <div>
                 <h2 className="font-bold">Psychometric Testing</h2>
                 <p className="text-sm">
@@ -185,7 +185,7 @@ const HomePage = () => {
               </div>
             </div>
             <div className="p-1 w-60 sm:w-96 bg-white rounded-lg flex items-center gap-2 shadow-xl">
-              <BookOpenIcon className="w-28 h-28 text-primary" />
+              <NewspaperIcon className="w-28 h-28 text-primary" />
               <div>
                 <h2 className="font-bold">Course Selection</h2>
                 <p className="text-sm">

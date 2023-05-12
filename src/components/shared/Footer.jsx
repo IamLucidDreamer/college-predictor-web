@@ -2,14 +2,23 @@ import React from "react";
 import AppLogo from "../images/AppLogo";
 import { serverUnauth } from "../../helpers/apiCall";
 import { toast } from "react-toastify";
+import { useSelector } from "react-redux";
 
 const Footer = () => {
+  const appInApp = useSelector((state) => state.appInApp.appInApp);
+  console.log(appInApp, "hello world");
+  if (appInApp === "true") {
+    return;
+  }
+
   const [email, setEmail] = "";
 
   const addSubscriber = () => {
     serverUnauth
       .post("/subscriber/create", email)
-      .then((res) => {toast.success(res.data.message);})
+      .then((res) => {
+        toast.success(res.data.message);
+      })
       .catch((err) => {
         toast.error(err.response.data.error);
       });

@@ -185,7 +185,7 @@ const Profile = () => {
                             onChange={handleChange}
                           >
                             <option value="" disabled>
-                              Select GEnder
+                              Select Gender
                             </option>
                             <option value="male">Male</option>
                             <option value="female">Female</option>
