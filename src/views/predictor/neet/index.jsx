@@ -149,28 +149,80 @@ const NeetIndex = () => {
             </div>
           )} */}
         {activeType === 1 && (
-          <PredictorAllIndia
-            initialValues={{
-              examType: [],
-              year: [],
-              course: [],
-              round: [],
-              allottedPH: [],
-              quota: [],
-              allottedCategory: [],
-              instituteName: [],
-              rank: 0,
-            }}
-            displayValues={[
-              "year",
-              "course",
-              "round",
-              "instituteType",
-              "allottedCategory",
-              "closingRank",
-              "percentage",
-            ]}
-          />
+          <>
+            <div className="text-secondary p-2 md:p-4 flex flex-col gap-2">
+              <p>
+                All the NEET Under Graduate (MBBS/BDS) aspirant candidates are
+                hereby informed that counseling for All India Quota seats/
+                Institutional Quota/ Domicile (internal candidates) of Central
+                Universities (Aligarh Muslim University/ Banaras Hindu
+                University/ University of Delhi/Faculty of Dentistry, Jamia
+                Millia Islamia, Delhi), (wards of ESIC insured persons) seats of
+                colleges under Employee State Insurance Corporation and Armed
+                Forces Medical College, Pune for the Under graduate session
+                2019-20 will be conducted by Medical Counseling Committee/
+                Directorate General of Health Services, Ministry of Health and
+                Family Welfare, Government of India.
+              </p>
+              <p>
+                For participation in Institutional Quota (internal) seats of
+                Central Universities (Aligarh Muslim University/ Banaras Hindu
+                University/ University of Delhi/ Faculty of Dentistry, Jamia
+                Millia Islamia, Delhi), internal quota seats of colleges under
+                Employee State Insurance Corporation and Armed Forces Medical
+                College, Pune, candidates are required to go for registration at
+                official website of Medical Counseling Committee{" "}
+                <a
+                  href="https://www.mcc.nic.in"
+                  target="_blank"
+                  className="text-blue-600"
+                >
+                  (www.mcc.nic.in)
+                </a>
+                . Candidates of Andhra Pradesh and Telangana would be eligible
+                for participation against the 15% All India Quota seats.
+              </p>
+              <p>
+                Candidates to note that Non- Refundable registration counseling
+                fees and refundable tuition fees have to be paid by the
+                candidate at the time of registration. Reservation of seats
+                under PH Category has been increased from 3% to 5% and the 21
+                Benchmark Disabilities as envisaged under the regulations of
+                “THE RIGHTS OF PERSONS WITH DISABILITIES ACT 2016” are included
+                under the PH category for participation. For range of 21
+                benchmark intellectual disabilities please visit{" "}
+                <a
+                  href="https://mcc.nic.in/#/home"
+                  target="_blank"
+                  className="text-blue-600"
+                >
+                  https://mcc.nic.in/#/home
+                </a>
+              </p>
+            </div>
+            <PredictorAllIndia
+              initialValues={{
+                examType: [],
+                year: [],
+                course: [],
+                round: [],
+                allottedPH: [],
+                quota: [],
+                allottedCategory: [],
+                instituteName: [],
+                rank: 0,
+              }}
+              displayValues={[
+                "year",
+                "course",
+                "round",
+                "instituteType",
+                "allottedCategory",
+                "closingRank",
+                "percentage",
+              ]}
+            />
+          </>
         )}
         {/*  )} */}
       </div>

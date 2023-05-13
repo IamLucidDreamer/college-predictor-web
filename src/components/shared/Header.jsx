@@ -43,7 +43,7 @@ const Header = () => {
       className={`bg-white sticky top-0 z-50 duration-500 ${
         top ? "shadow-lg" : "shadow-none"
       }`}
-      style={{ zIndex: 99999 }}
+      style={{ zIndex: 999 }}
     >
       <div className="container mx-auto px-2 lg:px-10 py-3">
         <div className="flex items-center justify-between">
@@ -164,7 +164,8 @@ const DrawerMenu = ({ openModal, closeModal, navigate }) => {
     <Transition show={openModal} as={Fragment}>
       <Dialog
         as="div"
-        className="fixed inset-0 z-50 overflow-hidden"
+        style={{ zIndex: 9999 }}
+        className="fixed inset-0 overflow-hidden"
         onClose={closeModal}
       >
         <div className="absolute inset-0  overflow-hidden">

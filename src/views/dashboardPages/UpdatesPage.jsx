@@ -83,7 +83,7 @@ const Card = ({ title, description, imageMain, document, createdAt }) => {
                   alt="Lana image"
                 />
               </div>
-              <div className="flex-1 min-w-0">
+              <div className="flex flex-col flex-1 min-w-0 w-full">
                 <p className="text-secondary font-semibold text-xl mb-4">
                   {title}
                 </p>
