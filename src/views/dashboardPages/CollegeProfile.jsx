@@ -21,8 +21,8 @@ const CollegeProfile = () => {
   return (
     <div className="bg-gray-100">
       <div className="bg-blue-500 p-20 pb-10 text-white text-center">
-        <img className="mx-auto w-40 h-40 border-4 border-white" src={data.collegeIcon} alt="" />
-        <h1 className="mt-5 text-2xl font-semibold">{data.collegeName}</h1>
+        <img className="mx-auto w-40 h-40 border-4 border-white" src={data?.collegeIcon} alt="" />
+        <h1 className="mt-5 text-2xl font-semibold">{data?.displayName}</h1>
         {/* <h2 className="mt-2 text-xs">Indian Institute of Technology, Argul Campus, Jatani, Khordha, Bhubaneswar, Odisha - 752050</h2> */}
       </div>
       <div class="container mx-auto my-5 p-5">
