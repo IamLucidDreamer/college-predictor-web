@@ -12,6 +12,8 @@ import Updates from "../layout/Updates";
 import Predictor from "../predictor";
 import NeetIndex from "../predictor/neet";
 import BlogPage from "./Blogs";
+
+import LoadingIndication from "../../components/loader/index";
 import { serverUnauth } from "../../helpers/apiCall";
 import {
   AcademicCapIcon,
@@ -22,13 +24,40 @@ import {
   NewspaperIcon,
   ViewListIcon,
 } from "@heroicons/react/outline";
+import { useNavigate } from "react-router-dom";
+import { CollgeCard } from "./Colleges";
 
 const HomePage = () => {
+  const navigate = useNavigate();
+
   const [updates, setUpdates] = useState([]);
   const [college, setCollege] = useState([]);
+  const [search, setSearch] = useState("");
+  const [searchCollege, setSearchCollege] = useState([]);
+  const [loadingSearchCollege, setLoadingSearchCollege] = useState(false);
 
   const myRef = useRef(null);
   const textRef = useRef(null);
+
+  const getSearchData = () => {
+    serverUnauth
+      .post(`/college/search?limit=2`, { name: search })
+      .then((res) => {
+        setSearchCollege(res?.data?.data?.College);
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+      .finally(() => setLoadingSearchCollege(false));
+  };
+
+  useEffect(() => {
+    setLoadingSearchCollege(true);
+    const timerId = setTimeout(() => {
+      getSearchData();
+    }, 2000);
+    return () => clearTimeout(timerId);
+  }, [search]);
 
   useEffect(() => {
     requestCaller();
@@ -45,6 +74,14 @@ const HomePage = () => {
       .get(`/updates/get-all`)
       .then((res) => {
         setUpdates(res?.data?.data?.updates);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    serverUnauth
+      .get(`/college/get-all`)
+      .then((res) => {
+        setCollege(res?.data?.data?.College);
       })
       .catch((err) => {
         console.log(err);
@@ -77,11 +114,13 @@ const HomePage = () => {
             >
               Search for Colleges Across India
             </h1>
-            <div className="w-full lg:w-3/4 flex items-center justify-between gap-2 bg-white p-3 rounded-xl">
+            <div className="relative w-full lg:w-3/4 flex items-center justify-between gap-2 bg-white p-3 rounded-xl">
               <input
                 className="focus:outline-none w-full"
                 type="text"
                 placeholder="Search for Colleges Across India..."
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
               />
               <button className="text-sm text-slate-400">
                 <svg
@@ -100,6 +139,38 @@ const HomePage = () => {
                   ></path>
                 </svg>
               </button>
+              {search.length > 0 && (
+                <div
+                  className="bg-white rounded-lg absolute w-full top-14 left-0 shadow-lg"
+                  style={{ zIndex: 999999 }}
+                >
+                  {searchCollege.length > 0 && !loadingSearchCollege ? (
+                    searchCollege.map((val) => (
+                      <div className="bg-white p-2 rounded-lg m-1">
+                        <button
+                          style={{ width: "100%" }}
+                          className="text-left"
+                          onClick={() =>
+                            navigate(`/dashboard/colleges/${val?._id}`, {
+                              state: { data: val },
+                            })
+                          }
+                        >
+                          {val?.displayName}
+                        </button>
+                      </div>
+                    ))
+                  ) : loadingSearchCollege ? (
+                    <div className="p-2">
+                      <LoadingIndication width={30} height={30} />
+                    </div>
+                  ) : (
+                    <h1 className="text-base text-secondary p-2">
+                      No Colleges Found
+                    </h1>
+                  )}
+                </div>
+              )}
             </div>
           </div>
         </div>
@@ -207,78 +278,35 @@ const HomePage = () => {
       </div>
       <div className="py-20 text-center p-5">
         <h1 className="font-semibold text-3xl">Top Colleges</h1>
-        <div className="mt-10 flex flex-col md:flex-row justify-center gap-7">
-          <div className="w-full md:w-1/5 rounded-lg bg-gray-200">
-            <div className="relative">
-              <img
-                className="rounded-t-lg"
-                src="https://cdn.pixabay.com/photo/2020/11/19/08/03/college-5757815_960_720.jpg"
-                alt=""
-              />
-              <div className="w-[4rem] absolute -bottom-5 left-0 right-0 mx-auto">
-                <img
-                  className="w-[4rem] h-[4rem] rounded-full"
-                  src="https://th.bing.com/th/id/OIP.UivuSmnBJX5p18zf5qCrKgHaHa?pid=ImgDet&rs=1"
-                  alt=""
+        <div className="my-16">
+          {college.length !== 0 && (
+            <Corousal
+              defaultControlsConfig={{
+                nextButtonText: ">",
+                prevButtonText: "<",
+              }}
+              autoplay={true}
+              autoplayInterval={6000}
+              wrapAround={true}
+              dragging={true}
+              cellAlign="center"
+              slidesToShow={window.innerWidth > 768 ? 3 : 1}
+              className=""
+            >
+              {college?.map((val) => (
+                <CollgeCard
+                  data={val}
+                  coverImage={val.collegeCover}
+                  collegeIcon={val.collegeIcon}
+                  collegeName={val.displayName || val.collegeName}
+                  location={`${val.city}, ${val.state}`}
                 />
-              </div>
-            </div>
-            <div className="py-5">
-              <h2 className="font-semibold text-lg">SRM University Chennai</h2>
-              <h3 className="text-sm">Lorem ipsum dolor sit.</h3>
-              <span className="text-white text-xs bg-green-400 rounded-full px-4">
-                active
-              </span>
-            </div>
-          </div>
-          <div className="w-full md:w-1/5 rounded-lg bg-gray-200">
-            <div className="relative">
-              <img
-                className="rounded-t-lg"
-                src="https://cdn.pixabay.com/photo/2020/11/19/08/03/college-5757815_960_720.jpg"
-                alt=""
-              />
-              <div className="w-[4rem] absolute -bottom-5 left-0 right-0 mx-auto">
-                <img
-                  className="w-[4rem] h-[4rem] rounded-full"
-                  src="https://th.bing.com/th/id/OIP.UivuSmnBJX5p18zf5qCrKgHaHa?pid=ImgDet&rs=1"
-                  alt=""
-                />
-              </div>
-            </div>
-            <div className="py-5">
-              <h2 className="font-semibold text-lg">SRM University Chennai</h2>
-              <h3 className="text-sm">Lorem ipsum dolor sit.</h3>
-              <span className="text-white text-xs bg-green-400 rounded-full px-4">
-                active
-              </span>
-            </div>
-          </div>
-          <div className="w-full md:w-1/5 rounded-lg bg-gray-200">
-            <div className="relative">
-              <img
-                className="rounded-t-lg"
-                src="https://cdn.pixabay.com/photo/2020/11/19/08/03/college-5757815_960_720.jpg"
-                alt=""
-              />
-              <div className="w-[4rem] absolute -bottom-5 left-0 right-0 mx-auto">
-                <img
-                  className="w-[4rem] h-[4rem] rounded-full"
-                  src="https://th.bing.com/th/id/OIP.UivuSmnBJX5p18zf5qCrKgHaHa?pid=ImgDet&rs=1"
-                  alt=""
-                />
-              </div>
-            </div>
-            <div className="py-5">
-              <h2 className="font-semibold text-lg">SRM University Chennai</h2>
-              <h3 className="text-sm">Lorem ipsum dolor sit.</h3>
-              <span className="text-white text-xs bg-green-400 rounded-full px-4">
-                active
-              </span>
-            </div>
-          </div>
+              ))}
+            </Corousal>
+          )}
         </div>
       </div>
+
       {/* Download App Section */}
       <div className="bg-primary bg-opacity-10 w-full py-20">
         <div className="p-4 w-full text-center sm:p-8">
@@ -346,7 +374,7 @@ const HomePage = () => {
         </div>
       </div>
       {/* REview Section */}
-      <div className="py-20">
+      <div className="py-20 bg-white">
         <div className="mx-auto text-center md:max-w-xl lg:max-w-3xl">
           <h3 className="mb-6 text-3xl font-bold text-neutral-800">
             What our Students Say
@@ -358,74 +386,91 @@ const HomePage = () => {
           </p>
         </div>
 
-        <div className="grid gap-6 text-center md:grid-cols-3 lg:gap-12 ">
-          <div className="mb-12 md:mb-0">
-            <div className="mb-6 flex justify-center">
-              <img
-                src="https://tecdn.b-cdn.net/img/Photos/Avatars/img%20(1).jpg"
-                className="w-32 rounded-full shadow-lg"
-              />
+        <div className="mx-auto max-w-screen-xl my-8">
+          <Corousal
+            defaultControlsConfig={{
+              nextButtonText: ">",
+              prevButtonText: "<",
+            }}
+            autoplay={true}
+            autoplayInterval={6000}
+            wrapAround={true}
+            dragging={true}
+            cellAlign="center"
+            slidesToShow={window.innerWidth > 768 ? 3 : 1}
+            className=""
+          >
+            <div className="mb-12 md:mb-0">
+              <div className="mb-6 flex justify-center">
+                <img
+                  src="https://tecdn.b-cdn.net/img/Photos/Avatars/img%20(1).jpg"
+                  className="w-32 rounded-full shadow-lg"
+                />
+              </div>
+              <h5 className="mb-4 text-xl font-semibold">Some Name</h5>
+              <h6 className="mb-4 font-semibold text-primary">Some Title</h6>
+              <p className="mb-4">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="currentColor"
+                  className="inline-block h-7 w-7 pr-2"
+                  viewBox="0 0 24 24"
+                >
+                  <path d="M13 14.725c0-5.141 3.892-10.519 10-11.725l.984 2.126c-2.215.835-4.163 3.742-4.38 5.746 2.491.392 4.396 2.547 4.396 5.149 0 3.182-2.584 4.979-5.199 4.979-3.015 0-5.801-2.305-5.801-6.275zm-13 0c0-5.141 3.892-10.519 10-11.725l.984 2.126c-2.215.835-4.163 3.742-4.38 5.746 2.491.392 4.396 2.547 4.396 5.149 0 3.182-2.584 4.979-5.199 4.979-3.015 0-5.801-2.305-5.801-6.275z" />
+                </svg>
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod
+                eos id officiis hic tenetur quae quaerat ad velit ab hic
+                tenetur.
+              </p>
             </div>
-            <h5 className="mb-4 text-xl font-semibold">Some Name</h5>
-            <h6 className="mb-4 font-semibold text-primary">Some Title</h6>
-            <p className="mb-4">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="currentColor"
-                className="inline-block h-7 w-7 pr-2"
-                viewBox="0 0 24 24"
-              >
-                <path d="M13 14.725c0-5.141 3.892-10.519 10-11.725l.984 2.126c-2.215.835-4.163 3.742-4.38 5.746 2.491.392 4.396 2.547 4.396 5.149 0 3.182-2.584 4.979-5.199 4.979-3.015 0-5.801-2.305-5.801-6.275zm-13 0c0-5.141 3.892-10.519 10-11.725l.984 2.126c-2.215.835-4.163 3.742-4.38 5.746 2.491.392 4.396 2.547 4.396 5.149 0 3.182-2.584 4.979-5.199 4.979-3.015 0-5.801-2.305-5.801-6.275z" />
-              </svg>
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod eos
-              id officiis hic tenetur quae quaerat ad velit ab hic tenetur.
-            </p>
-          </div>
 
-          <div className="mb-12 md:mb-0">
-            <div className="mb-6 flex justify-center">
-              <img
-                src="https://tecdn.b-cdn.net/img/Photos/Avatars/img%20(1).jpg"
-                className="w-32 rounded-full shadow-lg"
-              />
+            <div className="mb-12 md:mb-0">
+              <div className="mb-6 flex justify-center">
+                <img
+                  src="https://tecdn.b-cdn.net/img/Photos/Avatars/img%20(1).jpg"
+                  className="w-32 rounded-full shadow-lg"
+                />
+              </div>
+              <h5 className="mb-4 text-xl font-semibold">Some Name</h5>
+              <h6 className="mb-4 font-semibold text-primary">Some Title</h6>
+              <p className="mb-4">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="currentColor"
+                  className="inline-block h-7 w-7 pr-2"
+                  viewBox="0 0 24 24"
+                >
+                  <path d="M13 14.725c0-5.141 3.892-10.519 10-11.725l.984 2.126c-2.215.835-4.163 3.742-4.38 5.746 2.491.392 4.396 2.547 4.396 5.149 0 3.182-2.584 4.979-5.199 4.979-3.015 0-5.801-2.305-5.801-6.275zm-13 0c0-5.141 3.892-10.519 10-11.725l.984 2.126c-2.215.835-4.163 3.742-4.38 5.746 2.491.392 4.396 2.547 4.396 5.149 0 3.182-2.584 4.979-5.199 4.979-3.015 0-5.801-2.305-5.801-6.275z" />
+                </svg>
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod
+                eos id officiis hic tenetur quae quaerat ad velit ab hic
+                tenetur.
+              </p>
             </div>
-            <h5 className="mb-4 text-xl font-semibold">Some Name</h5>
-            <h6 className="mb-4 font-semibold text-primary">Some Title</h6>
-            <p className="mb-4">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="currentColor"
-                className="inline-block h-7 w-7 pr-2"
-                viewBox="0 0 24 24"
-              >
-                <path d="M13 14.725c0-5.141 3.892-10.519 10-11.725l.984 2.126c-2.215.835-4.163 3.742-4.38 5.746 2.491.392 4.396 2.547 4.396 5.149 0 3.182-2.584 4.979-5.199 4.979-3.015 0-5.801-2.305-5.801-6.275zm-13 0c0-5.141 3.892-10.519 10-11.725l.984 2.126c-2.215.835-4.163 3.742-4.38 5.746 2.491.392 4.396 2.547 4.396 5.149 0 3.182-2.584 4.979-5.199 4.979-3.015 0-5.801-2.305-5.801-6.275z" />
-              </svg>
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod eos
-              id officiis hic tenetur quae quaerat ad velit ab hic tenetur.
-            </p>
-          </div>
-          <div className="mb-12 md:mb-0">
-            <div className="mb-6 flex justify-center">
-              <img
-                src="https://tecdn.b-cdn.net/img/Photos/Avatars/img%20(1).jpg"
-                className="w-32 rounded-full shadow-lg"
-              />
+            <div className="mb-12 md:mb-0">
+              <div className="mb-6 flex justify-center">
+                <img
+                  src="https://tecdn.b-cdn.net/img/Photos/Avatars/img%20(1).jpg"
+                  className="w-32 rounded-full shadow-lg"
+                />
+              </div>
+              <h5 className="mb-4 text-xl font-semibold">Some Name</h5>
+              <h6 className="mb-4 font-semibold text-primary">Some Title</h6>
+              <p className="mb-4">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="currentColor"
+                  className="inline-block h-7 w-7 pr-2"
+                  viewBox="0 0 24 24"
+                >
+                  <path d="M13 14.725c0-5.141 3.892-10.519 10-11.725l.984 2.126c-2.215.835-4.163 3.742-4.38 5.746 2.491.392 4.396 2.547 4.396 5.149 0 3.182-2.584 4.979-5.199 4.979-3.015 0-5.801-2.305-5.801-6.275zm-13 0c0-5.141 3.892-10.519 10-11.725l.984 2.126c-2.215.835-4.163 3.742-4.38 5.746 2.491.392 4.396 2.547 4.396 5.149 0 3.182-2.584 4.979-5.199 4.979-3.015 0-5.801-2.305-5.801-6.275z" />
+                </svg>
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod
+                eos id officiis hic tenetur quae quaerat ad velit ab hic
+                tenetur.
+              </p>
             </div>
-            <h5 className="mb-4 text-xl font-semibold">Some Name</h5>
-            <h6 className="mb-4 font-semibold text-primary">Some Title</h6>
-            <p className="mb-4">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="currentColor"
-                className="inline-block h-7 w-7 pr-2"
-                viewBox="0 0 24 24"
-              >
-                <path d="M13 14.725c0-5.141 3.892-10.519 10-11.725l.984 2.126c-2.215.835-4.163 3.742-4.38 5.746 2.491.392 4.396 2.547 4.396 5.149 0 3.182-2.584 4.979-5.199 4.979-3.015 0-5.801-2.305-5.801-6.275zm-13 0c0-5.141 3.892-10.519 10-11.725l.984 2.126c-2.215.835-4.163 3.742-4.38 5.746 2.491.392 4.396 2.547 4.396 5.149 0 3.182-2.584 4.979-5.199 4.979-3.015 0-5.801-2.305-5.801-6.275z" />
-              </svg>
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod eos
-              id officiis hic tenetur quae quaerat ad velit ab hic tenetur.
-            </p>
-          </div>
+          </Corousal>
         </div>
       </div>
 
@@ -512,8 +557,23 @@ const HomePage = () => {
 export default HomePage;
 
 const UpdateCards = ({ updates }) => {
+  const myRef = useRef(null);
+
+  useEffect(() => {
+    gsap.from(myRef.current, {
+      duration: 1,
+      ease: "power2.out",
+      opacity: 0,
+    });
+  }, []);
+
   return (
-    <div className={`bg-white rounded-lg p-3 mx-2 border-b-4 border-primary z-30 duration-500 ${updates ? "opacity-100" : "opacity-0"}`}>
+    <div
+      ref={myRef}
+      className={`bg-white rounded-lg p-3 mx-2 border-b-4 border-primary z-30 duration-500 ${
+        updates ? "opacity-100" : "opacity-0"
+      }`}
+    >
       <div className="flex overflow-hidden gap-2 items-center">
         <img
           className="w-14 h-14 rounded-full"

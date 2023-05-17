@@ -54,7 +54,7 @@ const Colleges = () => {
                 data={val}
                 coverImage={val.collegeCover}
                 collegeIcon={val.collegeIcon}
-                collegeName={val.collegeName}
+                collegeName={val.displayName || val.collegeName}
                 location={`${val.city}, ${val.state}`}
               />
             );
@@ -105,7 +105,7 @@ const Colleges = () => {
 
 export default Colleges;
 
-const CollgeCard = ({
+export const CollgeCard = ({
   data,
   coverImage,
   collegeIcon,
@@ -147,9 +147,15 @@ const CollgeCard = ({
           >
             Read More
           </button>
-          <button className="bg-primary text-white px-2.5 py-1.5 rounded-lg text-sm">
-            Apply Now
-          </button>
+          {data?.applicationLink && (
+            <a
+              className="bg-primary text-white px-2.5 py-1.5 rounded-lg text-sm"
+              href={data?.applicationLink}
+              target="_blank"
+            >
+              Apply Now
+            </a>
+          )}
         </div>
       </div>
     </button>
