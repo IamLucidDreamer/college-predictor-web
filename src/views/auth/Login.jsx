@@ -67,7 +67,7 @@ const Login = () => {
         imageLink={image}
         title={"Sign In"}
         description={
-          "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nesciunt sapiente ducimus."
+          "Login and continue with your registered account to get access to premium content."
         }
         form={
           <div className="w-11/12 lg:w-10/12 xl:w-2/3 max-w-2xl flex flex-col items-center justify-center">

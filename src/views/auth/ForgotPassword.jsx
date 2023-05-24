@@ -8,7 +8,7 @@ import { sendOtp } from "../../services/authService";
 import { toast } from "react-toastify";
 import AuthLayout from "../layout/AuthLayout";
 import AppLogo from "../../components/images/AppLogo";
-import image from "../../assets/images/signup.jpg";
+import image from "../../assets/images/forgot_bg.jpg";
 import { Link, useNavigate } from "react-router-dom";
 import {
   PhoneIcon,
@@ -60,7 +60,7 @@ const ForgotPassword = () => {
         imageLink={image}
         title={"Forgot Password"}
         description={
-          "loren inpusm dolor sadf acudan favascaec acffe sdclaf cudan sdcfa oasd fdSS."
+          "Enter your registered Mobile Number to reset your password."
         }
         form={
           <div className="w-11/12 lg:w-10/12 xl:w-2/3 max-w-2xl flex flex-col items-center justify-center pt-4">
