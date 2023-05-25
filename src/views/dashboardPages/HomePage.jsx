@@ -381,7 +381,7 @@ const HomePage = () => {
               className="w-[150px] sm:w-auto flex bg-gray-800 hover:bg-gray-700 focus:ring-4 focus:ring-gray-300 text-white rounded-lg items-center justify-center px-4 py-2.5"
             >
               <svg
-                className="mr-3 w-7 h-7"
+                className="mr-2 md:mr-3 w-5 h-5 sm:w-7 sm:h-7"
                 aria-hidden="true"
                 focusable="false"
                 data-prefix="fab"
@@ -406,10 +406,10 @@ const HomePage = () => {
               data-aos="flip-left"
               data-aos-offset="100"
               href="#"
-              className="w-[150px] sm:w-auto flex bg-gray-800 hover:bg-gray-700 focus:ring-4 focus:ring-gray-300 text-white rounded-lg items-center justify-center px-4 py-2.5"
+              className=" w-[150px] sm:w-auto flex bg-gray-800 hover:bg-gray-700 focus:ring-4 focus:ring-gray-300 text-white rounded-lg items-center justify-center px-4 py-2.5"
             >
               <svg
-                className="mr-3 w-7 h-7"
+                className="mr-2 md:mr-3 w-5 h-5 sm:w-7 sm:h-7"
                 aria-hidden="true"
                 focusable="false"
                 data-prefix="fab"

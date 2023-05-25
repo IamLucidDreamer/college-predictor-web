@@ -2,19 +2,25 @@ import React from "react";
 import { useState } from "react";
 import { useEffect } from "react";
 import { server } from "../../helpers/apiCall";
+import { useLocation } from "react-router-dom";
 
 const CollegeProfile = () => {
-  const [data, setData] = useState([]);
+  const location = useLocation();
+  console.log(location, "hello");
+
+  const [data, setData] = useState(location.state.data);
 
   useEffect(() => {
     getData();
   }, []);
 
   const getData = () => {
-    server
-      .get("college/get-all")
-      .then((res) => setData(res.data.data.College[0], "This is res"))
-      .catch((err) => console.log(err));
+    if (!location.state.data) {
+      server
+        .get("college/get-all")
+        .then((res) => setData(res.data.data.College[0], "This is res"))
+        .catch((err) => console.log(err));
+    }
   };
 
   console.log(data, "This is data");

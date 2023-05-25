@@ -50,7 +50,7 @@ const Colleges = () => {
         <div className="w-full flex flex-wrap gap-8 justify-center lg:justify-evenly my-4">
           {data?.map((val) => {
             return (
-              <CollgeCard
+              <CollegeCardLocal
                 data={val}
                 coverImage={val.collegeCover}
                 collegeIcon={val.collegeIcon}
@@ -69,7 +69,7 @@ const Colleges = () => {
           {dataTop?.map((val) => {
             return (
               <div className="min-w-max">
-                <CollgeCard
+                <CollegeCardLocal
                   data={val}
                   coverImage={val.collegeCover}
                   collegeIcon={val.collegeIcon}
@@ -88,7 +88,7 @@ const Colleges = () => {
         <div className="w-full flex gap-8 justify-center lg:justify-evenly my-4 max-w-screen overflow-x-scroll no-scrollbar">
           {dataTopState?.map((val) => {
             return (
-              <CollgeCard
+              <CollegeCardLocal
                 data={val}
                 coverImage={val.collegeCover}
                 collegeIcon={val.collegeIcon}
@@ -104,6 +104,70 @@ const Colleges = () => {
 };
 
 export default Colleges;
+
+export const CollegeCardLocal = ({
+  data,
+  coverImage,
+  collegeIcon,
+  collegeName,
+  location,
+}) => {
+  const navigate = useNavigate();
+  return (
+    <div className="p-1" data-aos="flip-up" data-aos-offset="10">
+      <button
+        onClick={(e) => {
+          e.stopPropagation();
+          navigate(`/dashboard/colleges/${data?._id}`, {
+            state: { data: data },
+          });
+        }}
+        className="relative rounded-lg bg-white shadow-md md:flex-row md:max-w-screen-md"
+        style={{ width: "400px" }}
+      >
+        <img
+          style={{ height: "220px" }}
+          className="rounded-lg object-cover w-full"
+          src={coverImage}
+          alt=""
+        />
+        <div className="relative">
+          <img
+            style={{ width: "100px", height: "100px" }}
+            className="rounded-lg mx-auto shadow-lg -mt-16 bg-white object-cover"
+            src={collegeIcon}
+            alt=""
+          />
+        </div>
+        <div className="px-2">
+          <p className="text-secondary font-semibold text-xl text-center mt-4">
+            {collegeName}
+          </p>
+          <p className="mb-2 text-sm text-secondary text-center">{location}</p>
+          <div className="flex justify-center gap-4 items-center p-3 pb-5">
+            <button
+              className="border-secondary text-secondary px-2.5 py-1 rounded-lg text-sm"
+              style={{ borderWidth: "1px" }}
+            >
+              Read More
+            </button>
+            {data?.applicationLink && (
+              <a
+                className="bg-primary text-white px-2.5 py-1.5 rounded-lg text-sm"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  window.open(`https://${data?.applicationLink}`, "_blank");
+                }}
+              >
+                Apply Now
+              </a>
+            )}
+          </div>
+        </div>
+      </button>
+    </div>
+  );
+};
 
 export const CollgeCard = ({
   data,
