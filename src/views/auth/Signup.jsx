@@ -48,9 +48,13 @@ const SignUp = () => {
     if (authToken?.length) {
       navigate("/dashboard");
     }
-  },[]);
+  }, []);
 
-  const handleSignUp = async (values) => {
+  const handleSignUp = async (values, setErrors) => {
+    if (!values.consent) {
+      setErrors({ consent: "Please accept the terms of service." });
+      return;
+    }
     setLoading(true);
     try {
       const response = await sendOtp(
@@ -93,10 +97,11 @@ const SignUp = () => {
                 email: "",
                 password: "",
                 examType: 0,
+                consent: false,
               }}
               validationSchema={signUpalidation}
-              onSubmit={(values) => {
-                handleSignUp(values);
+              onSubmit={(values, { setErrors }) => {
+                handleSignUp(values, setErrors);
               }}
             >
               {({ values, touched, errors, handleChange, handleSubmit }) => {
@@ -194,7 +199,9 @@ const SignUp = () => {
                           <option value={0} disabled>
                             Select Exam
                           </option>
-                          <option value={1} disabled >JEE (Comming Soon)</option>
+                          <option value={1} disabled>
+                            JEE (Comming Soon)
+                          </option>
                           <option value={2}>NEET</option>
                         </select>
                       </div>
@@ -204,13 +211,52 @@ const SignUp = () => {
                         }
                         error={errors.examType}
                       />
+                      <div className="flex items-center justify-start gap-3 ">
+                        <input
+                          id="consent"
+                          className="p-2.5 text-lg rounded-lg bg-gray-100 focus:outline-none"
+                          name="consent"
+                          type="checkbox"
+                          value={values.consent}
+                          onChange={handleChange}
+                        />
+                        <div>
+                          <h1 className="text-sm">
+                            I accept the{" "}
+                            <a
+                              className="text-primary hover:underline font-semibold"
+                              href="https://careerkick.in/term-&-conditions/"
+                              target="_blank"
+                            >
+                              terms of service
+                            </a>{" "}
+                            &{" "}
+                            <a
+                              className="text-primary hover:underline font-semibold"
+                              href="https://careerkick.in/privacy-policy/"
+                              target="_blank"
+                            >
+                              privacy policy
+                            </a>
+                            .
+                          </h1>
+                        </div>
+                      </div>
+                      <CustomValidationErrorMessage
+                        show={touched.consent && errors.consent ? true : false}
+                        error={errors.consent}
+                      />
                       <button
                         className="p-2.5 text-lg rounded-lg bg-secondary text-white my-4 w-full shadow-lg"
                         type="submit"
                         onClick={handleSubmit}
                         disabled={loading}
                       >
-                        {loading ? <Loader width={25} height={25} /> : "Sign Up"}
+                        {loading ? (
+                          <Loader width={25} height={25} />
+                        ) : (
+                          "Sign Up"
+                        )}
                       </button>
                       {/* <div className="flex items-center gap-2 mt-4 mb-2 w-11/12 ">
                       <div className="bg-secondary h-0.5 w-full"></div>

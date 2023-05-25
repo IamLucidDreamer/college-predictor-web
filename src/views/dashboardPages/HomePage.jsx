@@ -464,7 +464,11 @@ const HomePage = () => {
             slidesToShow={window.innerWidth > 768 ? 3 : 1}
             className=""
           >
-            <div className="mb-12 md:mb-0 mx-6">
+            <div
+              className="mb-12 md:mb-0 mx-6"
+              data-aos="flip-up"
+              data-aos-offset="100"
+            >
               <div className="mb-6 flex justify-center">
                 <img
                   src="https://lh3.googleusercontent.com/a-/AD_cMMSzxbuNI8smakH-HeX_oQtV1uBweSaLLXXOGUzijug=w45-h45-p-rp-mo-ba4-br100"
@@ -490,7 +494,11 @@ const HomePage = () => {
               </p>
             </div>
 
-            <div className="mb-12 md:mb-0 mx-6">
+            <div
+              className="mb-12 md:mb-0 mx-6"
+              data-aos="flip-up"
+              data-aos-offset="100"
+            >
               <div className="mb-6 flex justify-center">
                 <img
                   src="https://lh3.googleusercontent.com/a-/AD_cMMQp89Tb7K3suRUFcPwFy1iSOfvVw0TiUiDrQsmI=w75-h75-p-rp-mo-br100"
@@ -513,13 +521,15 @@ const HomePage = () => {
                 Your allotted counsellor will help you all the time until you
                 get admitted into the college . They clear all your doubt
                 everything no matter how many questions and doubt you made ,they
-                are always there to help in your counselling. <br />
-                Best Career Counselling Services in India you can get. A special
-                Thank you to the careerkick and my alloted counsellor for the
-                help ♥️🙏
+                are always there to help in your counselling.
               </p>
             </div>
-            <div className="mb-12 md:mb-0 mx-6">
+
+            <div
+              className="mb-12 md:mb-0 mx-6"
+              data-aos="flip-up"
+              data-aos-offset="100"
+            >
               <div className="mb-6 flex justify-center">
                 <img
                   src="https://lh3.googleusercontent.com/a-/AD_cMMQHAYhQgMhKSbmh_I9SZNWGxoAS2VXtH8nVLwoMRg=w45-h45-p-c0x00000000-rp-mo-br100"

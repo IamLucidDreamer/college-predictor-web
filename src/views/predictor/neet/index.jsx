@@ -300,7 +300,11 @@ const PredictorAllIndia = ({ initialValues, displayValues }) => {
       >
         {({ values, handleSubmit, setFieldValue, touched, errors }) => {
           return (
-            <div className="flex flex-col my-3 mx-auto">
+            <div
+              className="flex flex-col my-3 mx-auto"
+              data-aos="fade-up"
+              data-aos-offset="100"
+            >
               {Object.keys(values)?.map((val, index) => {
                 if (val === "rank") {
                   return;

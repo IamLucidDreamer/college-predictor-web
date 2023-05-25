@@ -138,7 +138,7 @@ const Login = () => {
                         )}
                       </button>
                       <div className="text-sm w-full text-right my-1 px-3">
-                        <Link to={"/forgot-password"}>Forgot Password</Link>
+                        <Link to={"/forgot-password"}>Forgot Password ?</Link>
                       </div>
                       {/* <div className="flex items-center gap-2 mt-4 mb-2 w-11/12 ">
                       <div className="bg-secondary h-0.5 w-full"></div>
