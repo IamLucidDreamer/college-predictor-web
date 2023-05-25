@@ -435,7 +435,11 @@ const HomePage = () => {
       </div>
       {/* REview Section */}
       <div className="py-20 bg-white">
-        <div className="mx-auto text-center md:max-w-xl lg:max-w-3xl">
+        <div
+          className="mx-auto text-center md:max-w-xl lg:max-w-3xl"
+          data-aos="fade-up"
+          data-aos-offset="50"
+        >
           <h3 className="mb-6 text-3xl font-bold text-neutral-800">
             What our Students Say
           </h3>
@@ -463,12 +467,11 @@ const HomePage = () => {
             <div className="mb-12 md:mb-0 mx-6">
               <div className="mb-6 flex justify-center">
                 <img
-                  src="https://tecdn.b-cdn.net/img/Photos/Avatars/img%20(1).jpg"
+                  src="https://lh3.googleusercontent.com/a-/AD_cMMSzxbuNI8smakH-HeX_oQtV1uBweSaLLXXOGUzijug=w45-h45-p-rp-mo-ba4-br100"
                   className="w-32 rounded-full shadow-lg"
                 />
               </div>
-              <h5 className="mb-4 text-xl font-semibold">Some Name</h5>
-              <h6 className="mb-4 font-semibold text-primary">Some Title</h6>
+              <h5 className="mb-4 text-xl font-semibold">Abhinav Pandey</h5>
               <p className="mb-4">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -478,21 +481,23 @@ const HomePage = () => {
                 >
                   <path d="M13 14.725c0-5.141 3.892-10.519 10-11.725l.984 2.126c-2.215.835-4.163 3.742-4.38 5.746 2.491.392 4.396 2.547 4.396 5.149 0 3.182-2.584 4.979-5.199 4.979-3.015 0-5.801-2.305-5.801-6.275zm-13 0c0-5.141 3.892-10.519 10-11.725l.984 2.126c-2.215.835-4.163 3.742-4.38 5.746 2.491.392 4.396 2.547 4.396 5.149 0 3.182-2.584 4.979-5.199 4.979-3.015 0-5.801-2.305-5.801-6.275z" />
                 </svg>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod
-                eos id officiis hic tenetur quae quaerat ad velit ab hic
-                tenetur.
+                One of the best counseling services. They are very supportive
+                and very well behaved. One can contact them anytime for help and
+                they are eagerly ready to help you out.
+                <br /> My experience was excellent with their service. I would
+                highly recommend you to hire counselor if you are seeking for
+                admission in any course in any college.
               </p>
             </div>
 
             <div className="mb-12 md:mb-0 mx-6">
               <div className="mb-6 flex justify-center">
                 <img
-                  src="https://tecdn.b-cdn.net/img/Photos/Avatars/img%20(1).jpg"
+                  src="https://lh3.googleusercontent.com/a-/AD_cMMQp89Tb7K3suRUFcPwFy1iSOfvVw0TiUiDrQsmI=w75-h75-p-rp-mo-br100"
                   className="w-32 rounded-full shadow-lg"
                 />
               </div>
-              <h5 className="mb-4 text-xl font-semibold">Some Name</h5>
-              <h6 className="mb-4 font-semibold text-primary">Some Title</h6>
+              <h5 className="mb-4 text-xl font-semibold">Abhishek Tiwari</h5>
               <p className="mb-4">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -502,20 +507,26 @@ const HomePage = () => {
                 >
                   <path d="M13 14.725c0-5.141 3.892-10.519 10-11.725l.984 2.126c-2.215.835-4.163 3.742-4.38 5.746 2.491.392 4.396 2.547 4.396 5.149 0 3.182-2.584 4.979-5.199 4.979-3.015 0-5.801-2.305-5.801-6.275zm-13 0c0-5.141 3.892-10.519 10-11.725l.984 2.126c-2.215.835-4.163 3.742-4.38 5.746 2.491.392 4.396 2.547 4.396 5.149 0 3.182-2.584 4.979-5.199 4.979-3.015 0-5.801-2.305-5.801-6.275z" />
                 </svg>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod
-                eos id officiis hic tenetur quae quaerat ad velit ab hic
-                tenetur.
+                From my experience I will say that they provide the best
+                counselling service.
+                <br />
+                Your allotted counsellor will help you all the time until you
+                get admitted into the college . They clear all your doubt
+                everything no matter how many questions and doubt you made ,they
+                are always there to help in your counselling. <br />
+                Best Career Counselling Services in India you can get. A special
+                Thank you to the careerkick and my alloted counsellor for the
+                help ♥️🙏
               </p>
             </div>
             <div className="mb-12 md:mb-0 mx-6">
               <div className="mb-6 flex justify-center">
                 <img
-                  src="https://tecdn.b-cdn.net/img/Photos/Avatars/img%20(1).jpg"
+                  src="https://lh3.googleusercontent.com/a-/AD_cMMQHAYhQgMhKSbmh_I9SZNWGxoAS2VXtH8nVLwoMRg=w45-h45-p-c0x00000000-rp-mo-br100"
                   className="w-32 rounded-full shadow-lg"
                 />
               </div>
-              <h5 className="mb-4 text-xl font-semibold">Some Name</h5>
-              <h6 className="mb-4 font-semibold text-primary">Some Title</h6>
+              <h5 className="mb-4 text-xl font-semibold">Shivansh Verma</h5>
               <p className="mb-4">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -525,9 +536,10 @@ const HomePage = () => {
                 >
                   <path d="M13 14.725c0-5.141 3.892-10.519 10-11.725l.984 2.126c-2.215.835-4.163 3.742-4.38 5.746 2.491.392 4.396 2.547 4.396 5.149 0 3.182-2.584 4.979-5.199 4.979-3.015 0-5.801-2.305-5.801-6.275zm-13 0c0-5.141 3.892-10.519 10-11.725l.984 2.126c-2.215.835-4.163 3.742-4.38 5.746 2.491.392 4.396 2.547 4.396 5.149 0 3.182-2.584 4.979-5.199 4.979-3.015 0-5.801-2.305-5.801-6.275z" />
                 </svg>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod
-                eos id officiis hic tenetur quae quaerat ad velit ab hic
-                tenetur.
+                I would like to thank Careerkick Services for supporting I have
+                a good experience in careerkick services Careerkick Services is
+                one the best counseling provider platforms Thank u once again
+                for guiding me in whole admission process.
               </p>
             </div>
           </Corousal>
