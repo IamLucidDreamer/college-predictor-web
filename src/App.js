@@ -2,6 +2,8 @@ import { useEffect } from "react";
 import Routes from "./Routes/Index";
 import { useDispatch } from "react-redux";
 import { setAppInApp } from "./store/actions/appInApp";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 function App() {
 
@@ -16,6 +18,11 @@ function App() {
     }
   }
     , [])
+
+  useEffect(() => {
+    AOS.init({ duration: 1200, delay: 500 });
+    AOS.refresh();
+  }, []);
 
   return (
     <div style={{ backgroundColor: "rgb(247 248 249)" }}>

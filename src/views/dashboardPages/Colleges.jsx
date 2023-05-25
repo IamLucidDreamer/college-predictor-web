@@ -114,50 +114,54 @@ export const CollgeCard = ({
 }) => {
   const navigate = useNavigate();
   return (
-    <button
-      onClick={(e) => {
-        e.stopPropagation();
-        navigate(`/dashboard/colleges/${data?._id}`, { state: { data: data } });
-      }}
-      className="relative rounded-lg bg-white shadow-md md:flex-row max-w-md"
-    >
-      <img
-        style={{ width: "400px", height: "220px" }}
-        className="rounded-lg object-cover"
-        src={coverImage}
-        alt=""
-      />
-      <div className="relative">
+    <div className="p-4" data-aos="flip-up" data-aos-offset="100">
+      <button
+        onClick={(e) => {
+          e.stopPropagation();
+          navigate(`/dashboard/colleges/${data?._id}`, {
+            state: { data: data },
+          });
+        }}
+        className="relative rounded-lg bg-white shadow-md md:flex-row w-full md:max-w-screen-md"
+      >
         <img
-          style={{ width: "100px", height: "100px" }}
-          className="rounded-lg mx-auto shadow-lg -mt-16 bg-white object-cover"
-          src={collegeIcon}
+          style={{ height: "220px" }}
+          className="rounded-lg object-cover w-full"
+          src={coverImage}
           alt=""
         />
-      </div>
-      <div className="px-2">
-        <p className="text-secondary font-semibold text-xl text-center mt-4">
-          {collegeName}
-        </p>
-        <p className="mb-2 text-sm text-secondary text-center">{location}</p>
-        <div className="flex justify-center gap-4 items-center p-3 pb-5">
-          <button
-            className="border-secondary text-secondary px-2.5 py-1 rounded-lg text-sm"
-            style={{ borderWidth: "1px" }}
-          >
-            Read More
-          </button>
-          {data?.applicationLink && (
-            <a
-              className="bg-primary text-white px-2.5 py-1.5 rounded-lg text-sm"
-              href={data?.applicationLink}
-              target="_blank"
-            >
-              Apply Now
-            </a>
-          )}
+        <div className="relative">
+          <img
+            style={{ width: "100px", height: "100px" }}
+            className="rounded-lg mx-auto shadow-lg -mt-16 bg-white object-cover"
+            src={collegeIcon}
+            alt=""
+          />
         </div>
-      </div>
-    </button>
+        <div className="px-2">
+          <p className="text-secondary font-semibold text-xl text-center mt-4">
+            {collegeName}
+          </p>
+          <p className="mb-2 text-sm text-secondary text-center">{location}</p>
+          <div className="flex justify-center gap-4 items-center p-3 pb-5">
+            <button
+              className="border-secondary text-secondary px-2.5 py-1 rounded-lg text-sm"
+              style={{ borderWidth: "1px" }}
+            >
+              Read More
+            </button>
+            {data?.applicationLink && (
+              <a
+                className="bg-primary text-white px-2.5 py-1.5 rounded-lg text-sm"
+                href={data?.applicationLink}
+                target="_blank"
+              >
+                Apply Now
+              </a>
+            )}
+          </div>
+        </div>
+      </button>
+    </div>
   );
 };

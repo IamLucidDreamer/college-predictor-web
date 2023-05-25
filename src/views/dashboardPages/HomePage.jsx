@@ -37,7 +37,6 @@ const HomePage = () => {
   const [loadingSearchCollege, setLoadingSearchCollege] = useState(false);
 
   const myRef = useRef(null);
-  const textRef = useRef(null);
 
   const getSearchData = () => {
     serverUnauth
@@ -55,7 +54,7 @@ const HomePage = () => {
     setLoadingSearchCollege(true);
     const timerId = setTimeout(() => {
       getSearchData();
-    }, 2000);
+    }, 1000);
     return () => clearTimeout(timerId);
   }, [search]);
 
@@ -107,10 +106,13 @@ const HomePage = () => {
             borderBottomLeftRadius: "70px",
           }}
         >
-          <div className="min-h-[80vh] flex flex-col gap-10 items-center justify-center md:max-w-xl lg:max-w-3xl p-4 md:p-8 lg:p-16">
+          <div
+            className="min-h-[80vh] flex flex-col gap-10 items-center justify-center md:max-w-xl lg:max-w-3xl p-4 md:p-8 lg:p-16"
+            data-aos="flip-up"
+          >
             <h1
-              ref={textRef}
               className="text-2xl sm:text-5xl text-white font-semibold text-center"
+              data-aos="flip-up"
             >
               Search for Colleges Across India
             </h1>
@@ -142,11 +144,15 @@ const HomePage = () => {
               {search.length > 0 && (
                 <div
                   className="bg-white rounded-lg absolute w-full top-14 left-0 shadow-lg"
+                  data-aos="fade-up"
                   style={{ zIndex: 999999 }}
                 >
                   {searchCollege.length > 0 && !loadingSearchCollege ? (
                     searchCollege.map((val) => (
-                      <div className="bg-white p-2 rounded-lg m-1">
+                      <div
+                        className="bg-white p-2 rounded-lg m-1"
+                        data-aos="fade-up"
+                      >
                         <button
                           style={{ width: "100%" }}
                           className="text-left"
@@ -176,7 +182,10 @@ const HomePage = () => {
         </div>
       </div>
       <div className="mx-auto max-w-screen-lg -mt-24 z-50 relative">
-        <h2 className="text-center text-white text-xl sm:text-3xl mb-4 font-semibold">
+        <h2
+          className="text-center text-white text-xl sm:text-3xl mb-4 font-semibold"
+          data-aos="fade-up"
+        >
           Latest Updates & Notifications
         </h2>
         {updates.length !== 0 && (
@@ -196,7 +205,11 @@ const HomePage = () => {
           </Corousal>
         )}
       </div>
-      <div className="my-10 text-center py-16">
+      <div
+        className="my-10 text-center py-16"
+        data-aos="fade-up"
+        data-aos-offset="70"
+      >
         <h1 className="font-semibold text-3xl">
           India's Leading Education Portal for all you{" "}
           <span className="font-semibold text-primary">academic needs</span>
@@ -204,34 +217,57 @@ const HomePage = () => {
         <h2 className="mt-2">
           India's Leading Education Portal for all you academic needs
         </h2>
-        <div className="mt-10 flex flex-col md:flex-row justify-center gap-4 m-4">
-          <div className="lg:w-1/5 bg-gray-200 p-8 py-16 rounded-lg shadow-secondary">
+        <div className="mt-10 flex flex-col md:flex-row justify-center gap-6 m-6">
+          <div
+            className="lg:w-1/5 bg-gray-200 p-8 py-16 rounded-lg shadow-secondary"
+            data-aos="flip-up"
+            data-aos-offset="80"
+          >
             <h2 className="font-semibold text-lg">Colleges</h2>
             <p>Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet.</p>
           </div>
-          <div className="lg:w-1/5 bg-gray-200 p-8 py-16 rounded-lg shadow-secondary">
+          <div
+            className="lg:w-1/5 bg-gray-200 p-8 py-16 rounded-lg shadow-secondary"
+            data-aos="flip-up"
+            data-aos-offset="160"
+          >
             <h2 className="font-semibold text-lg">Colleges</h2>
             <p>Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet.</p>
           </div>
-          <div className="lg:w-1/5 bg-gray-200 p-8 py-16 rounded-lg shadow-secondary">
+          <div
+            className="lg:w-1/5 bg-gray-200 p-8 py-16 rounded-lg shadow-secondary"
+            data-aos="flip-up"
+            data-aos-offset="240"
+          >
             <h2 className="font-semibold text-lg">Colleges</h2>
             <p>Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet.</p>
           </div>
         </div>
       </div>
+
       <div className="text-center p-5 bg-gray-200 pt-20 pb-28">
-        <h1 className="font-semibold text-3xl">Counselling</h1>
-        <h2 className="mt-2">
-          India's Leading Education Portal for all you academic needs
-        </h2>
+        <div data-aos="fade-up" data-aos-offset="10">
+          <h1 className="font-semibold text-3xl">Counselling</h1>
+          <h2 className="mt-2">
+            India's Leading Education Portal for all you academic needs
+          </h2>
+        </div>
         <div className="mt-10 flex flex-col md:flex-row items-center justify-center gap-3">
-          <div className="w-full md:w-2/3 lg:w-1/2 relative">
+          <div
+            className="w-full md:w-2/3 lg:w-1/2 relative"
+            data-aos="fade-up"
+            data-aos-offset="10"
+          >
             <img
               className="rounded-lg"
               src="https://cdn.pixabay.com/photo/2017/06/20/22/14/man-2425121_960_720.jpg"
               alt=""
             />
-            <div className="mt-4 sm:mt-0 relative sm:absolute sm:bottom-14 sm:-left-8 p-3 w-full sm:w-96 bg-white rounded-lg flex items-center gap-2 shadow-xl">
+            <div
+              className="mt-4 sm:mt-0 relative sm:absolute sm:bottom-14 sm:-left-8 p-3 w-full sm:w-96 bg-white rounded-lg flex items-center gap-2 shadow-xl"
+              data-aos="fade-right"
+              data-aos-offset="100"
+            >
               <AcademicCapIcon className="w-28 h-28 text-primary" />
               <div>
                 <h2 className="font-bold text-left">Career Counselling</h2>
@@ -242,8 +278,12 @@ const HomePage = () => {
               </div>
             </div>
           </div>
-          <div className="text-left flex flex-col gap-4">
-            <div className="p-1 w-full sm:w-96 bg-white rounded-lg flex items-center gap-2 shadow-xl">
+          <div className="text-left flex flex-col gap-4 overflow-hidden">
+            <div
+              className="p-1 w-full sm:w-96 bg-white rounded-lg flex items-center gap-2 shadow-xl"
+              data-aos="fade-left"
+              data-aos-offset="100"
+            >
               <BookOpenIcon className="w-28 h-28 text-primary" />
               <div>
                 <h2 className="font-bold">Educational Counselling</h2>
@@ -253,7 +293,11 @@ const HomePage = () => {
                 </p>
               </div>
             </div>
-            <div className="p-1 w-full sm:w-96 bg-white rounded-lg flex items-center gap-2 shadow-xl">
+            <div
+              className="p-1 w-full sm:w-96 bg-white rounded-lg flex items-center gap-2 shadow-xl"
+              data-aos="fade-left"
+              data-aos-offset="100"
+            >
               <ChartPieIcon className="w-28 h-28 text-primary" />
               <div>
                 <h2 className="font-bold">Psychometric Testing</h2>
@@ -263,7 +307,11 @@ const HomePage = () => {
                 </p>
               </div>
             </div>
-            <div className="p-1 w-full sm:w-96 bg-white rounded-lg flex items-center gap-2 shadow-xl">
+            <div
+              className="p-1 w-full sm:w-96 bg-white rounded-lg flex items-center gap-2 shadow-xl"
+              data-aos="fade-left"
+              data-aos-offset="100"
+            >
               <NewspaperIcon className="w-28 h-28 text-primary" />
               <div>
                 <h2 className="font-bold">Course Selection</h2>
@@ -276,9 +324,12 @@ const HomePage = () => {
           </div>
         </div>
       </div>
-      <div className="py-20 text-center p-5">
+      <div
+        className="py-20 text-center p-5 max-w-screen-xl mx-auto"
+        data-aos="fade-up"
+      >
         <h1 className="font-semibold text-3xl">Top Colleges</h1>
-        <div className="my-16">
+        <div className="mt-10">
           {college.length !== 0 && (
             <Corousal
               defaultControlsConfig={{
@@ -292,6 +343,7 @@ const HomePage = () => {
               cellAlign="center"
               slidesToShow={window.innerWidth > 768 ? 3 : 1}
               className=""
+              style={{ justifyContent: "space-between", gap: "100px" }}
             >
               {college?.map((val) => (
                 <CollgeCard
@@ -309,7 +361,11 @@ const HomePage = () => {
 
       {/* Download App Section */}
       <div className="bg-primary bg-opacity-10 w-full py-20">
-        <div className="p-4 w-full text-center sm:p-8">
+        <div
+          className="p-4 w-full text-center sm:p-8"
+          data-aos="fade-up"
+          data-aos-offset="100"
+        >
           <h3 className="mb-2 text-3xl font-semibold text-gray-900">
             Donwload the CareerKick App
           </h3>
@@ -319,6 +375,8 @@ const HomePage = () => {
           </p>
           <div className="flex justify-center items-center space-y-0 space-x-8">
             <a
+              data-aos="flip-right"
+              data-aos-offset="100"
               href="#"
               className="w-[150px] sm:w-auto flex bg-gray-800 hover:bg-gray-700 focus:ring-4 focus:ring-gray-300 text-white rounded-lg items-center justify-center px-4 py-2.5"
             >
@@ -345,6 +403,8 @@ const HomePage = () => {
               </div>
             </a>
             <a
+              data-aos="flip-left"
+              data-aos-offset="100"
               href="#"
               className="w-[150px] sm:w-auto flex bg-gray-800 hover:bg-gray-700 focus:ring-4 focus:ring-gray-300 text-white rounded-lg items-center justify-center px-4 py-2.5"
             >
@@ -400,7 +460,7 @@ const HomePage = () => {
             slidesToShow={window.innerWidth > 768 ? 3 : 1}
             className=""
           >
-            <div className="mb-12 md:mb-0">
+            <div className="mb-12 md:mb-0 mx-6">
               <div className="mb-6 flex justify-center">
                 <img
                   src="https://tecdn.b-cdn.net/img/Photos/Avatars/img%20(1).jpg"
@@ -424,7 +484,7 @@ const HomePage = () => {
               </p>
             </div>
 
-            <div className="mb-12 md:mb-0">
+            <div className="mb-12 md:mb-0 mx-6">
               <div className="mb-6 flex justify-center">
                 <img
                   src="https://tecdn.b-cdn.net/img/Photos/Avatars/img%20(1).jpg"
@@ -447,7 +507,7 @@ const HomePage = () => {
                 tenetur.
               </p>
             </div>
-            <div className="mb-12 md:mb-0">
+            <div className="mb-12 md:mb-0 mx-6">
               <div className="mb-6 flex justify-center">
                 <img
                   src="https://tecdn.b-cdn.net/img/Photos/Avatars/img%20(1).jpg"
@@ -475,35 +535,59 @@ const HomePage = () => {
       </div>
 
       <div className="text-center py-16 bg-gray-200">
-        <h1 className="font-semibold text-3xl">
+        <h1
+          className="font-semibold text-3xl"
+          data-aos="fade-up"
+          data-aos-offset="10"
+        >
           Our <span className="font-semibold text-primary">Products</span>
         </h1>
         <div className="mt-10 flex flex-col md:flex-row justify-center gap-4 lg:gap-8 m-4">
-          <div className="lg:w-40 bg-white p-4 py-8 rounded-lg font-medium">
+          <div
+            className="lg:w-40 bg-white p-4 py-8 rounded-lg font-medium"
+            data-aos="flip-down"
+            data-aos-offset="10"
+          >
             <ChartBarIcon className="w-12 h-12 text-secondary mx-auto" />
             <h2 className="shadow-secondary text-secondary text-xl mt-2">
               College Review
             </h2>
           </div>
-          <div className="lg:w-40 bg-white p-4 py-8 rounded-lg font-medium">
+          <div
+            className="lg:w-40 bg-white p-4 py-8 rounded-lg font-medium"
+            data-aos="flip-down"
+            data-aos-offset="40"
+          >
             <AcademicCapIcon className="w-12 h-12 text-secondary mx-auto" />
             <h2 className="shadow-secondary text-secondary text-xl mt-2">
               College Compare
             </h2>
           </div>
-          <div className="lg:w-40 bg-white p-4 py-8 rounded-lg font-medium">
+          <div
+            className="lg:w-40 bg-white p-4 py-8 rounded-lg font-medium"
+            data-aos="flip-down"
+            data-aos-offset="70"
+          >
             <ViewListIcon className="w-12 h-12 text-secondary mx-auto" />
             <h2 className="shadow-secondary text-secondary text-xl mt-2">
               College List
             </h2>
           </div>
-          <div className="lg:w-40 bg-white p-4 py-8 rounded-lg font-medium">
+          <div
+            className="lg:w-40 bg-white p-4 py-8 rounded-lg font-medium"
+            data-aos="flip-down"
+            data-aos-offset="110"
+          >
             <DocumentIcon className="w-12 h-12 text-secondary mx-auto" />
             <h2 className="shadow-secondary text-secondary text-xl mt-2">
               College Cut-Off
             </h2>
           </div>
-          <div className="lg:w-40 bg-white p-4 py-8 rounded-lg font-medium">
+          <div
+            className="lg:w-40 bg-white p-4 py-8 rounded-lg font-medium"
+            data-aos="flip-down"
+            data-aos-offset="140"
+          >
             <ViewListIcon className="w-12 h-12 text-secondary mx-auto" />
             <h2 className="shadow-secondary text-secondary text-xl mt-2">
               College Application
@@ -514,7 +598,11 @@ const HomePage = () => {
 
       {/* Client Section */}
       <section className="bg-white">
-        <div className="py-8 lg:py-16 mx-auto max-w-screen-xl">
+        <div
+          className="py-8 lg:py-16 mx-auto max-w-screen-xl"
+          data-aos="fade-up"
+          data-aos-offset="50"
+        >
           <h2 className="mb-8 lg:mb-16 text-3xl font-semibold tracking-tight leading-tight text-center text-gray-900 md:text-4xl">
             Our Associate{" "}
             <span className="text-primary font-bold"> Partners </span>
@@ -557,22 +645,12 @@ const HomePage = () => {
 export default HomePage;
 
 const UpdateCards = ({ updates }) => {
-  const myRef = useRef(null);
-
-  useEffect(() => {
-    gsap.from(myRef.current, {
-      duration: 1,
-      ease: "power2.out",
-      opacity: 0,
-    });
-  }, []);
-
   return (
     <div
-      ref={myRef}
       className={`bg-white rounded-lg p-3 mx-2 border-b-4 border-primary z-30 duration-500 ${
         updates ? "opacity-100" : "opacity-0"
       }`}
+      data-aos="flip-up"
     >
       <div className="flex overflow-hidden gap-2 items-center">
         <img
