@@ -1,18 +1,21 @@
 import React from "react";
 import { useState } from "react";
 import { useEffect } from "react";
-import { server } from "../../helpers/apiCall";
+import { server, serverUnauth } from "../../helpers/apiCall";
 import { useLocation } from "react-router-dom";
+import { getFeidlValue } from "../../helpers/predictor";
 
 const CollegeProfile = () => {
   const location = useLocation();
 
   const [data, setData] = useState(location?.state?.data || {});
+  const [cutOffData, setCutOffData] = useState({});
   const searchParams = new URLSearchParams(document.location.search);
 
   useEffect(() => {
     getData();
-  }, []);
+    getDataCutOffData();
+  }, [data]);
 
   const getData = () => {
     if (!location?.state?.data) {
@@ -22,6 +25,55 @@ const CollegeProfile = () => {
         .catch((err) => console.log(err));
     }
   };
+
+  const getDataCutOffData = () => {
+    if (data?.collegeName) {
+      serverUnauth
+        .post("/predict-neet", {
+          examType: [],
+          year: [],
+          course: [],
+          round: [],
+          allottedPH: [],
+          quota: [],
+          allottedCategory: [],
+          instituteName: [data?.collegeName],
+          rank: 1,
+        })
+        .then((res) => {
+          const data = res?.data?.data;
+          const newArr = [];
+          const newObject = {};
+          data.map((val) => {
+            if (!newArr?.includes(val?.instituteName)) {
+              const instituteName = val?.instituteName;
+              newArr.push(instituteName);
+              delete val["instituteName"];
+              newObject[instituteName] = [val];
+            } else {
+              newObject[val?.instituteName].push(val);
+            }
+          });
+          setCutOffData(newObject);
+        })
+        .catch((err) => {
+          console.log(err);
+        })
+        .finally(() => {});
+    }
+  };
+
+  console.log(cutOffData, "hello");
+
+  const displayValue = [
+    "year",
+    "course",
+    "round",
+    "instituteType",
+    "allottedCategory",
+    "closingRank",
+    "percentage",
+  ];
 
   return (
     <div className="bg-gray-100 w-full">
@@ -43,15 +95,15 @@ const CollegeProfile = () => {
       <h1 className="text-xl md:text-2xl font-semibold text-center mt-20 sm:mt-28">
         {data?.displayName || data?.collegeName}
       </h1>
-      
-      <div class="container mx-auto my-5">
-        <div class="md:flex no-wrap md:-mx-2 ">
-          <div class="w-full mx-2">
-            <div class="bg-white px-1 py-3 md:p-3 shadow rounded">
-              <div class="flex items-center space-x-2 font-semibold text-gray-900 leading-8">
+
+      <div className="container mx-auto my-5">
+        <div className="md:flex no-wrap md:mx-2 ">
+          <div className="w-full mx-2">
+            <div className="bg-white px-1 py-3 md:p-3 shadow rounded">
+              <div className="flex items-center space-x-2 font-semibold text-gray-900 leading-8">
                 <span clas="text-green-500">
                   <svg
-                    class="h-5"
+                    className="h-5"
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
                     viewBox="0 0 24 24"
@@ -65,88 +117,106 @@ const CollegeProfile = () => {
                     />
                   </svg>
                 </span>
-                <span class="tracking-wide">About</span>
+                <span className="tracking-wide">About</span>
               </div>
-              <div class="text-gray-700">
-                <div class="grid md:grid-cols-2 text-sm">
+              <div className="text-gray-700">
+                <div className="grid md:grid-cols-2 text-sm">
                   {data.collegeName && (
-                    <div class="grid grid-cols-2">
-                      <div class="px-2 md:px-4 py-2 font-semibold">
+                    <div className="grid grid-cols-2">
+                      <div className="px-2 md:px-4 py-2 font-semibold">
                         Institute Name
                       </div>
-                      <div class="px-2 md:px-4 py-2">{data.collegeName}</div>
+                      <div className="px-2 md:px-4 py-2">
+                        {data.collegeName}
+                      </div>
                     </div>
                   )}
                   {data.displayName && (
-                    <div class="grid grid-cols-2">
-                      <div class="px-2 md:px-4 py-2 font-semibold">
+                    <div className="grid grid-cols-2">
+                      <div className="px-2 md:px-4 py-2 font-semibold">
                         Also Known as Name
                       </div>
-                      <div class="px-2 md:px-4 py-2">{data.displayName}</div>
+                      <div className="px-2 md:px-4 py-2">
+                        {data.displayName}
+                      </div>
                     </div>
                   )}
                   {data.collegeTag && (
-                    <div class="grid grid-cols-2">
-                      <div class="px-2 md:px-4 py-2 font-semibold">
+                    <div className="grid grid-cols-2">
+                      <div className="px-2 md:px-4 py-2 font-semibold">
                         College Tag
                       </div>
-                      <div class="px-2 md:px-4 py-2">{data.collegeTag}</div>
+                      <div className="px-2 md:px-4 py-2">{data.collegeTag}</div>
                     </div>
                   )}
                   {data.collegeType && (
-                    <div class="grid grid-cols-2">
-                      <div class="px-2 md:px-4 py-2 font-semibold">
+                    <div className="grid grid-cols-2">
+                      <div className="px-2 md:px-4 py-2 font-semibold">
                         College Type
                       </div>
-                      <div class="px-2 md:px-4 py-2">{data.collegeType}</div>
+                      <div className="px-2 md:px-4 py-2">
+                        {data.collegeType}
+                      </div>
                     </div>
                   )}
                   {data.estYear && (
-                    <div class="grid grid-cols-2">
-                      <div class="px-2 md:px-4 py-2 font-semibold">
+                    <div className="grid grid-cols-2">
+                      <div className="px-2 md:px-4 py-2 font-semibold">
                         Establishment Year
                       </div>
-                      <div class="px-2 md:px-4 py-2">{data.estYear}</div>
+                      <div className="px-2 md:px-4 py-2">{data.estYear}</div>
                     </div>
                   )}
                   {data.city && (
-                    <div class="grid grid-cols-2">
-                      <div class="px-2 md:px-4 py-2 font-semibold">City</div>
-                      <div class="px-2 md:px-4 py-2">{data.city}</div>
+                    <div className="grid grid-cols-2">
+                      <div className="px-2 md:px-4 py-2 font-semibold">
+                        City
+                      </div>
+                      <div className="px-2 md:px-4 py-2">{data.city}</div>
                     </div>
                   )}
                   {data.state && (
-                    <div class="grid grid-cols-2">
-                      <div class="px-2 md:px-4 py-2 font-semibold">State</div>
-                      <div class="px-2 md:px-4 py-2">{data.state}</div>
+                    <div className="grid grid-cols-2">
+                      <div className="px-2 md:px-4 py-2 font-semibold">
+                        State
+                      </div>
+                      <div className="px-2 md:px-4 py-2">{data.state}</div>
                     </div>
                   )}
                   {data.state && data.city && data.address && (
-                    <div class="grid grid-cols-2">
-                      <div class="px-2 md:px-4 py-2 font-semibold">Address</div>
-                      <div class="px-2 md:px-4 py-2">
+                    <div className="grid grid-cols-2">
+                      <div className="px-2 md:px-4 py-2 font-semibold">
+                        Address
+                      </div>
+                      <div className="px-2 md:px-4 py-2">
                         {data.address}, {data.city}, {data.state}
                       </div>
                     </div>
                   )}
                   {data.ranking && (
-                    <div class="grid grid-cols-2">
-                      <div class="px-2 md:px-4 py-2 font-semibold">Ranking</div>
-                      <div class="px-2 md:px-4 py-2">{data.ranking}</div>
+                    <div className="grid grid-cols-2">
+                      <div className="px-2 md:px-4 py-2 font-semibold">
+                        Ranking
+                      </div>
+                      <div className="px-2 md:px-4 py-2">{data.ranking}</div>
                     </div>
                   )}
                   {data.contactNumber && (
-                    <div class="grid grid-cols-2">
-                      <div class="px-2 md:px-4 py-2 font-semibold">
+                    <div className="grid grid-cols-2">
+                      <div className="px-2 md:px-4 py-2 font-semibold">
                         Phone Number
                       </div>
-                      <div class="px-2 md:px-4 py-2">{data.contactNumber}</div>
+                      <div className="px-2 md:px-4 py-2">
+                        {data.contactNumber}
+                      </div>
                     </div>
                   )}
                   {data.website && (
-                    <div class="grid grid-cols-2">
-                      <div class="px-2 md:px-4 py-2 font-semibold">Website</div>
-                      <div class="px-2 md:px-4 py-2">{data.website}</div>
+                    <div className="grid grid-cols-2">
+                      <div className="px-2 md:px-4 py-2 font-semibold">
+                        Website
+                      </div>
+                      <div className="px-2 md:px-4 py-2">{data.website}</div>
                     </div>
                   )}
                 </div>
@@ -154,11 +224,11 @@ const CollegeProfile = () => {
             </div>
 
             {data?.campusPhotos?.length > 0 && (
-              <div class="bg-white px-1 py-3 md:p-3 shadow rounded my-5">
-                <div class="flex items-center space-x-2 font-semibold text-gray-900 leading-8">
+              <div className="bg-white px-1 py-3 md:p-3 shadow rounded my-5">
+                <div className="flex items-center space-x-2 font-semibold text-gray-900 leading-8">
                   <span clas="text-green-500">
                     <svg
-                      class="h-5"
+                      className="h-5"
                       xmlns="http://www.w3.org/2000/svg"
                       fill="none"
                       viewBox="0 0 24 24"
@@ -172,7 +242,7 @@ const CollegeProfile = () => {
                       />
                     </svg>
                   </span>
-                  <span class="tracking-wide">Campus Photos</span>
+                  <span className="tracking-wide">Campus Photos</span>
                 </div>
                 <div className="m-2 md:m-4 flex flex-wrap gap-2 md:gap-4">
                   {data?.campusPhotos?.map((item) => (
@@ -187,13 +257,13 @@ const CollegeProfile = () => {
               </div>
             )}
 
-            <div class="bg-white p-3 shadow-sm rounded-sm">
-              <div class="grid grid-cols-2">
+            <div className="bg-white px-1 py-3 md:p-3 shadow rounded my-5">
+              <div className="grid grid-cols-2">
                 <div>
-                  <div class="flex items-center space-x-2 font-semibold text-gray-900 leading-8 mb-3">
+                  <div className="flex items-center space-x-2 font-semibold text-gray-900 leading-8 mb-3">
                     <span clas="text-green-500">
                       <svg
-                        class="h-5"
+                        className="h-5"
                         xmlns="http://www.w3.org/2000/svg"
                         fill="none"
                         viewBox="0 0 24 24"
@@ -207,17 +277,98 @@ const CollegeProfile = () => {
                         />
                       </svg>
                     </span>
-                    <span class="tracking-wide">COURSES OFFERED</span>
+                    <span className="">COURSES OFFERED</span>
                   </div>
-                  <ul class="list-inside space-y-2">
+                  <ul className="flex gap-4 px-4 py-2">
                     {data?.coursesOffered?.map((item) => (
                       <li key={item?.value}>
-                        <div class="text-teal-600">{item?.value}</div>
+                        <div className="text-secondary font-bold">
+                          {item?.value}
+                        </div>
                       </li>
                     ))}
                   </ul>
                 </div>
               </div>
+            </div>
+
+            <div className="overflow-x-scroll bg-white px-1 py-3 md:p-3 shadow rounded my-5">
+              <div className="flex items-center space-x-2 font-semibold text-gray-900 leading-8 mb-3">
+                <span clas="text-green-500">
+                  <svg
+                    className="h-5"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+                    />
+                  </svg>
+                </span>
+                <span className="">CUT OFF</span>
+              </div>
+
+              <div className="flex justify-between bg-gray-100 items-center">
+                {Object.keys(cutOffData)?.length > 0 &&
+                  displayValue?.map((val, index) => {
+                    if (val === "rank") {
+                      return;
+                    }
+                    return (
+                      <div className="p-2 w-auto rounded-full mx-auto font-semibold">
+                        <h1
+                          style={{
+                            minWidth: "120px",
+                            maxWidth: "120px",
+                          }}
+                          className="text-center"
+                        >
+                          {val
+                            ?.replace(/([A-Z])/g, " $1")
+                            ?.charAt(0)
+                            ?.toUpperCase() +
+                            val?.replace(/([A-Z])/g, " $1")?.slice(1)}
+                        </h1>
+                      </div>
+                    );
+                  })}
+              </div>
+              {Object.entries(cutOffData).map((value, index) => {
+                const key = value[0];
+                const val = value[1];
+                return (
+                  <div className="p-1 lg:p-4 m-1 shadow-lg rounded-lg">
+                    <div className="flex items-center justify-start gap-4">
+                      <div className="w-10/12 font-semibold">{key}</div>
+                    </div>
+                    {val.map((valMap) => (
+                      <div className="flex gap-2 justify-between lg:gap-5 my-2 pl-5 border-b-2 py-0.5 px-1 w-full">
+                        {Object.keys(cutOffData)?.length > 0 &&
+                          displayValue?.map((colData, index) => {
+                            return (
+                              <div className="p-1">
+                                <h1
+                                  style={{
+                                    minWidth: "120px",
+                                    maxWidth: "120px",
+                                  }}
+                                  className="text-center truncate"
+                                >
+                                  {valMap[colData]}
+                                </h1>
+                              </div>
+                            );
+                          })}
+                      </div>
+                    ))}
+                  </div>
+                );
+              })}
             </div>
           </div>
         </div>
