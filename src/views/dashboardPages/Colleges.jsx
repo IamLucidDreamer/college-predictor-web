@@ -113,6 +113,7 @@ export const CollegeCardLocal = ({
   location,
 }) => {
   const navigate = useNavigate();
+  console.log(data, "test data");
   return (
     <div className="p-1" data-aos="flip-up" data-aos-offset="10">
       <button
