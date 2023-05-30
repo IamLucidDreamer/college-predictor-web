@@ -1,27 +1,29 @@
-import React from "react";
+import React, { useState } from "react";
 import AppLogo from "../images/AppLogo";
 import { serverUnauth } from "../../helpers/apiCall";
 import { toast } from "react-toastify";
 import { useSelector } from "react-redux";
+import { Formik } from "formik";
+import * as Yup from "yup";
 
 const Footer = () => {
   const appInApp = useSelector((state) => state.appInApp.appInApp);
-  console.log(appInApp, "hello world");
+  const [success, setSuccess] = useState(false);
   if (appInApp === "true") {
     return;
   }
 
-  const [email, setEmail] = "";
-
-  const addSubscriber = () => {
+  const handleSubscribe = (values, resetForm, setSubmitting, setErrors) => {
     serverUnauth
-      .post("/subscriber/create", email)
+      .post("/subscriber/create", { email: values.email })
       .then((res) => {
-        toast.success(res.data.message);
+        resetForm();
+        setSuccess(true);
       })
       .catch((err) => {
-        toast.error(err.response.data.error);
-      });
+        setErrors({ email: err?.response?.data?.error });
+      })
+      .finally(() => setSubmitting(false));
   };
 
   return (
@@ -147,28 +149,63 @@ const Footer = () => {
       <div className="border-t border-gray-200">
         <div className="container px-5 py-8 flex flex-wrap mx-auto items-center">
           <div className="flex md:flex-nowrap flex-wrap justify-center items-end md:justify-start">
-            <div className="relative sm:w-64 w-40 sm:mr-4 mr-2">
-              <label
-                for="footer-field"
-                className="leading-7 text-sm text-gray-200"
-              >
-                Placeholder
-              </label>
-              <input
-                type="email"
-                id="subscriber"
-                name="subscriber"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                className="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:ring-2 focus:bg-transparent focus:ring-indigo-200 focus:border-indigo-500 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
-              />
-            </div>
-            <button
-              onClick={() => addSubscriber()}
-              className="inline-flex text-white bg-primary border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded-full"
+            <Formik
+              initialValues={{ email: "" }}
+              validationSchema={Yup.object({
+                email: Yup.string()
+                  .email("Not a valid Email.")
+                  .required("This is required."),
+              })}
+              onSubmit={(values, { resetForm, setSubmitting, setErrors }) => {
+                handleSubscribe(values, resetForm, setSubmitting, setErrors);
+              }}
             >
-              Subscribe
-            </button>
+              {({
+                handleChange,
+                handleSubmit,
+                values,
+                isSubmitting,
+                touched,
+                errors,
+              }) => {
+                return (
+                  <div className="flex flex-col items-start gap-2">
+                    <input
+                      id="email"
+                      name="email"
+                      type="email"
+                      placeholder="hello@careerkick.in"
+                      value={values.email}
+                      onChange={handleChange}
+                      className=" border-2 border-secondary bg-white w-full rounded text-secondary p-2 focus:border-white focus:outline-0"
+                    />
+                    {success &&
+                    !touched.email &&
+                    !errors.email &&
+                    values.email.length === 0 ? (
+                      <p className="text-sm text-green-400 mt-1">
+                        Successfully Subscribed to the Newsletter
+                      </p>
+                    ) : null}
+                    {touched.email && errors.email ? (
+                      <p className="text-sm text-red-400 mt-1">
+                        {errors.email}
+                      </p>
+                    ) : null}
+                    <button
+                      type="submit"
+                      onClick={handleSubmit}
+                      className={`w-2/3 lg:w-44 text-whitetext-2xl border-2 border-secondary bg-primary rounded p-2 text-white uppercase hover:border-white ${
+                        isSubmitting ? "opacity-50" : "opacity-100"
+                      } `}
+                      disabled={isSubmitting}
+                    >
+                      SUBSCRIBE
+                    </button>
+                  </div>
+                );
+              }}
+            </Formik>
             <p className="text-gray-500 text-sm md:ml-6 md:mt-0 mt-2 sm:text-left text-center">
               Bitters chicharrones fanny pack
               <br />{" "}

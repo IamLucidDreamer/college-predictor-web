@@ -566,7 +566,8 @@ const HomePage = () => {
         </h1>
         <div className="mt-10 flex flex-col md:flex-row justify-center gap-4 lg:gap-8 m-4">
           <div
-            className="lg:w-40 bg-white p-4 py-8 rounded-lg font-medium"
+            onClick={() => navigate("/dashboard/updates")}
+            className="lg:w-40 bg-white p-4 py-8 rounded-lg font-medium hover:cursor-pointer"
             data-aos="flip-down"
             data-aos-offset="10"
           >
@@ -576,7 +577,8 @@ const HomePage = () => {
             </h2>
           </div>
           <div
-            className="lg:w-40 bg-white p-4 py-8 rounded-lg font-medium"
+            onClick={() => navigate("/dashboard/updates")}
+            className="lg:w-40 bg-white p-4 py-8 rounded-lg font-medium hover:cursor-pointer"
             data-aos="flip-down"
             data-aos-offset="40"
           >
@@ -586,7 +588,8 @@ const HomePage = () => {
             </h2>
           </div>
           <div
-            className="lg:w-40 bg-white p-4 py-8 rounded-lg font-medium"
+            onClick={() => navigate("/dashboard/updates")}
+            className="lg:w-40 bg-white p-4 py-8 rounded-lg font-medium hover:cursor-pointer"
             data-aos="flip-down"
             data-aos-offset="70"
           >
@@ -596,7 +599,8 @@ const HomePage = () => {
             </h2>
           </div>
           <div
-            className="lg:w-40 bg-white p-4 py-8 rounded-lg font-medium"
+            onClick={() => navigate("/dashboard/updates")}
+            className="lg:w-40 bg-white p-4 py-8 rounded-lg font-medium hover:cursor-pointer"
             data-aos="flip-down"
             data-aos-offset="110"
           >
@@ -606,7 +610,8 @@ const HomePage = () => {
             </h2>
           </div>
           <div
-            className="lg:w-40 bg-white p-4 py-8 rounded-lg font-medium"
+            onClick={() => navigate("/dashboard/colleges")}
+            className="lg:w-40 bg-white p-4 py-8 rounded-lg font-medium hover:cursor-pointer"
             data-aos="flip-down"
             data-aos-offset="140"
           >
@@ -667,9 +672,11 @@ const HomePage = () => {
 export default HomePage;
 
 const UpdateCards = ({ updates }) => {
+  const navigate = useNavigate();
   return (
     <div
-      className={`bg-white rounded-lg p-3 mx-2 border-b-4 border-primary z-30 duration-500 ${
+      onClick={() => navigate("/dashboard/updates")}
+      className={`bg-white rounded-lg p-3 mx-2 border-b-4 border-primary z-30 duration-500 hover:cursor-pointer ${
         updates ? "opacity-100" : "opacity-0"
       }`}
       data-aos="flip-up"
