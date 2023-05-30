@@ -7,11 +7,7 @@ import Header from "../../components/shared/Header";
 import Footer from "../../components/shared/Footer";
 
 import homeHeroBG from "../../assets/images/home_bg.jpg";
-
-import Updates from "../layout/Updates";
-import Predictor from "../predictor";
-import NeetIndex from "../predictor/neet";
-import BlogPage from "./Blogs";
+import counsillingBg from "../../assets/images/counselling_bg.jpg";
 
 import LoadingIndication from "../../components/loader/index";
 import { serverUnauth } from "../../helpers/apiCall";
@@ -150,8 +146,7 @@ const HomePage = () => {
                   {searchCollege.length > 0 && !loadingSearchCollege ? (
                     searchCollege.map((val) => (
                       <div
-                        className="bg-white p-2 rounded-lg m-1"
-                        data-aos="fade-up"
+                        className="bg-white p-2 rounded-lg m-1 hover:bg-gray-100"
                       >
                         <button
                           style={{ width: "100%" }}
@@ -220,12 +215,12 @@ const HomePage = () => {
         </h2>
         <div className="mt-10 flex flex-col md:flex-row justify-center gap-6 m-6">
           <div
-            className="lg:w-1/5 bg-gray-200 p-8 py-16 rounded-lg shadow-secondary"
+            className="lg:w-1/4 bg-gray-200 p-8 py-16 rounded-lg shadow-secondary"
             data-aos="flip-up"
             data-aos-offset="80"
           >
             <h2
-              className="font-semibold text-lg mb-4"
+              className="font-semibold text-lg mb-4 capitalize"
               data-aos="fade-up"
               data-aos-offset="120"
             >
@@ -237,7 +232,7 @@ const HomePage = () => {
             </p>
           </div>
           <div
-            className="lg:w-1/5 bg-gray-200 p-8 py-16 rounded-lg shadow-secondary"
+            className="lg:w-1/4 bg-gray-200 p-8 py-16 rounded-lg shadow-secondary capitalize"
             data-aos="flip-up"
             data-aos-offset="160"
           >
@@ -254,7 +249,7 @@ const HomePage = () => {
             </p>
           </div>
           <div
-            className="lg:w-1/5 bg-gray-200 p-8 py-16 rounded-lg shadow-secondary"
+            className="lg:w-1/4 bg-gray-200 p-8 py-16 rounded-lg shadow-secondary capitalize"
             data-aos="flip-up"
             data-aos-offset="240"
           >
@@ -287,11 +282,7 @@ const HomePage = () => {
             data-aos="fade-up"
             data-aos-offset="10"
           >
-            <img
-              className="rounded-lg"
-              src="https://cdn.pixabay.com/photo/2017/06/20/22/14/man-2425121_960_720.jpg"
-              alt=""
-            />
+            <img className="rounded-lg" src={counsillingBg} alt="" />
             <div
               className="mt-4 sm:mt-0 relative sm:absolute sm:bottom-14 sm:-left-8 p-3 w-full sm:w-96 bg-white rounded-lg flex items-center gap-2 shadow-xl"
               data-aos="fade-right"
@@ -399,14 +390,14 @@ const HomePage = () => {
             Download the CareerKick App
           </h3>
           <p className="mb-5 text-base text-gray-500 sm:text-lg">
-            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quia
-            architecto error adipisci nam.
+            Regular exam updates, QnA, Predictors, College Applications &
+            E-books now on your Mobile
           </p>
           <div className="flex justify-center items-center space-y-0 space-x-8">
             <a
+              onClick={() => window.alert("Comming soon on APP store")}
               data-aos="flip-right"
               data-aos-offset="100"
-              href="#"
               className="w-[150px] sm:w-auto flex bg-gray-800 hover:bg-gray-700 focus:ring-4 focus:ring-gray-300 text-white rounded-lg items-center justify-center px-4 py-2.5"
             >
               <svg
@@ -434,7 +425,8 @@ const HomePage = () => {
             <a
               data-aos="flip-left"
               data-aos-offset="100"
-              href="#"
+              target="_blank"
+              href="https://play.google.com/store/apps/details?id=in.careerkick"
               className=" w-[150px] sm:w-auto flex bg-gray-800 hover:bg-gray-700 focus:ring-4 focus:ring-gray-300 text-white rounded-lg items-center justify-center px-4 py-2.5"
             >
               <svg
@@ -472,11 +464,6 @@ const HomePage = () => {
           <h3 className="mb-6 text-3xl font-bold text-neutral-800">
             What our Students Say
           </h3>
-          <p className="mb-6 pb-2 md:mb-12 md:pb-0">
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugit,
-            error amet numquam iure provident voluptate esse quasi, veritatis
-            totam voluptas nostrum quisquam eum porro a pariatur veniam.
-          </p>
         </div>
 
         <div className="mx-auto max-w-screen-xl my-8">

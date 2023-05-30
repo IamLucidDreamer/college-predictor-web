@@ -74,7 +74,11 @@ export default BlogPage;
 const BlogCard = ({ title, description, imageSecondary, id, createdAt }) => {
   const navigate = useNavigate();
   return (
-    <div className="flex flex-col rounded-lg bg-white shadow-md md:max-w-5xl md:flex-row w-full">
+    <div
+      className="flex flex-col rounded-lg bg-white shadow-md md:max-w-5xl md:flex-row w-full"
+      data-aos="fade-up"
+      data-aos-offset="50"
+    >
       <img
         className="h-72 rounded-t-lg object-cover md:w-60  md:rounded-none md:rounded-l-lg"
         src={imageSecondary}

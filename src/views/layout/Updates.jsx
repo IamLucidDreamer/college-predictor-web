@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { serverUnauth } from "../../helpers/apiCall";
 import dayjs from "dayjs";
+import { useNavigate } from "react-router-dom";
 
 const Updates = () => {
   const [data, setData] = useState([]);
@@ -43,8 +44,13 @@ const Updates = () => {
 export default Updates;
 
 const Card = ({ title, description, image, document, createdAt }) => {
+  const navigate = useNavigate();
   return (
-    <div style={{ borderWidth: "0px 0px 1px" }}>
+    <div
+      style={{ borderWidth: "0px 0px 1px" }}
+      onClick={() => navigate("/dashboard/updates")}
+      className="hover:cursor-pointer"
+    >
       <div className="flow-root">
         <ul role="list" className="divide-y divide-gray-200">
           <li className="py-3 sm:py-4">

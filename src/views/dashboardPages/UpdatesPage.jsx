@@ -71,7 +71,11 @@ export default DashboardUpdates;
 
 const Card = ({ title, description, imageMain, document, createdAt }) => {
   return (
-    <div className="bg-white shadow-md rounded-lg py-2 px-2 md:px-4 lg:px-6">
+    <div
+      className="bg-white shadow-md rounded-lg py-2 px-2 md:px-4 lg:px-6"
+      data-aos="fade-up"
+      data-aos-offset="50"
+    >
       <div className="flow-root">
         <div role="list" className="divide-y divide-gray-200">
           <div className="py-3 sm:py-4">

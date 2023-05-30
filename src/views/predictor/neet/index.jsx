@@ -26,7 +26,7 @@ const NeetIndex = () => {
   return (
     <>
       <div className="m-2 lg:m-4 shadow-lg rounded-lg bg-white">
-        {activeType === 0 && (
+        {activeType === 0 && false && (
           <div className="p-4 mb-4">
             <h1 className="text-2xl mt-2 mb-4 text-secondary font-semibold">
               About Neet Counselling
