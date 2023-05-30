@@ -26,6 +26,7 @@ const Header = () => {
   const [top, setTop] = useState(false);
 
   const user = useSelector((state) => state?.user);
+  const appInApp = useSelector((state) => state.appInApp.appInApp);
 
   useEffect(() => {
     window.addEventListener("scroll", () => {
@@ -48,9 +49,13 @@ const Header = () => {
     >
       <div className="container mx-auto px-2 lg:px-10 py-3">
         <div className="flex items-center justify-between">
-          <Link to={"/"}>
+          {appInApp ? (
             <AppLogo logotType={1} width={"175px"} />
-          </Link>
+          ) : (
+            <Link to={"/"}>
+              <AppLogo logotType={1} width={"175px"} />
+            </Link>
+          )}
           <nav className="hidden lg:flex gap-10 text-secondary font-semibold items-center uppercase">
             <Link to={"/dashboard/predictor"}>
               <button className="uppercase border-b-2 border-white hover:border-primary duration-300">
@@ -151,6 +156,7 @@ const Header = () => {
         openModal={open}
         closeModal={() => setOpen(false)}
         navigate={navigate}
+        appInApp={appInApp}
       />
     </div>
   );
@@ -158,7 +164,7 @@ const Header = () => {
 
 export default Header;
 
-const DrawerMenu = ({ openModal, closeModal, navigate }) => {
+const DrawerMenu = ({ openModal, closeModal, navigate, appInApp }) => {
   const dispatch = useDispatch();
 
   return (
@@ -243,7 +249,7 @@ const DrawerMenu = ({ openModal, closeModal, navigate }) => {
                       onClick={() => {
                         dispatch(logout());
                         clearAuth();
-                        navigate("/");
+                        appInApp ? navigate("/login") : navigate("/");
                       }}
                     >
                       <ArrowCircleRightIcon className="w-5 h-5" />
