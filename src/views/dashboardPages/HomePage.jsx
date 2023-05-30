@@ -206,7 +206,7 @@ const HomePage = () => {
         )}
       </div>
       <div
-        className="my-10 text-center py-16"
+        className="my-10 text-center py-16 max-w-screen-xl mx-auto text-secondary"
         data-aos="fade-up"
         data-aos-offset="70"
       >
@@ -215,7 +215,8 @@ const HomePage = () => {
           <span className="font-semibold text-primary">academic needs</span>
         </h1>
         <h2 className="mt-2">
-          India's Leading Education Portal for all you academic needs
+          Discover the world of higher education with comprehensive information
+          for your academic journey
         </h2>
         <div className="mt-10 flex flex-col md:flex-row justify-center gap-6 m-6">
           <div
@@ -223,24 +224,35 @@ const HomePage = () => {
             data-aos="flip-up"
             data-aos-offset="80"
           >
-            <h2 className="font-semibold text-lg">Colleges</h2>
-            <p>Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet.</p>
+            <h2 className="font-semibold text-lg">Expert counsellors</h2>
+            <p>
+              A team of expert counsellors is here to assist aspirants for their
+              booming medical journey.
+            </p>
           </div>
           <div
             className="lg:w-1/5 bg-gray-200 p-8 py-16 rounded-lg shadow-secondary"
             data-aos="flip-up"
             data-aos-offset="160"
           >
-            <h2 className="font-semibold text-lg">Colleges</h2>
-            <p>Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet.</p>
+            <h2 className="font-semibold text-lg">
+              Free rank and college predictor
+            </h2>
+            <p>
+              Free rank and college predictors help to analyse and find the best
+              institutes
+            </p>
           </div>
           <div
             className="lg:w-1/5 bg-gray-200 p-8 py-16 rounded-lg shadow-secondary"
             data-aos="flip-up"
             data-aos-offset="240"
           >
-            <h2 className="font-semibold text-lg">Colleges</h2>
-            <p>Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet.</p>
+            <h2 className="font-semibold text-lg">Free E-books</h2>
+            <p>
+              Entire knowledge about NEET Counselling can be found from our
+              informative e-books.
+            </p>
           </div>
         </div>
       </div>
@@ -248,9 +260,7 @@ const HomePage = () => {
       <div className="text-center p-5 bg-gray-200 pt-20 pb-28">
         <div data-aos="fade-up" data-aos-offset="10">
           <h1 className="font-semibold text-3xl">Counselling</h1>
-          <h2 className="mt-2">
-            India's Leading Education Portal for all you academic needs
-          </h2>
+          <h2 className="mt-2">Lorem Ipsum Dolrore</h2>
         </div>
         <div className="mt-10 flex flex-col md:flex-row items-center justify-center gap-3">
           <div
@@ -367,7 +377,7 @@ const HomePage = () => {
           data-aos-offset="100"
         >
           <h3 className="mb-2 text-3xl font-semibold text-gray-900">
-            Donwload the CareerKick App
+            Download the CareerKick App
           </h3>
           <p className="mb-5 text-base text-gray-500 sm:text-lg">
             Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quia
@@ -566,7 +576,7 @@ const HomePage = () => {
         </h1>
         <div className="mt-10 flex flex-col md:flex-row justify-center gap-4 lg:gap-8 m-4">
           <div
-            onClick={() => navigate("/dashboard/updates")}
+            onClick={() => navigate("/dashboard/colleges")}
             className="lg:w-40 bg-white p-4 py-8 rounded-lg font-medium hover:cursor-pointer"
             data-aos="flip-down"
             data-aos-offset="10"
@@ -577,7 +587,7 @@ const HomePage = () => {
             </h2>
           </div>
           <div
-            onClick={() => navigate("/dashboard/updates")}
+            onClick={() => navigate("/dashboard/colleges")}
             className="lg:w-40 bg-white p-4 py-8 rounded-lg font-medium hover:cursor-pointer"
             data-aos="flip-down"
             data-aos-offset="40"
@@ -588,7 +598,7 @@ const HomePage = () => {
             </h2>
           </div>
           <div
-            onClick={() => navigate("/dashboard/updates")}
+            onClick={() => navigate("/dashboard/colleges")}
             className="lg:w-40 bg-white p-4 py-8 rounded-lg font-medium hover:cursor-pointer"
             data-aos="flip-down"
             data-aos-offset="70"
@@ -599,7 +609,7 @@ const HomePage = () => {
             </h2>
           </div>
           <div
-            onClick={() => navigate("/dashboard/updates")}
+            onClick={() => navigate("/dashboard/colleges")}
             className="lg:w-40 bg-white p-4 py-8 rounded-lg font-medium hover:cursor-pointer"
             data-aos="flip-down"
             data-aos-offset="110"

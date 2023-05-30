@@ -1,7 +1,7 @@
 import { ArrowRightIcon, BookOpenIcon } from "@heroicons/react/outline";
 
 import Header from "../../components/shared/Header";
-import heroBg from "../../assets/images/about_hero.avif";
+import heroBg from "../../assets/images/about_hero.jpg";
 import Footer from "../../components/shared/Footer";
 
 const Hero = () => (
@@ -25,10 +25,12 @@ const Hero = () => (
             <div className="">
               <h1 className="text-white font-semibold text-5xl">About US</h1>
               <p className="mt-4 text-lg text-gray-300">
-                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Vero
-                tempore voluptatem delectus quae, dolorem rerum maiores quia
-                quis alias adipisci aperiam eos illo itaque distinctio
-                quibusdam, aut iste natus enim.
+                CAREERKICK SERVICES is the first and largest online trusted
+                counselling platform in India which provides all information
+                regarding educational institutions & universities on its YouTube
+                channel. The main aim of this organization is to let the
+                aspirants get the best possible colleges or universities to for
+                their brighter future ahead.
               </p>
             </div>
           </div>
@@ -43,21 +45,23 @@ const Hero = () => (
               <BookOpenIcon className="w-8 h-8 text-white" />
             </div>
             <h3 className="text-3xl mb-2 font-semibold leading-normal">
-              Some Title
+              Benefits of NEET Predictor
             </h3>
-            <p className="text-lg font-light leading-relaxed mt-4 mb-4 text-gray-700">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit.Lorem
-              ipsum dolor sit amet consectetur adipisicing elit.
-            </p>
-            <p className="text-lg font-light leading-relaxed mt-0 mb-4 text-gray-700">
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Saepe
-              repellendus incidunt veniam obcaecati doloribus amet sit aliquid
-              atque, quo suscipit repudiandae quis nemo laborum, ipsum ut
-              accusamus architecto dicta voluptatem.
-            </p>
+            <ul className="text-lg font-light leading-relaxed mt-4 mb-4 text-gray-700 list-disc">
+              <li>Best possible college prediction.</li>
+              <li>Prediction for All India as well as State Quota.</li>
+              <li>Detailed information on various colleges.</li>
+              <li>Prediction as per ranking and cut-off.</li>
+              <li>Frequently asked questions with answers.</li>
+              <li>Latest NEET related updates .</li>
+              <l1>
+                Live Chat feature to connect you live to the Counselling team
+                through Whatsapp.
+              </l1>
+            </ul>
             <a
-              href=""
-              className="font-bold text-gray-800 mt-8 flex gap-2 items-center"
+              href="tel:+917393062116"
+              className="font-bold text-gray-800 mt-8 flex gap-2 items-center mb-8"
             >
               Contact Us
               <ArrowRightIcon className="text-primary w-5 h-5" />
@@ -68,7 +72,9 @@ const Hero = () => (
             <div className="relative flex flex-col min-w-0 break-words  w-full mb-6 shadow-lg rounded-lg bg-primary">
               <img
                 alt="..."
-                src={heroBg}
+                src={
+                  "https://careerkick.in/wp-content/uploads/2020/09/nikhilsir@05x-720x600.png"
+                }
                 className="w-full align-middle rounded-t-lg"
               />
               <blockquote className="relative p-8 mb-4">
@@ -89,92 +95,13 @@ const Hero = () => (
                 </svg>
                 <h4 className="text-xl font-bold text-white">Nikhil Sachan</h4>
                 <p className="text-md font-light mt-2 text-white">
-                  The Arctic Ocean freezes every winter and much of the sea-ice
-                  then thaws every summer, and that process will continue
-                  whatever happens.
+                  Nikhil Sachan is a leading Career Counselling Expert and
+                  mentor since six years who is serving students with valuable
+                  guidance and counselling services. He started his own company
+                  for students’ career guidance and counselling to let students
+                  reach their destination with dedication without any hindrance.
                 </p>
               </blockquote>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-    <section className="pt-20 pb-48 bg-gray-200">
-      <div className="container mx-auto px-4">
-        <div className="flex flex-wrap justify-center text-center mb-24">
-          <div className="w-full lg:w-6/12 px-4">
-            <h2 className="text-4xl font-semibold">Here are our heroes</h2>
-            <p className="text-lg leading-relaxed m-4 text-gray-600">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Adipisci
-              culpa vero ab at aspernatur deserunt sed voluptatum iure?
-              Dignissimos, voluptates mollitia! Exercitationem aliquid
-              architecto corporis minima, maiores perferendis reiciendis! Ad?
-            </p>
-          </div>
-        </div>
-        <div className="flex flex-wrap">
-          <div className="w-full md:w-6/12 lg:w-3/12 lg:mb-0 mb-12 px-4">
-            <div className="px-6">
-              <img
-                alt="..."
-                src={heroBg}
-                className="shadow-lg rounded-full max-w-full mx-auto"
-                style={{ maxWidth: "120px" }}
-              />
-              <div className="pt-6 text-center">
-                <h5 className="text-xl font-bold">Nikhil Sachan</h5>
-                <p className="mt-1 text-sm text-gray-500 uppercase font-semibold">
-                  Founder and CEO
-                </p>
-              </div>
-            </div>
-          </div>
-          <div className="w-full md:w-6/12 lg:w-3/12 lg:mb-0 mb-12 px-4">
-            <div className="px-6">
-              <img
-                alt="..."
-                src={heroBg}
-                className="shadow-lg rounded-full max-w-full mx-auto"
-                style={{ maxWidth: "120px" }}
-              />
-              <div className="pt-6 text-center">
-                <h5 className="text-xl font-bold">Member Name</h5>
-                <p className="mt-1 text-sm text-gray-500 uppercase font-semibold">
-                  Title Here
-                </p>
-              </div>
-            </div>
-          </div>
-          <div className="w-full md:w-6/12 lg:w-3/12 lg:mb-0 mb-12 px-4">
-            <div className="px-6">
-              <img
-                alt="..."
-                src={heroBg}
-                className="shadow-lg rounded-full max-w-full mx-auto"
-                style={{ maxWidth: "120px" }}
-              />
-              <div className="pt-6 text-center">
-                <h5 className="text-xl font-bold">Member Name</h5>
-                <p className="mt-1 text-sm text-gray-500 uppercase font-semibold">
-                  Title Here
-                </p>
-              </div>
-            </div>
-          </div>
-          <div className="w-full md:w-6/12 lg:w-3/12 lg:mb-0 mb-12 px-4">
-            <div className="px-6">
-              <img
-                alt="..."
-                src={heroBg}
-                className="shadow-lg rounded-full max-w-full mx-auto"
-                style={{ maxWidth: "120px" }}
-              />
-              <div className="pt-6 text-center">
-                <h5 className="text-xl font-bold">Member Name</h5>
-                <p className="mt-1 text-sm text-gray-500 uppercase font-semibold">
-                  Title Here
-                </p>
-              </div>
             </div>
           </div>
         </div>

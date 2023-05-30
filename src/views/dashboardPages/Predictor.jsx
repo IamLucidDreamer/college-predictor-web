@@ -1,4 +1,4 @@
-import testImage from "../../assets/images/about_hero.avif";
+
 import Footer from "../../components/shared/Footer";
 import Header from "../../components/shared/Header";
 import MainHeading from "../../components/shared/MainHeading";
