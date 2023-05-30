@@ -22,7 +22,7 @@ const Hero = () => (
       <div className="container relative mx-auto">
         <div className="items-center flex flex-wrap">
           <div className="w-full lg:w-6/12 px-4 ml-auto mr-auto text-center">
-            <div className="">
+            <div className="" data-aos="fade-up" data-aos-offset="100">
               <h1 className="text-white font-semibold text-5xl">About US</h1>
               <p className="mt-4 text-lg text-gray-300">
                 CAREERKICK SERVICES is the first and largest online trusted
@@ -40,7 +40,11 @@ const Hero = () => (
     <section className="py-20 bg-white -mt-24">
       <div className="container mx-auto px-4">
         <div className="flex flex-wrap items-center mt-32">
-          <div className="w-full md:w-5/12 px-4 mr-auto ml-auto">
+          <div
+            className="w-full md:w-5/12 px-4 mr-auto ml-auto"
+            data-aos="fade-up"
+            data-aos-offset="100"
+          >
             <div className="text-gray-600 p-3 text-center inline-flex items-center justify-center w-16 h-16 mb-6 shadow-lg rounded-full bg-primary">
               <BookOpenIcon className="w-8 h-8 text-white" />
             </div>
@@ -62,13 +66,19 @@ const Hero = () => (
             <a
               href="tel:+917393062116"
               className="font-bold text-gray-800 mt-8 flex gap-2 items-center mb-8"
+              data-aos="fade-right"
+              data-aos-offset="140"
             >
               Contact Us
               <ArrowRightIcon className="text-primary w-5 h-5" />
             </a>
           </div>
 
-          <div className="w-full md:w-4/12 px-4 mr-auto ml-auto">
+          <div
+            className="w-full md:w-4/12 px-4 mr-auto ml-auto"
+            data-aos="flip-up"
+            data-aos-offset="200"
+          >
             <div className="relative flex flex-col min-w-0 break-words  w-full mb-6 shadow-lg rounded-lg bg-primary">
               <img
                 alt="..."
@@ -93,14 +103,19 @@ const Hero = () => (
                     className="text-primary fill-current"
                   ></polygon>
                 </svg>
-                <h4 className="text-xl font-bold text-white">Nikhil Sachan</h4>
-                <p className="text-md font-light mt-2 text-white">
-                  Nikhil Sachan is a leading Career Counselling Expert and
-                  mentor since six years who is serving students with valuable
-                  guidance and counselling services. He started his own company
-                  for students’ career guidance and counselling to let students
-                  reach their destination with dedication without any hindrance.
-                </p>
+                <div data-aos="fade-up" data-aos-offset="100">
+                  <h4 className="text-xl font-bold text-white">
+                    Nikhil Sachan
+                  </h4>
+                  <p className="text-md font-light mt-2 text-white">
+                    Nikhil Sachan is a leading Career Counselling Expert and
+                    mentor since six years who is serving students with valuable
+                    guidance and counselling services. He started his own
+                    company for students’ career guidance and counselling to let
+                    students reach their destination with dedication without any
+                    hindrance.
+                  </p>
+                </div>
               </blockquote>
             </div>
           </div>

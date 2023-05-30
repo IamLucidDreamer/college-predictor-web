@@ -66,6 +66,7 @@ const CollegeProfile = () => {
   console.log(cutOffData, "hello");
 
   const displayValue = [
+    "examType",
     "year",
     "course",
     "round",

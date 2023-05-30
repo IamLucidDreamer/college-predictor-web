@@ -224,8 +224,14 @@ const HomePage = () => {
             data-aos="flip-up"
             data-aos-offset="80"
           >
-            <h2 className="font-semibold text-lg">Expert counsellors</h2>
-            <p>
+            <h2
+              className="font-semibold text-lg mb-4"
+              data-aos="fade-up"
+              data-aos-offset="120"
+            >
+              Expert counsellors
+            </h2>
+            <p data-aos="fade-up" data-aos-offset="120">
               A team of expert counsellors is here to assist aspirants for their
               booming medical journey.
             </p>
@@ -235,10 +241,14 @@ const HomePage = () => {
             data-aos="flip-up"
             data-aos-offset="160"
           >
-            <h2 className="font-semibold text-lg">
-              Free rank and college predictor
+            <h2
+              className="font-semibold text-lg mb-4"
+              data-aos="fade-up"
+              data-aos-offset="160"
+            >
+              Free rank & college predictor
             </h2>
-            <p>
+            <p data-aos="fade-up" data-aos-offset="160">
               Free rank and college predictors help to analyse and find the best
               institutes
             </p>
@@ -248,8 +258,14 @@ const HomePage = () => {
             data-aos="flip-up"
             data-aos-offset="240"
           >
-            <h2 className="font-semibold text-lg">Free E-books</h2>
-            <p>
+            <h2
+              className="font-semibold text-lg mb-4"
+              data-aos="fade-up"
+              data-aos-offset="200"
+            >
+              Free E-books
+            </h2>
+            <p data-aos="fade-up" data-aos-offset="200">
               Entire knowledge about NEET Counselling can be found from our
               informative e-books.
             </p>
@@ -260,7 +276,10 @@ const HomePage = () => {
       <div className="text-center p-5 bg-gray-200 pt-20 pb-28">
         <div data-aos="fade-up" data-aos-offset="10">
           <h1 className="font-semibold text-3xl">Counselling</h1>
-          <h2 className="mt-2">Lorem Ipsum Dolrore</h2>
+          <h2 className="mt-2">
+            Ease your biggest doubts with personalized Video Counselling from
+            our Curated Experts
+          </h2>
         </div>
         <div className="mt-10 flex flex-col md:flex-row items-center justify-center gap-3">
           <div
