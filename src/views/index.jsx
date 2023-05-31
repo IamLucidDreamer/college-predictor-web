@@ -12,7 +12,7 @@ const LandingPAgeApp = () => {
   useEffect(() => {
     const authToken = getAuthToken();
     if (authToken?.length) {
-      navigate("/dashboard");
+      navigate("/dashboard/predictor");
     }
   }, []);
 
