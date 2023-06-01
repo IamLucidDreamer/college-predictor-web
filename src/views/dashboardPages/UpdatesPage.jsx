@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { serverUnauth } from "../../helpers/apiCall";
 import * as dayjs from "dayjs";
+import { Document, Page, pdfjs } from "react-pdf";
+import pdfDist from "../../../node_modules/pdfjs-dist/build/pdf.worker.entry";
+
+pdfjs.GlobalWorkerOptions.workerSrc = pdfDist;
 
 const DashboardUpdates = () => {
   const [data, setData] = useState([]);
@@ -70,6 +74,8 @@ const DashboardUpdates = () => {
 export default DashboardUpdates;
 
 const Card = ({ title, description, imageMain, document, createdAt }) => {
+  const [showPdf, setShowPdf] = useState(false);
+
   return (
     <div
       className="bg-white shadow-md rounded-lg py-2 px-2 md:px-4 lg:px-6"
@@ -99,15 +105,30 @@ const Card = ({ title, description, imageMain, document, createdAt }) => {
                 </p>
               </div>
               {document && (
-                <a
-                  href={document}
-                  target="_blank"
-                  className="text-base lg:text-lg rounded-lg bg-secondary text-white py-2 w-full lg:w-40 text-center "
-                >
-                  View
-                </a>
+                <>
+                  <button
+                    className="text-base lg:text-lg rounded-lg bg-secondary text-white py-2 w-full lg:w-40 text-center "
+                    onClick={() => setShowPdf(!showPdf)}
+                  >
+                    {showPdf ? "Hide" : "View"}
+                  </button>
+                </>
               )}
             </div>
+            {showPdf && (
+              <div
+                className="w-full mt-4 "
+                data-aos="fade-up"
+                data-aos-offset="50"
+              >
+                <iframe
+                  maximum-scale="3"
+                  src={`${document}#toolbar=0 `}
+                  height={"400px"}
+                  className="mx-auto w-full"
+                />
+              </div>
+            )}
           </div>
         </div>
       </div>
