@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { serverUnauth } from "../../helpers/apiCall";
 import * as dayjs from "dayjs";
-import { Document, Page, pdfjs } from "react-pdf";
-import pdfDist from "../../../node_modules/pdfjs-dist/build/pdf.worker.entry";
+// import { Document, Page, pdfjs } from "react-pdf";
+// import pdfDist from "../../../node_modules/pdfjs-dist/build/pdf.worker.entry";
 
 pdfjs.GlobalWorkerOptions.workerSrc = pdfDist;
 
