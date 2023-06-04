@@ -14,6 +14,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { setUser } from "../../store/actions/userActions";
 import { useDispatch } from "react-redux";
 import { KeyIcon, CheckIcon } from "@heroicons/react/outline";
+import { useSelector } from "react-redux";
 
 const newPassworValidation = Yup.object({
   otp: Yup.string()
@@ -32,6 +33,8 @@ const NewPassword = () => {
   const { state } = useLocation();
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
+  const appInApp = useSelector((state) => state.appInApp.appInApp);
 
   const [loading, setLoading] = useState(false);
   const [resendLoading, setResendLoading] = useState(false);
@@ -68,10 +71,18 @@ const NewPassword = () => {
       const response = await forgotPassword(data);
       const { status } = response;
       if (status >= 200 && status < 300) {
-        dispatch(setUser(response?.data?.data));
-        localStorage.setItem("authToken", response?.data?.token);
-        navigate("/dashboard/predictor");
-        toast.success("Welcome to Career Kick");
+        if (appInApp) {
+          navigate(
+            `/login-success?app_in_app=true&auth_token=${response?.data?.token}&user_id=${response?.data?.data?._id}`
+          );
+        } else {
+          dispatch(setUser(response?.data?.data));
+          localStorage.setItem("authToken", response?.data?.token);
+          navigate("/dashboard/predictor");
+        }
+        toast.success(
+          "Password Reset Succesfully, Welcome back to Career Kick"
+        );
       }
     } catch (err) {
       console.error("Error : ", err);

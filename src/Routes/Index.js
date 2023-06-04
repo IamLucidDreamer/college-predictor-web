@@ -18,6 +18,7 @@ const VerifyOTP = lazy(() => import("../views/auth/VerifyOTP"))
 const ForgotPassword = lazy(() => import("../views/auth/ForgotPassword"))
 const NewPassword = lazy(() => import("../views/auth/NewPassword"))
 const CompleteProfile = lazy(() => import("../views/auth/CompleteProfile"))
+const LoginSuccess = lazy(() => import("../views/auth/LoginSuccess"))
 
 const MainPage = lazy(() => import("../views/dashboardPages/HomePage"))
 const DashboardPredictor = lazy(() => import("../views/dashboardPages/Predictor"))
@@ -58,6 +59,10 @@ const router = createBrowserRouter([
     {
         path: "/complete-profile",
         element: <CompleteProfile />,
+    },
+    {
+        path: "/login-success",
+        element: <LoginSuccess />,
     },
     {
         path: "/home",

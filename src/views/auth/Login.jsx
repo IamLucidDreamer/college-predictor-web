@@ -14,6 +14,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setUser } from "../../store/actions/userActions";
 import { getAuthToken } from "../../helpers/auth";
+import { useSelector } from "react-redux";
 
 const loginValidation = Yup.object({
   username: Yup.string().required("This field is Required"),
@@ -25,6 +26,8 @@ const loginValidation = Yup.object({
 const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const appInApp = useSelector((state) => state.appInApp.appInApp);
+
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
@@ -47,10 +50,16 @@ const Login = () => {
       const response = await login(values);
       const { status } = response;
       if (status >= 200 && status < 300) {
-        delete response?.data?.user?.encrypted_password;
-        dispatch(setUser(response?.data?.user));
-        localStorage.setItem("authToken", response?.data?.token);
-        navigate("/dashboard/predictor");
+        if (appInApp) {
+          navigate(
+            `/login-success?app_in_app=true&auth_token=${response?.data?.token}&user_id=${response?.data?.user?._id}`
+          );
+        } else {
+          delete response?.data?.user?.encrypted_password;
+          dispatch(setUser(response?.data?.user));
+          localStorage.setItem("authToken", response?.data?.token);
+          navigate("/dashboard/predictor");
+        }
         toast.success("Login Was Success");
       }
     } catch (err) {

@@ -13,6 +13,7 @@ import image from "../../assets/images/verify_otp_bg.jpg";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { setUser } from "../../store/actions/userActions";
 import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 
 const loginValidation = Yup.object({
   otp: Yup.string()
@@ -24,6 +25,8 @@ const VerifyOTP = () => {
   const { state } = useLocation();
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
+  const appInApp = useSelector((state) => state.appInApp.appInApp);
 
   const [loading, setLoading] = useState(false);
   const [resendLoading, setResendLoading] = useState(false);
@@ -60,9 +63,15 @@ const VerifyOTP = () => {
       const response = await signup(data);
       const { status } = response;
       if (status >= 200 && status < 300) {
-        dispatch(setUser(response?.data?.data));
-        localStorage.setItem("authToken", response?.data?.token);
-        navigate("/profile");
+        if (appInApp) {
+          navigate(
+            `/login-success?app_in_app=true&auth_token=${response?.data?.token}&user_id=${response?.data?.data?._id}`
+          );
+        } else {
+          dispatch(setUser(response?.data?.data));
+          localStorage.setItem("authToken", response?.data?.token);
+          navigate("/profile");
+        }
         toast.success("Welcome to Career Kick");
       }
     } catch (err) {

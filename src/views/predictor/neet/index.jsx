@@ -18,6 +18,7 @@ import Loader from "../../../components/loader/index";
 import mbbsImage from "../../../assets/images/test_mbbs.webp";
 import MainHeading from "../../../components/shared/MainHeading";
 import { ArrowLeftIcon } from "@heroicons/react/outline";
+import PdfDownloader from "../../../components/shared/PdfViewer";
 
 const NeetIndex = () => {
   const [activeType, setActiveType] = useState(0);
@@ -381,6 +382,9 @@ const PredictorAllIndia = ({ initialValues, displayValues }) => {
                 </button>
               </div>
               <div>
+                <>
+                  <PdfDownloader />
+                </>
                 {Object.keys(predictData).length > 0 || !predictorRan ? (
                   <div className="overflow-x-scroll mt-4">
                     <div className="flex justify-between bg-gray-100 items-center">

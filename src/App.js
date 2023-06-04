@@ -5,6 +5,8 @@ import { setAppInApp } from "./store/actions/appInApp";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import { XIcon } from "@heroicons/react/outline";
+import { server } from "./helpers/apiCall";
+import { setUser } from "./store/actions/userActions";
 
 function App() {
 
@@ -14,8 +16,16 @@ function App() {
 
   useEffect(() => {
     const appInApp = searchParams.get("app_in_app")
+    const authToken = searchParams.get("auth_token")
+    const userId = searchParams.get("user_id")
     if (appInApp) {
       dispatch(setAppInApp(appInApp))
+    }
+    if (authToken) {
+      localStorage.setItem("authToken", authToken);
+      server.get(`/user/get/${userId}`)
+        .then(res => { dispatch(setUser(res?.data?.data)) })
+        .catch((err) => console.log(err))
     }
   }
     , [])
