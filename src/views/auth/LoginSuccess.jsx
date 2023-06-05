@@ -5,7 +5,7 @@ const LoginSuccess = () => {
   const authToken = searchParams.get("auth_token");
   const userId = searchParams.get("user_id");
   useEffect(() => {
-    window.postMessage(
+    window.ReactNativeWebView.postMessage(
       JSON.stringify({
         message: "login-success",
         authToken: authToken,
