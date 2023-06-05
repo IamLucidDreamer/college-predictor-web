@@ -51,10 +51,14 @@ const Development = () => {
   const [show, setShow] = useState(true)
 
   useEffect(() => {
-    setShow(false)
-    const showMessage = setTimeout(() => { setShow(false) }, 10000)
+    if (window.location.pathname === "/login-success") {
+      setShow(false)
+    }
+    else {
+      const showMessage = setTimeout(() => { setShow(false) }, 10000)
 
-    return () => clearTimeout(showMessage)
+      return () => clearTimeout(showMessage)
+    }
   }, [])
 
   if (!show) {
