@@ -142,16 +142,19 @@ const Header = () => {
               </button>
             )}
           </nav>
-          <button
-            className="lg:hidden h-7 flex flex-col justify-between items-stretch"
-            onClick={() => setOpen(true)}
-          >
-            <div className="w-8 h-1 bg-secondary" />
-            <div className="w-8 h-1 bg-secondary" />
-            <div className="w-8 h-1 bg-secondary" />
-          </button>
+          {!appInApp && (
+            <button
+              className="lg:hidden h-7 flex flex-col justify-between items-stretch"
+              onClick={() => setOpen(true)}
+            >
+              <div className="w-8 h-1 bg-secondary" />
+              <div className="w-8 h-1 bg-secondary" />
+              <div className="w-8 h-1 bg-secondary" />
+            </button>
+          )}
         </div>
       </div>
+
       <DrawerMenu
         openModal={open}
         closeModal={() => setOpen(false)}
