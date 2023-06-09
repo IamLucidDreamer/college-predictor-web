@@ -15,6 +15,19 @@ function App() {
   const dispatch = useDispatch()
 
   useEffect(() => {
+    window.addEventListener(
+      "message",
+      (event) => {
+        if (event.data === "logout") {
+          localStorage.clear()
+          window.location.reload()
+        }
+      },
+      false
+    );
+  }, [])
+
+  useEffect(() => {
     const appInApp = searchParams.get("app_in_app")
     const authToken = searchParams.get("auth_token")
     const userId = searchParams.get("user_id")
@@ -48,11 +61,11 @@ export default App;
 
 const Development = () => {
 
-  const [show, setShow] = useState(true)
+  const [show, setShow] = useState(false)
 
   useEffect(() => {
-    if (window.location.pathname === "/login-success") {
-      setShow(false)
+    if (window.location.pathname === "/" || window.location.pathname === "/home") {
+      setShow(true)
     }
     else {
       const showMessage = setTimeout(() => { setShow(false) }, 10000)
