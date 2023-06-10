@@ -20,7 +20,6 @@ function App() {
       (event) => {
         if (event.data === "logout") {
           localStorage.clear()
-          window.location.reload()
         }
       },
       false
