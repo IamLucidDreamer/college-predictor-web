@@ -31,10 +31,10 @@ function App() {
     const appInApp = searchParams.get("app_in_app")
     const authToken = searchParams.get("auth_token")
     const userId = searchParams.get("user_id")
-    if (appInApp) {
+    if (appInApp ) {
       dispatch(setAppInApp(appInApp))
     }
-    if (authToken) {
+    if (authToken && window.location.pathname !== "/login-success") {
       localStorage.setItem("authToken", authToken);
       server.get(`/user/get/${userId}`)
         .then(res => { dispatch(setUser(res?.data?.data)) })
