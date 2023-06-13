@@ -145,9 +145,7 @@ const HomePage = () => {
                 >
                   {searchCollege.length > 0 && !loadingSearchCollege ? (
                     searchCollege.map((val) => (
-                      <div
-                        className="bg-white p-2 rounded-lg m-1 hover:bg-gray-100"
-                      >
+                      <div className="bg-white p-2 rounded-lg m-1 hover:bg-gray-100">
                         <button
                           style={{ width: "100%" }}
                           className="text-left"
@@ -380,7 +378,7 @@ const HomePage = () => {
       </div>
 
       {/* Download App Section */}
-      <div className="bg-primary bg-opacity-20 w-full py-20 text-secondary" >
+      <div className="bg-primary bg-opacity-20 w-full py-20 text-secondary">
         <div
           className="p-4 w-full text-center sm:p-8"
           data-aos="fade-up"
@@ -461,9 +459,7 @@ const HomePage = () => {
           data-aos="fade-up"
           data-aos-offset="50"
         >
-          <h3 className="mb-6 text-3xl font-bold">
-            What our Students Say
-          </h3>
+          <h3 className="mb-6 text-3xl font-bold">What our Students Say</h3>
         </div>
 
         <div className="mx-auto max-w-screen-xl my-8">
@@ -640,7 +636,7 @@ const HomePage = () => {
       </div>
 
       {/* Client Section */}
-      <section className="bg-white">
+      {/* <section className="bg-white">
         <div
           className="py-8 lg:py-16 mx-auto max-w-screen-xl"
           data-aos="fade-up"
@@ -677,6 +673,38 @@ const HomePage = () => {
               }
               className="max-h-16"
             />
+          </div>
+        </div>
+      </section> */}
+      <section className="bg-white">
+        <div
+          className="py-8 lg:py-16 mx-auto max-w-screen-xl"
+          data-aos="fade-up"
+          data-aos-offset="50"
+        >
+          <h2 className="mb-8 lg:mb-16 text-3xl font-semibold tracking-tight leading-tight text-center text-gray-900 md:text-4xl">
+            Our <span className="text-primary font-bold"> Achievements </span>
+          </h2>
+          <div className="flex flex-wrap justify-center gap-8 md:gap-12 lg:gap-20">
+            <div className="bg-primary p-4 rounded-2xl">
+              <div className="flex flex-col lg:flex-row items-center gap-4 lg:gap-6 justify-between w-full">
+                <div className="p-4">
+                  <h1 className="text-white text-3xl font-semibold">
+                    5000+ College Alloted
+                  </h1>
+                </div>
+                <div className="p-4">
+                  <h1 className="text-white text-3xl font-semibold">
+                    250000+ Students Guided
+                  </h1>
+                </div>
+                <div className="p-4">
+                  <h1 className="text-white text-3xl font-semibold">
+                    500+ College Tie-Ups
+                  </h1>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
