@@ -15,8 +15,9 @@ import {
 import Loader from "../../../components/loader/index";
 
 // Images
-import mbbsImage from "../../../assets/images/test_mbbs.webp";
-import MainHeading from "../../../components/shared/MainHeading";
+import mbbsImage from "../../../assets/images/test_mbbs.png";
+import ayushImage from "../../../assets/images/test_ayush.jpg";
+
 import { ArrowLeftIcon } from "@heroicons/react/outline";
 import PdfDownloader from "../../../components/shared/PdfViewer";
 
@@ -107,11 +108,11 @@ const NeetIndex = () => {
                   : "w-1/2"
                 : "w-full rounded-lg"
             }`}
-            style={{ backgroundImage: `url(${mbbsImage})` }}
+            style={{ backgroundImage: `url(${ayushImage})` }}
           >
             <button
               onClick={() => setActiveType(2)}
-              className={`h-32 md:h-96 w-full text-xl md:text-3xl bg-no-repeat bg-cover bg-center bg-secondary bg-opacity-60 text-white font-semibold ${
+              className={`h-32 md:h-96 w-full text-xl md:text-3xl bg-no-repeat bg-cover bg-right bg-secondary bg-opacity-60 text-white font-semibold ${
                 activeType === 1 ? "hidden" : ""
               }`}
             >

@@ -113,7 +113,6 @@ export const CollegeCardLocal = ({
   location,
 }) => {
   const navigate = useNavigate();
-  console.log(data, "test data");
   return (
     <div className="p-1" data-aos="flip-up" data-aos-offset="10">
       <button
@@ -124,7 +123,6 @@ export const CollegeCardLocal = ({
           });
         }}
         className="relative rounded-lg bg-white shadow-md md:flex-row md:max-w-screen-md"
-        style={{ width: "400px" }}
       >
         <img
           style={{ height: "220px" }}
@@ -140,7 +138,7 @@ export const CollegeCardLocal = ({
             alt=""
           />
         </div>
-        <div className="px-2">
+        <div className="px-2 md:px-4">
           <p className="text-secondary font-semibold text-xl text-center mt-4">
             {collegeName}
           </p>

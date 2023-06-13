@@ -78,10 +78,10 @@ const Profile = () => {
         });
 
         return (
-          <div className="w-full">
+          <div className="w-full min-h-screen bg-gray-100">
             <Header />
             <div
-              className="h-36 lg:h-60 w-full bg-no-repeat bg-center bg-cover"
+              className="h-36 lg:h-60 w-full bg-no-repeat bg-right bg-cover"
               style={{
                 backgroundImage: `url(${coverImage})`,
               }}
