@@ -29,14 +29,12 @@ const LandingPAgeApp = () => {
               height={"250px"}
               classname={"mx-auto mb-4"}
             />
-            <h1 className="text-secondary text-5xl my-2 text-center">
-              Welcome
-            </h1>
+            <h1 className="text-secondary text-5xl my-2 text-center">Welcome</h1>
             <p className="text-secondary text-lg my-2 text-center">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi
-              culpa consequuntur perspiciatis.
+              India's largest online consulting platform which provides
+              information about regarding Educational Institutions and Colleges.
             </p>
-            <div className="flex gap-2 lg:gap-4 w-full lg:w-1/2 my-4 justify-center">
+            <div className="flex gap-4 w-full lg:w-1/2 my-4 justify-center">
               <Link
                 to={"/signup"}
                 className="w-32 py-2.5 rounded-3xl bg-primary text-white text-center font-semibold"

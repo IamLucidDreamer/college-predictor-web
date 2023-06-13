@@ -120,7 +120,7 @@ const HomePage = () => {
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
               />
-              <button className="text-sm text-slate-400">
+              <button className="text-sm text-secondary">
                 <svg
                   aria-hidden="true"
                   className="w-5 h-5"
@@ -268,7 +268,7 @@ const HomePage = () => {
         </div>
       </div>
 
-      <div className="text-center p-5 bg-gray-200 pt-20 pb-28">
+      <div className="text-center p-5 bg-gray-200 pt-20 pb-28 text-secondary">
         <div data-aos="fade-up" data-aos-offset="10">
           <h1 className="font-semibold text-3xl">Counselling</h1>
           <h2 className="mt-2">
@@ -345,7 +345,7 @@ const HomePage = () => {
         </div>
       </div>
       <div
-        className="py-20 text-center p-5 max-w-screen-xl mx-auto"
+        className="py-20 text-center p-5 max-w-screen-xl mx-auto text-secondary"
         data-aos="fade-up"
       >
         <h1 className="font-semibold text-3xl">Top Colleges</h1>
@@ -380,16 +380,16 @@ const HomePage = () => {
       </div>
 
       {/* Download App Section */}
-      <div className="bg-primary bg-opacity-10 w-full py-20">
+      <div className="bg-primary bg-opacity-20 w-full py-20 text-secondary" >
         <div
           className="p-4 w-full text-center sm:p-8"
           data-aos="fade-up"
           data-aos-offset="100"
         >
-          <h3 className="mb-2 text-3xl font-semibold text-gray-900">
+          <h3 className="mb-2 text-3xl font-semibold text-secondary">
             Download the CareerKick App
           </h3>
-          <p className="mb-5 text-base text-gray-500 sm:text-lg">
+          <p className="mb-5 text-base text-secondary sm:text-lg">
             Regular exam updates, QnA, Predictors, College Applications &
             E-books now on your Mobile
           </p>
@@ -398,7 +398,7 @@ const HomePage = () => {
               onClick={() => window.alert("Comming soon on APP store")}
               data-aos="flip-right"
               data-aos-offset="100"
-              className="w-[150px] sm:w-auto flex bg-gray-800 hover:bg-gray-700 focus:ring-4 focus:ring-gray-300 text-white rounded-lg items-center justify-center px-4 py-2.5"
+              className="w-[150px] sm:w-auto flex bg-secondary hover:bg-gray-700 focus:ring-4 focus:ring-gray-300 text-white rounded-lg items-center justify-center px-4 py-2.5"
             >
               <svg
                 className="mr-2 md:mr-3 w-5 h-5 sm:w-7 sm:h-7"
@@ -427,7 +427,7 @@ const HomePage = () => {
               data-aos-offset="100"
               target="_blank"
               href="https://play.google.com/store/apps/details?id=in.careerkick"
-              className=" w-[150px] sm:w-auto flex bg-gray-800 hover:bg-gray-700 focus:ring-4 focus:ring-gray-300 text-white rounded-lg items-center justify-center px-4 py-2.5"
+              className=" w-[150px] sm:w-auto flex bg-secondary hover:bg-gray-700 focus:ring-4 focus:ring-gray-300 text-white rounded-lg items-center justify-center px-4 py-2.5"
             >
               <svg
                 className="mr-2 md:mr-3 w-5 h-5 sm:w-7 sm:h-7"
@@ -455,13 +455,13 @@ const HomePage = () => {
         </div>
       </div>
       {/* REview Section */}
-      <div className="py-20 bg-white">
+      <div className="py-20 bg-white text-secondary">
         <div
           className="mx-auto text-center md:max-w-xl lg:max-w-3xl"
           data-aos="fade-up"
           data-aos-offset="50"
         >
-          <h3 className="mb-6 text-3xl font-bold text-neutral-800">
+          <h3 className="mb-6 text-3xl font-bold">
             What our Students Say
           </h3>
         </div>
@@ -572,7 +572,7 @@ const HomePage = () => {
         </div>
       </div>
 
-      <div className="text-center py-16 bg-gray-200">
+      <div className="text-center py-16 bg-gray-200 text-secondary">
         <h1
           className="font-semibold text-3xl"
           data-aos="fade-up"

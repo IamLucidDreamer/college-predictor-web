@@ -42,7 +42,11 @@ const AuthLayout = ({ imageLink, title, description, form }) => {
           backgroundImage: `url(${window.innerWidth < 1024 ? bgAuth : ""})`,
         }}
       >
-        <div className="min-h-screen max-h-screen flex items-end lg:items-center justify-center pb-8 overflow-y-scroll">
+        <div
+          className="min-h-screen max-h-screen flex items-end lg:items-center justify-center pb-8 overflow-autp"
+          data-aos="fade-up"
+          data-aos-offset="10"
+        >
           {form}
         </div>
       </div>
