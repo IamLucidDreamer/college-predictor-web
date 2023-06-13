@@ -615,7 +615,7 @@ const HomePage = () => {
             </h2>
           </div>
           <div
-            onClick={() => navigate("/dashboard/colleges")}
+            onClick={() => navigate("/dashboard/predictor")}
             className="lg:w-40 bg-white p-4 py-8 rounded-lg font-medium hover:cursor-pointer"
             data-aos="flip-down"
             data-aos-offset="110"

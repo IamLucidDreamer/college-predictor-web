@@ -4,6 +4,8 @@ import Header from "../../components/shared/Header";
 import heroBg from "../../assets/images/about_hero.jpg";
 import Footer from "../../components/shared/Footer";
 
+import nikhilSirImage from "../../assets/images/nikhil_sir_image.png";
+
 const Hero = () => (
   <>
     <Header />
@@ -82,9 +84,7 @@ const Hero = () => (
             <div className="relative flex flex-col min-w-0 break-words  w-full mb-6 shadow-lg rounded-lg bg-primary">
               <img
                 alt="..."
-                src={
-                  "https://careerkick.in/wp-content/uploads/2020/09/nikhilsir@05x-720x600.png"
-                }
+                src={nikhilSirImage}
                 className="w-full align-middle rounded-t-lg"
               />
               <blockquote className="relative p-8 mb-4">
