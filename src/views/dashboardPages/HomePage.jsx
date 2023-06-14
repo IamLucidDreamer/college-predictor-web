@@ -22,9 +22,12 @@ import {
 } from "@heroicons/react/outline";
 import { useNavigate } from "react-router-dom";
 import { CollgeCard } from "./Colleges";
+import { useSelector } from "react-redux";
 
 const HomePage = () => {
   const navigate = useNavigate();
+
+  const appInApp = useSelector((state) => state.appInApp.appInApp);
 
   const [updates, setUpdates] = useState([]);
   const [college, setCollege] = useState([]);
@@ -198,73 +201,75 @@ const HomePage = () => {
           </Corousal>
         )}
       </div>
-      <div
-        className="my-10 text-center py-16 max-w-screen-xl mx-auto text-secondary"
-        data-aos="fade-up"
-        data-aos-offset="70"
-      >
-        <h1 className="font-semibold text-3xl">
-          India's Leading Education Portal for all you{" "}
-          <span className="font-semibold text-primary">academic needs</span>
-        </h1>
-        <h2 className="mt-2">
-          Discover the world of higher education with comprehensive information
-          for your academic journey
-        </h2>
-        <div className="mt-10 flex flex-col md:flex-row justify-center gap-6 m-6">
-          <div
-            className="lg:w-1/4 bg-gray-200 p-8 py-16 rounded-lg shadow-secondary"
-            data-aos="flip-up"
-            data-aos-offset="80"
-          >
-            <h2
-              className="font-semibold text-lg mb-4 capitalize"
-              data-aos="fade-up"
-              data-aos-offset="120"
+      {!appInApp && (
+        <div
+          className="my-10 text-center py-16 max-w-screen-xl mx-auto text-secondary"
+          data-aos="fade-up"
+          data-aos-offset="70"
+        >
+          <h1 className="font-semibold text-3xl">
+            India's Leading Education Portal for all you{" "}
+            <span className="font-semibold text-primary">academic needs</span>
+          </h1>
+          <h2 className="mt-2">
+            Discover the world of higher education with comprehensive
+            information for your academic journey
+          </h2>
+          <div className="mt-10 flex flex-col md:flex-row justify-center gap-6 m-6">
+            <div
+              className="lg:w-1/4 bg-gray-200 p-8 py-16 rounded-lg shadow-secondary"
+              data-aos="flip-up"
+              data-aos-offset="80"
             >
-              Expert counsellors
-            </h2>
-            <p data-aos="fade-up" data-aos-offset="120">
-              A team of expert counsellors is here to assist aspirants for their
-              booming medical journey.
-            </p>
-          </div>
-          <div
-            className="lg:w-1/4 bg-gray-200 p-8 py-16 rounded-lg shadow-secondary capitalize"
-            data-aos="flip-up"
-            data-aos-offset="160"
-          >
-            <h2
-              className="font-semibold text-lg mb-4"
-              data-aos="fade-up"
+              <h2
+                className="font-semibold text-lg mb-4 capitalize"
+                data-aos="fade-up"
+                data-aos-offset="120"
+              >
+                Expert counsellors
+              </h2>
+              <p data-aos="fade-up" data-aos-offset="120">
+                A team of expert counsellors is here to assist aspirants for
+                their booming medical journey.
+              </p>
+            </div>
+            <div
+              className="lg:w-1/4 bg-gray-200 p-8 py-16 rounded-lg shadow-secondary capitalize"
+              data-aos="flip-up"
               data-aos-offset="160"
             >
-              Free rank & college predictor
-            </h2>
-            <p data-aos="fade-up" data-aos-offset="160">
-              Free rank and college predictors help to analyse and find the best
-              institutes
-            </p>
-          </div>
-          <div
-            className="lg:w-1/4 bg-gray-200 p-8 py-16 rounded-lg shadow-secondary capitalize"
-            data-aos="flip-up"
-            data-aos-offset="240"
-          >
-            <h2
-              className="font-semibold text-lg mb-4"
-              data-aos="fade-up"
-              data-aos-offset="200"
+              <h2
+                className="font-semibold text-lg mb-4"
+                data-aos="fade-up"
+                data-aos-offset="160"
+              >
+                Free rank & college predictor
+              </h2>
+              <p data-aos="fade-up" data-aos-offset="160">
+                Free rank and college predictors help to analyse and find the
+                best institutes
+              </p>
+            </div>
+            <div
+              className="lg:w-1/4 bg-gray-200 p-8 py-16 rounded-lg shadow-secondary capitalize"
+              data-aos="flip-up"
+              data-aos-offset="240"
             >
-              Free E-books
-            </h2>
-            <p data-aos="fade-up" data-aos-offset="200">
-              Entire knowledge about NEET Counselling can be found from our
-              informative e-books.
-            </p>
+              <h2
+                className="font-semibold text-lg mb-4"
+                data-aos="fade-up"
+                data-aos-offset="200"
+              >
+                Free E-books
+              </h2>
+              <p data-aos="fade-up" data-aos-offset="200">
+                Entire knowledge about NEET Counselling can be found from our
+                informative e-books.
+              </p>
+            </div>
           </div>
         </div>
-      </div>
+      )}
 
       <div className="text-center p-5 bg-gray-200 pt-20 pb-28 text-secondary">
         <div data-aos="fade-up" data-aos-offset="10">
@@ -377,196 +382,203 @@ const HomePage = () => {
         </div>
       </div>
 
-      {/* Download App Section */}
-      <div className="bg-primary bg-opacity-20 w-full py-20 text-secondary">
-        <div
-          className="p-4 w-full text-center sm:p-8"
-          data-aos="fade-up"
-          data-aos-offset="100"
-        >
-          <h3 className="mb-2 text-3xl font-semibold text-secondary">
-            Download the CareerKick App
-          </h3>
-          <p className="mb-5 text-base text-secondary sm:text-lg">
-            Regular exam updates, QnA, Predictors, College Applications &
-            E-books now on your Mobile
-          </p>
-          <div className="flex justify-center items-center space-y-0 space-x-8">
-            <a
-              onClick={() => window.alert("Comming soon on APP store")}
-              data-aos="flip-right"
+      {!appInApp && (
+        <>
+          {/* Download App Section */}
+          <div className="bg-primary bg-opacity-20 w-full py-20 text-secondary">
+            <div
+              className="p-4 w-full text-center sm:p-8"
+              data-aos="fade-up"
               data-aos-offset="100"
-              className="w-[150px] sm:w-auto flex bg-secondary hover:bg-gray-700 focus:ring-4 focus:ring-gray-300 text-white rounded-lg items-center justify-center px-4 py-2.5"
             >
-              <svg
-                className="mr-2 md:mr-3 w-5 h-5 sm:w-7 sm:h-7"
-                aria-hidden="true"
-                focusable="false"
-                data-prefix="fab"
-                data-icon="apple"
-                role="img"
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 384 512"
-              >
-                <path
-                  fill="currentColor"
-                  d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"
-                ></path>
-              </svg>
-              <div className="text-left">
-                <div className="mb-1 text-xs">Get it On</div>
-                <div className="-mt-1 font-sans text-sm font-semibold">
-                  App Store
-                </div>
+              <h3 className="mb-2 text-3xl font-semibold text-secondary">
+                Download the CareerKick App
+              </h3>
+              <p className="mb-5 text-base text-secondary sm:text-lg">
+                Regular exam updates, QnA, Predictors, College Applications &
+                E-books now on your Mobile
+              </p>
+              <div className="flex justify-center items-center space-y-0 space-x-8">
+                <a
+                  onClick={() => window.alert("Comming soon on APP store")}
+                  data-aos="flip-right"
+                  data-aos-offset="100"
+                  className="w-[150px] sm:w-auto flex bg-secondary hover:bg-gray-700 focus:ring-4 focus:ring-gray-300 text-white rounded-lg items-center justify-center px-4 py-2.5"
+                >
+                  <svg
+                    className="mr-2 md:mr-3 w-5 h-5 sm:w-7 sm:h-7"
+                    aria-hidden="true"
+                    focusable="false"
+                    data-prefix="fab"
+                    data-icon="apple"
+                    role="img"
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 384 512"
+                  >
+                    <path
+                      fill="currentColor"
+                      d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"
+                    ></path>
+                  </svg>
+                  <div className="text-left">
+                    <div className="mb-1 text-xs">Get it On</div>
+                    <div className="-mt-1 font-sans text-sm font-semibold">
+                      App Store
+                    </div>
+                  </div>
+                </a>
+                <a
+                  data-aos="flip-left"
+                  data-aos-offset="100"
+                  target="_blank"
+                  href="https://play.google.com/store/apps/details?id=in.careerkick"
+                  className=" w-[150px] sm:w-auto flex bg-secondary hover:bg-gray-700 focus:ring-4 focus:ring-gray-300 text-white rounded-lg items-center justify-center px-4 py-2.5"
+                >
+                  <svg
+                    className="mr-2 md:mr-3 w-5 h-5 sm:w-7 sm:h-7"
+                    aria-hidden="true"
+                    focusable="false"
+                    data-prefix="fab"
+                    data-icon="google-play"
+                    role="img"
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 512 512"
+                  >
+                    <path
+                      fill="currentColor"
+                      d="M325.3 234.3L104.6 13l280.8 161.2-60.1 60.1zM47 0C34 6.8 25.3 19.2 25.3 35.3v441.3c0 16.1 8.7 28.5 21.7 35.3l256.6-256L47 0zm425.2 225.6l-58.9-34.1-65.7 64.5 65.7 64.5 60.1-34.1c18-14.3 18-46.5-1.2-60.8zM104.6 499l280.8-161.2-60.1-60.1L104.6 499z"
+                    ></path>
+                  </svg>
+                  <div className="text-left">
+                    <div className="mb-1 text-xs">Get in on</div>
+                    <div className="-mt-1 font-sans text-sm font-semibold">
+                      Google Play
+                    </div>
+                  </div>
+                </a>
               </div>
-            </a>
-            <a
-              data-aos="flip-left"
-              data-aos-offset="100"
-              target="_blank"
-              href="https://play.google.com/store/apps/details?id=in.careerkick"
-              className=" w-[150px] sm:w-auto flex bg-secondary hover:bg-gray-700 focus:ring-4 focus:ring-gray-300 text-white rounded-lg items-center justify-center px-4 py-2.5"
-            >
-              <svg
-                className="mr-2 md:mr-3 w-5 h-5 sm:w-7 sm:h-7"
-                aria-hidden="true"
-                focusable="false"
-                data-prefix="fab"
-                data-icon="google-play"
-                role="img"
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 512 512"
-              >
-                <path
-                  fill="currentColor"
-                  d="M325.3 234.3L104.6 13l280.8 161.2-60.1 60.1zM47 0C34 6.8 25.3 19.2 25.3 35.3v441.3c0 16.1 8.7 28.5 21.7 35.3l256.6-256L47 0zm425.2 225.6l-58.9-34.1-65.7 64.5 65.7 64.5 60.1-34.1c18-14.3 18-46.5-1.2-60.8zM104.6 499l280.8-161.2-60.1-60.1L104.6 499z"
-                ></path>
-              </svg>
-              <div className="text-left">
-                <div className="mb-1 text-xs">Get in on</div>
-                <div className="-mt-1 font-sans text-sm font-semibold">
-                  Google Play
-                </div>
-              </div>
-            </a>
+            </div>
           </div>
-        </div>
-      </div>
-      {/* REview Section */}
-      <div className="py-20 bg-white text-secondary">
-        <div
-          className="mx-auto text-center md:max-w-xl lg:max-w-3xl"
-          data-aos="fade-up"
-          data-aos-offset="50"
-        >
-          <h3 className="mb-6 text-3xl font-bold">What our Students Say</h3>
-        </div>
 
-        <div className="mx-auto max-w-screen-xl my-8">
-          <Corousal
-            defaultControlsConfig={{
-              nextButtonText: ">",
-              prevButtonText: "<",
-            }}
-            autoplay={true}
-            autoplayInterval={6000}
-            wrapAround={true}
-            dragging={true}
-            cellAlign="center"
-            slidesToShow={window.innerWidth > 768 ? 3 : 1}
-            className=""
-          >
+          {/* REview Section */}
+          <div className="py-20 bg-white text-secondary">
             <div
-              className="mb-12 md:mb-0 mx-6"
-              data-aos="flip-up"
-              data-aos-offset="100"
+              className="mx-auto text-center md:max-w-xl lg:max-w-3xl"
+              data-aos="fade-up"
+              data-aos-offset="50"
             >
-              <div className="mb-6 flex justify-center">
-                <img
-                  src="https://lh3.googleusercontent.com/a-/AD_cMMSzxbuNI8smakH-HeX_oQtV1uBweSaLLXXOGUzijug=w45-h45-p-rp-mo-ba4-br100"
-                  className="w-32 rounded-full shadow-lg"
-                />
-              </div>
-              <h5 className="mb-4 text-xl font-semibold">Abhinav Pandey</h5>
-              <p className="mb-4">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="currentColor"
-                  className="inline-block h-7 w-7 pr-2"
-                  viewBox="0 0 24 24"
-                >
-                  <path d="M13 14.725c0-5.141 3.892-10.519 10-11.725l.984 2.126c-2.215.835-4.163 3.742-4.38 5.746 2.491.392 4.396 2.547 4.396 5.149 0 3.182-2.584 4.979-5.199 4.979-3.015 0-5.801-2.305-5.801-6.275zm-13 0c0-5.141 3.892-10.519 10-11.725l.984 2.126c-2.215.835-4.163 3.742-4.38 5.746 2.491.392 4.396 2.547 4.396 5.149 0 3.182-2.584 4.979-5.199 4.979-3.015 0-5.801-2.305-5.801-6.275z" />
-                </svg>
-                One of the best counseling services. They are very supportive
-                and very well behaved. One can contact them anytime for help and
-                they are eagerly ready to help you out.
-                <br /> My experience was excellent with their service. I would
-                highly recommend you to hire counselor if you are seeking for
-                admission in any course in any college.
-              </p>
+              <h3 className="mb-6 text-3xl font-bold">What our Students Say</h3>
             </div>
 
-            <div
-              className="mb-12 md:mb-0 mx-6"
-              data-aos="flip-up"
-              data-aos-offset="100"
-            >
-              <div className="mb-6 flex justify-center">
-                <img
-                  src="https://lh3.googleusercontent.com/a-/AD_cMMQp89Tb7K3suRUFcPwFy1iSOfvVw0TiUiDrQsmI=w75-h75-p-rp-mo-br100"
-                  className="w-32 rounded-full shadow-lg"
-                />
-              </div>
-              <h5 className="mb-4 text-xl font-semibold">Abhishek Tiwari</h5>
-              <p className="mb-4">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="currentColor"
-                  className="inline-block h-7 w-7 pr-2"
-                  viewBox="0 0 24 24"
+            <div className="mx-auto max-w-screen-xl my-8">
+              <Corousal
+                defaultControlsConfig={{
+                  nextButtonText: ">",
+                  prevButtonText: "<",
+                }}
+                autoplay={true}
+                autoplayInterval={6000}
+                wrapAround={true}
+                dragging={true}
+                cellAlign="center"
+                slidesToShow={window.innerWidth > 768 ? 3 : 1}
+                className=""
+              >
+                <div
+                  className="mb-12 md:mb-0 mx-6"
+                  data-aos="flip-up"
+                  data-aos-offset="100"
                 >
-                  <path d="M13 14.725c0-5.141 3.892-10.519 10-11.725l.984 2.126c-2.215.835-4.163 3.742-4.38 5.746 2.491.392 4.396 2.547 4.396 5.149 0 3.182-2.584 4.979-5.199 4.979-3.015 0-5.801-2.305-5.801-6.275zm-13 0c0-5.141 3.892-10.519 10-11.725l.984 2.126c-2.215.835-4.163 3.742-4.38 5.746 2.491.392 4.396 2.547 4.396 5.149 0 3.182-2.584 4.979-5.199 4.979-3.015 0-5.801-2.305-5.801-6.275z" />
-                </svg>
-                From my experience I will say that they provide the best
-                counselling service.
-                <br />
-                Your allotted counsellor will help you all the time until you
-                get admitted into the college . They clear all your doubt
-                everything no matter how many questions and doubt you made ,they
-                are always there to help in your counselling.
-              </p>
-            </div>
+                  <div className="mb-6 flex justify-center">
+                    <img
+                      src="https://lh3.googleusercontent.com/a-/AD_cMMSzxbuNI8smakH-HeX_oQtV1uBweSaLLXXOGUzijug=w45-h45-p-rp-mo-ba4-br100"
+                      className="w-32 rounded-full shadow-lg"
+                    />
+                  </div>
+                  <h5 className="mb-4 text-xl font-semibold">Abhinav Pandey</h5>
+                  <p className="mb-4">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="currentColor"
+                      className="inline-block h-7 w-7 pr-2"
+                      viewBox="0 0 24 24"
+                    >
+                      <path d="M13 14.725c0-5.141 3.892-10.519 10-11.725l.984 2.126c-2.215.835-4.163 3.742-4.38 5.746 2.491.392 4.396 2.547 4.396 5.149 0 3.182-2.584 4.979-5.199 4.979-3.015 0-5.801-2.305-5.801-6.275zm-13 0c0-5.141 3.892-10.519 10-11.725l.984 2.126c-2.215.835-4.163 3.742-4.38 5.746 2.491.392 4.396 2.547 4.396 5.149 0 3.182-2.584 4.979-5.199 4.979-3.015 0-5.801-2.305-5.801-6.275z" />
+                    </svg>
+                    One of the best counseling services. They are very
+                    supportive and very well behaved. One can contact them
+                    anytime for help and they are eagerly ready to help you out.
+                    <br /> My experience was excellent with their service. I
+                    would highly recommend you to hire counselor if you are
+                    seeking for admission in any course in any college.
+                  </p>
+                </div>
 
-            <div
-              className="mb-12 md:mb-0 mx-6"
-              data-aos="flip-up"
-              data-aos-offset="100"
-            >
-              <div className="mb-6 flex justify-center">
-                <img
-                  src="https://lh3.googleusercontent.com/a-/AD_cMMQHAYhQgMhKSbmh_I9SZNWGxoAS2VXtH8nVLwoMRg=w45-h45-p-c0x00000000-rp-mo-br100"
-                  className="w-32 rounded-full shadow-lg"
-                />
-              </div>
-              <h5 className="mb-4 text-xl font-semibold">Shivansh Verma</h5>
-              <p className="mb-4">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="currentColor"
-                  className="inline-block h-7 w-7 pr-2"
-                  viewBox="0 0 24 24"
+                <div
+                  className="mb-12 md:mb-0 mx-6"
+                  data-aos="flip-up"
+                  data-aos-offset="100"
                 >
-                  <path d="M13 14.725c0-5.141 3.892-10.519 10-11.725l.984 2.126c-2.215.835-4.163 3.742-4.38 5.746 2.491.392 4.396 2.547 4.396 5.149 0 3.182-2.584 4.979-5.199 4.979-3.015 0-5.801-2.305-5.801-6.275zm-13 0c0-5.141 3.892-10.519 10-11.725l.984 2.126c-2.215.835-4.163 3.742-4.38 5.746 2.491.392 4.396 2.547 4.396 5.149 0 3.182-2.584 4.979-5.199 4.979-3.015 0-5.801-2.305-5.801-6.275z" />
-                </svg>
-                I would like to thank Careerkick Services for supporting I have
-                a good experience in careerkick services Careerkick Services is
-                one the best counseling provider platforms Thank u once again
-                for guiding me in whole admission process.
-              </p>
+                  <div className="mb-6 flex justify-center">
+                    <img
+                      src="https://lh3.googleusercontent.com/a-/AD_cMMQp89Tb7K3suRUFcPwFy1iSOfvVw0TiUiDrQsmI=w75-h75-p-rp-mo-br100"
+                      className="w-32 rounded-full shadow-lg"
+                    />
+                  </div>
+                  <h5 className="mb-4 text-xl font-semibold">
+                    Abhishek Tiwari
+                  </h5>
+                  <p className="mb-4">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="currentColor"
+                      className="inline-block h-7 w-7 pr-2"
+                      viewBox="0 0 24 24"
+                    >
+                      <path d="M13 14.725c0-5.141 3.892-10.519 10-11.725l.984 2.126c-2.215.835-4.163 3.742-4.38 5.746 2.491.392 4.396 2.547 4.396 5.149 0 3.182-2.584 4.979-5.199 4.979-3.015 0-5.801-2.305-5.801-6.275zm-13 0c0-5.141 3.892-10.519 10-11.725l.984 2.126c-2.215.835-4.163 3.742-4.38 5.746 2.491.392 4.396 2.547 4.396 5.149 0 3.182-2.584 4.979-5.199 4.979-3.015 0-5.801-2.305-5.801-6.275z" />
+                    </svg>
+                    From my experience I will say that they provide the best
+                    counselling service.
+                    <br />
+                    Your allotted counsellor will help you all the time until
+                    you get admitted into the college . They clear all your
+                    doubt everything no matter how many questions and doubt you
+                    made ,they are always there to help in your counselling.
+                  </p>
+                </div>
+
+                <div
+                  className="mb-12 md:mb-0 mx-6"
+                  data-aos="flip-up"
+                  data-aos-offset="100"
+                >
+                  <div className="mb-6 flex justify-center">
+                    <img
+                      src="https://lh3.googleusercontent.com/a-/AD_cMMQHAYhQgMhKSbmh_I9SZNWGxoAS2VXtH8nVLwoMRg=w45-h45-p-c0x00000000-rp-mo-br100"
+                      className="w-32 rounded-full shadow-lg"
+                    />
+                  </div>
+                  <h5 className="mb-4 text-xl font-semibold">Shivansh Verma</h5>
+                  <p className="mb-4">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="currentColor"
+                      className="inline-block h-7 w-7 pr-2"
+                      viewBox="0 0 24 24"
+                    >
+                      <path d="M13 14.725c0-5.141 3.892-10.519 10-11.725l.984 2.126c-2.215.835-4.163 3.742-4.38 5.746 2.491.392 4.396 2.547 4.396 5.149 0 3.182-2.584 4.979-5.199 4.979-3.015 0-5.801-2.305-5.801-6.275zm-13 0c0-5.141 3.892-10.519 10-11.725l.984 2.126c-2.215.835-4.163 3.742-4.38 5.746 2.491.392 4.396 2.547 4.396 5.149 0 3.182-2.584 4.979-5.199 4.979-3.015 0-5.801-2.305-5.801-6.275z" />
+                    </svg>
+                    I would like to thank Careerkick Services for supporting I
+                    have a good experience in careerkick services Careerkick
+                    Services is one the best counseling provider platforms Thank
+                    u once again for guiding me in whole admission process.
+                  </p>
+                </div>
+              </Corousal>
             </div>
-          </Corousal>
-        </div>
-      </div>
+          </div>
+        </>
+      )}
 
       <div className="text-center py-16 bg-gray-200 text-secondary">
         <h1
@@ -686,7 +698,7 @@ const HomePage = () => {
             Our <span className="text-primary font-bold"> Achievements </span>
           </h2>
           <div className="flex flex-wrap justify-center gap-8 md:gap-12 lg:gap-20">
-            <div className="bg-primary p-4 rounded-2xl">
+            <div className="bg-primary p-4 rounded-2xl m-2">
               <div className="flex flex-col lg:flex-row items-center gap-4 lg:gap-6 justify-between w-full">
                 <div className="p-4">
                   <h1 className="text-white text-3xl font-semibold">
