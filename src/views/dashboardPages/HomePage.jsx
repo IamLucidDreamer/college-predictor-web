@@ -18,6 +18,7 @@ import {
   ChartPieIcon,
   DocumentIcon,
   NewspaperIcon,
+  PhoneIcon,
   ViewListIcon,
 } from "@heroicons/react/outline";
 import { useNavigate } from "react-router-dom";
@@ -720,6 +721,16 @@ const HomePage = () => {
           </div>
         </div>
       </section>
+      <a
+        href="tel:+917393062116"
+        className="fixed bottom-8 right-8 rounded-full bg-primary shadow-xl text-white p-3"
+        data-aos="fade-up"
+        data-aos-offset="70"
+      >
+        <div className="flex flex-col items-center justify-center gap-2">
+          <PhoneIcon className="w-7 h-7" />
+        </div>
+      </a>
       <Footer />
     </div>
   );
