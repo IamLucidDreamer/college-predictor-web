@@ -9,6 +9,7 @@ import Loader from "../components/loader/index"
 import Dashboard from "../views/layout/Dashboard";
 import UserProfile from "../views/layout/UserProfile";
 import Card from "../views/layout/Card";
+import ErrorBoundary from "../components/errors/ErrorHandler";
 
 const LandingPAgeApp = lazy(() => import("../views/index"))
 const SignUp = lazy(() => import("../views/auth/Signup"));
@@ -114,9 +115,11 @@ const router = createBrowserRouter([
 
 const Routes = () => {
     return (
-        <Suspense fallback={<Loader coverFullScreen={true} />}>
-            <RouterProvider router={router} />
-        </Suspense >
+        <ErrorBoundary>
+            <Suspense fallback={<Loader coverFullScreen={true} />}>
+                <RouterProvider router={router} />
+            </Suspense >
+        </ErrorBoundary>
     )
 }
 
