@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { serverUnauth } from "../../helpers/apiCall";
 import * as dayjs from "dayjs";
+
 // import { Document, Page, pdfjs } from "react-pdf";
 // import pdfDist from "../../../node_modules/pdfjs-dist/build/pdf.worker.entry";
 
@@ -75,6 +76,7 @@ export default DashboardUpdates;
 
 const Card = ({ title, description, imageMain, document, createdAt }) => {
   const [showPdf, setShowPdf] = useState(false);
+  const [iframLoad, setIframLoad] = useState(false);
 
   return (
     <div
@@ -117,14 +119,14 @@ const Card = ({ title, description, imageMain, document, createdAt }) => {
             </div>
             {showPdf && (
               <div
-                className="w-full mt-4 "
+                className="w-full mt-4"
                 data-aos="fade-up"
                 data-aos-offset="50"
               >
                 <iframe
                   maximum-scale="3"
-                  src={`${document}#toolbar=0 `}
-                  height={"400px"}
+                  src={`https://docs.google.com/gview?embedded=true&url=${document}`}
+                  height={window.innerWidth >= 768 ? "600px" : "500px"}
                   className="mx-auto w-full"
                 />
               </div>
