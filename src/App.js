@@ -8,7 +8,7 @@ import { XIcon } from "@heroicons/react/outline";
 import { server } from "./helpers/apiCall";
 import { setUser } from "./store/actions/userActions";
 
-import imageCelebrations from "./assets/images/1k_image.jpeg"
+import imageCelebrations from "./assets/images/thousand_image.jpeg"
 
 function App() {
 
@@ -121,9 +121,9 @@ const Banner = () => {
 
   return (
     <div className="flex flex-1 fixed top-0 min-h-screen" style={{ zIndex: 999999 }}>
-      <div className="flex relative">
+      <div className="flex">
         <button onClick={() => setShow(false)} className="text-xs inline-flex items-center fixed top-5 right-5 text-white" style={{ zIndex: 999999 }}><XIcon className="w-5 h-5" /> Dismiss</button>
-        <div className="bg-black bg-opacity-25  flex justify-center px-4 items-center fixed bottom-0 w-full text-left text-base md:text-xl shadow-2xl p-4 border-4 gap-4">
+        <div className="bg-black bg-opacity-25  flex justify-center px-4 items-center fixed bottom-0 w-full text-left text-base md:text-xl shadow-2xl p-4 gap-4">
           <img src={imageCelebrations} className="w-10/12 lg:w-1/2" />
         </div>
       </div>
