@@ -4,7 +4,7 @@ import * as Yup from "yup";
 
 import CustomValidationErrorMessage from "../../components/errors/CustomValidationErrorMessage";
 import Loader from "../../components/loader/index";
-import { sendOtp } from "../../services/authService";
+import { sendOtp, signup } from "../../services/authService";
 import { toast } from "react-toastify";
 import AuthLayout from "../layout/AuthLayout";
 import AppLogo from "../../components/images/AppLogo";
@@ -19,6 +19,8 @@ import {
 } from "@heroicons/react/outline";
 import { phoneCodes } from "../../helpers/phoneNumberCode";
 import { getAuthToken } from "../../helpers/auth";
+import { useDispatch, useSelector } from "react-redux";
+import { setUser } from "../../store/actions/userActions";
 
 const signUpalidation = Yup.object({
   name: Yup.string()
@@ -43,6 +45,10 @@ const SignUp = () => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
 
+  const dispatch = useDispatch();
+
+  const appInApp = useSelector((state) => state.appInApp.appInApp);
+
   useEffect(() => {
     const authToken = getAuthToken();
     if (authToken?.length) {
@@ -56,21 +62,42 @@ const SignUp = () => {
       return;
     }
     setLoading(true);
-    try {
-      const response = await sendOtp(
-        `${values.countryCode}${values.phoneNumber}`
-      );
-      const { status } = response;
-      if (status >= 200 && status < 300) {
-        toast.success(
-          `OTP Sent Succesfully to ${values.countryCode}${values.phoneNumber}`
-        );
-        navigate("/verify-otp", { state: { values } });
+    // try {
+    //   const response = await sendOtp(
+    //     `${values.countryCode}${values.phoneNumber}`
+    //   );
+    //   const { status } = response;
+    //   if (status >= 200 && status < 300) {
+    //     toast.success(
+    //       `OTP Sent Succesfully to ${values.countryCode}${values.phoneNumber}`
+    //     );
+    //     navigate("/verify-otp", { state: { values } });
+    //   }
+    // } catch (err) {
+    //   console.error("Error : ", err);
+      try {
+        values.otp =12345678
+        const response = await signup(values);
+        const { status } = response;
+        if (status >= 200 && status < 300) {
+          if (appInApp) {
+            navigate(
+              `/login-success?app_in_app=true&auth_token=${response?.data?.token}&user_id=${response?.data?.data?._id}`
+            );
+          } else {
+            dispatch(setUser(response?.data?.data));
+            localStorage.setItem("authToken", response?.data?.token);
+            navigate("/profile");
+          }
+          toast.success("Welcome to Career Kick");
+        }
+      } catch (err) {
+        console.error("Error : ", err);
+        toast.error(err?.response?.data?.error || "Something went Wrong");
       }
-    } catch (err) {
-      console.error("Error : ", err);
-      toast.error(err?.response?.data?.error || "Something went Wrong");
-    }
+    //   toast.error(err?.response?.data?.error || "Something went Wrong.");
+
+    // }
     setLoading(false);
   };
 
