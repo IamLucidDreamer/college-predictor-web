@@ -4,11 +4,6 @@ import * as dayjs from "dayjs";
 import AppIcon from "../../components/images/AppIcon";
 import Loader from "../../components/loader/index";
 
-// import { Document, Page, pdfjs } from "react-pdf";
-// import pdfDist from "../../../node_modules/pdfjs-dist/build/pdf.worker.entry";
-
-// pdfjs.GlobalWorkerOptions.workerSrc = pdfDist;
-
 const DashboardUpdates = () => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);

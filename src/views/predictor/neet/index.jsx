@@ -19,7 +19,6 @@ import mbbsImage from "../../../assets/images/test_mbbs.png";
 import ayushImage from "../../../assets/images/test_ayush.jpg";
 
 import { ArrowLeftIcon } from "@heroicons/react/outline";
-import PdfDownloader from "../../../components/shared/PdfViewer";
 
 const NeetIndex = () => {
   const [activeType, setActiveType] = useState(0);
