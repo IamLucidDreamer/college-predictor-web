@@ -4,9 +4,11 @@ import { useEffect } from "react";
 import { serverUnauth } from "../../helpers/apiCall";
 import Updates from "../layout/Updates";
 import dayjs from "dayjs";
-import { truncate } from "../../helpers";
+import { isStringEmpty, truncate } from "../../helpers";
 import MainHeading from "../../components/shared/MainHeading";
 import { useNavigate } from "react-router-dom";
+
+import placeholderImage from "../../assets/images/profile_cover.jpg";
 
 const BlogPage = () => {
   const [data, setData] = useState([]);
@@ -55,6 +57,7 @@ const BlogPage = () => {
                 <BlogCard
                   title={val?.title}
                   description={val?.description}
+                  imagePrimary={val?.imageMain}
                   imageSecondary={val?.imageSecondary}
                   createdAt={val?.createdAt}
                   id={val?._id}
@@ -71,8 +74,16 @@ const BlogPage = () => {
 
 export default BlogPage;
 
-const BlogCard = ({ title, description, imageSecondary, id, createdAt }) => {
+const BlogCard = ({
+  title,
+  description,
+  imagePrimary,
+  imageSecondary,
+  id,
+  createdAt,
+}) => {
   const navigate = useNavigate();
+  console.log(imagePrimary, "hello");
   return (
     <div
       className="flex flex-col rounded-lg bg-white shadow-md md:max-w-5xl md:flex-row w-full"
@@ -80,8 +91,16 @@ const BlogCard = ({ title, description, imageSecondary, id, createdAt }) => {
       data-aos-offset="50"
     >
       <img
-        className="h-72 rounded-t-lg object-cover md:w-60  md:rounded-none md:rounded-l-lg"
-        src={imageSecondary}
+        className={`h-72 rounded-t-lg object-cover md:w-60  md:rounded-none md:rounded-l-lg ${
+          isStringEmpty(imageSecondary) && isStringEmpty(imagePrimary)
+            ? "object-right"
+            : "object-center"
+        }`}
+        src={
+          isStringEmpty(imageSecondary) ||
+          isStringEmpty(imagePrimary) ||
+          placeholderImage
+        }
         alt=""
       />
       <div className="flex flex-col justify-start p-6 w-full">
