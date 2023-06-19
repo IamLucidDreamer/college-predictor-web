@@ -1,46 +1,41 @@
-import {
-  Document,
-  Page,
-  Text,
-  View,
-  StyleSheet,
-  PDFViewer,
-} from "@react-pdf/renderer";
+import React, { useState } from 'react';
+import { Document, Page,pdfjs  } from 'react-pdf';
 
-import bgImage from "../../assets/images/app_logo.png";
+pdfjs.GlobalWorkerOptions.workerSrc = `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 
-const PdfDownloader = () => {
-  const styles = StyleSheet.create({
-    page: {
-      backgroundColor: "#f23131",
-      color: "black",
-      backgroundImage: `url(${bgImage})`,
-    },
-    section: {
-      margin: 10,
-      padding: 10,
-    },
-    viewer: {
-      width: window.innerWidth, //the pdf viewer will take up all of the width and height
-      height: window.innerHeight,
-    },
-  });
+const PDFViewer = ({ pdfUrl }) => {
+  const [numPages, setNumPages] = useState(null);
+  const [pageNumber, setPageNumber] = useState(1);
+
+  const onDocumentLoadSuccess = ({ numPages }) => {
+    setNumPages(numPages);
+  };
+
   return (
-    <PDFViewer style={styles.viewer}>
-      {/* Start of the document*/}
-      <Document>
-        {/*render a single page*/}
-        <Page size="A4" style={styles.page}>
-          <View style={styles.section}>
-            <Text>Hello</Text>
-          </View>
-          <View style={styles.section}>
-            <Text>World</Text>
-          </View>
-        </Page>
+    <div>
+      <Document
+        file={pdfUrl}
+        onLoadSuccess={onDocumentLoadSuccess}
+      >
+        <Page pageNumber={pageNumber} />
       </Document>
-    </PDFViewer>
+      <p>
+        Page {pageNumber} of {numPages}
+      </p>
+      <button
+        disabled={pageNumber <= 1}
+        onClick={() => setPageNumber(pageNumber - 1)}
+      >
+        Previous
+      </button>
+      <button
+        disabled={pageNumber >= numPages}
+        onClick={() => setPageNumber(pageNumber + 1)}
+      >
+        Next
+      </button>
+    </div>
   );
 };
 
-export default PdfDownloader;
+export default PDFViewer;

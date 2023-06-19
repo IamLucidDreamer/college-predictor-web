@@ -1,6 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { serverUnauth } from "../../helpers/apiCall";
 import * as dayjs from "dayjs";
+import AppIcon from "../../components/images/AppIcon";
+import Loader from "../../components/loader/index";
 
 // import { Document, Page, pdfjs } from "react-pdf";
 // import pdfDist from "../../../node_modules/pdfjs-dist/build/pdf.worker.entry";
@@ -52,6 +54,7 @@ const DashboardUpdates = () => {
           data?.map((val) => {
             return (
               <Card
+                key={val?._id}
                 title={val?.title}
                 description={val?.description}
                 imageMain={val?.imageMain}
@@ -76,7 +79,8 @@ export default DashboardUpdates;
 
 const Card = ({ title, description, imageMain, document, createdAt }) => {
   const [showPdf, setShowPdf] = useState(false);
-  const [iframLoad, setIframLoad] = useState(false);
+  const [showIframe, setShowIframe] = useState(false);
+
 
   return (
     <div
@@ -119,16 +123,29 @@ const Card = ({ title, description, imageMain, document, createdAt }) => {
             </div>
             {showPdf && (
               <div
-                className="w-full mt-4"
+                className="w-full mt-4 relative"
                 data-aos="fade-up"
                 data-aos-offset="50"
               >
+                {!showIframe && (
+                  <div className="absolute top-0 left-0 bottom-0 right-0 bg-black bg-opacity-50 flex items-center justify-center">
+                    <Loader />
+                  </div>
+                )}
                 <iframe
                   maximum-scale="3"
-                  src={`https://docs.google.com/gview?embedded=true&url=${document}`}
+                  onLoad={() => {
+                    setShowIframe(true);
+                  }}
+                  src={`https://docs.google.com/gview?url=${encodeURIComponent(
+                    document
+                  )}&embedded=true&rm=minimal`}
                   height={window.innerWidth >= 768 ? "600px" : "500px"}
-                  className="mx-auto w-full"
+                  className="mx-auto w-full relative"
                 />
+                <div className="w-14 h-14 rounded-xl p-2 bg-primary absolute right-2 top-2 flex justify-center items-center">
+                  <AppIcon />
+                </div>
               </div>
             )}
           </div>
@@ -140,16 +157,16 @@ const Card = ({ title, description, imageMain, document, createdAt }) => {
 
 const UpdateLaodingCard = () => {
   return (
-    <div class="bg-white p-2 sm:p-4 sm:h-32 rounded-2xl shadow-lg flex flex-col sm:flex-row gap-5 select-none ">
-      <div class="h-52 sm:h-full sm:w-72 rounded-xl bg-gray-200 animate-pulse"></div>
-      <div class="flex flex-col flex-1 gap-5 sm:p-2">
-        <div class="flex flex-1 flex-col gap-3">
-          <div class="bg-gray-200 w-full animate-pulse h-6 rounded-2xl"></div>
-          <div class="bg-gray-200 w-full animate-pulse h-2 rounded-2xl"></div>
+    <div className="bg-white p-2 sm:p-4 sm:h-32 rounded-2xl shadow-lg flex flex-col sm:flex-row gap-5 select-none ">
+      <div className="h-52 sm:h-full sm:w-72 rounded-xl bg-gray-200 animate-pulse"></div>
+      <div className="flex flex-col flex-1 gap-5 sm:p-2">
+        <div className="flex flex-1 flex-col gap-3">
+          <div className="bg-gray-200 w-full animate-pulse h-6 rounded-2xl"></div>
+          <div className="bg-gray-200 w-full animate-pulse h-2 rounded-2xl"></div>
         </div>
-        <div class="mt-auto flex gap-3">
-          <div class="bg-gray-200 w-32 h-4 animate-pulse rounded-full"></div>
-          <div class="bg-gray-200 w-20 h-4 animate-pulse rounded-full ml-auto"></div>
+        <div className="mt-auto flex gap-3">
+          <div className="bg-gray-200 w-32 h-4 animate-pulse rounded-full"></div>
+          <div className="bg-gray-200 w-20 h-4 animate-pulse rounded-full ml-auto"></div>
         </div>
       </div>
     </div>

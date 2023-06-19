@@ -338,9 +338,19 @@ const PredictorAllIndiaNEET = ({ initialValues, displayValues }) => {
                         val.replace(/([A-Z])/g, " $1").slice(1)
                       }`}
                       isMulti
-                      options={data[val]?.map((value) => {
-                        return { value: value, label: value };
-                      })}
+                      options={
+                        data[val]?.length === 1 && !data[val][0]
+                          ? [
+                              {
+                                value: "",
+                                label: "Select Next Option",
+                                isDisabled: true,
+                              },
+                            ]
+                          : data[val]?.map((value) => {
+                              return { value: value, label: value };
+                            })
+                      }
                       onChange={(e) => {
                         setFieldValue(
                           val,
@@ -379,9 +389,7 @@ const PredictorAllIndiaNEET = ({ initialValues, displayValues }) => {
                 </button>
               </div>
               <div>
-                <>
-                  {/* <PdfDownloader /> */}
-                </>
+                <>{/* <PdfDownloader /> */}</>
                 {Object.keys(predictData).length > 0 || !predictorRan ? (
                   <div className="overflow-x-scroll mt-4">
                     <div className="flex justify-between bg-gray-100 items-center">
@@ -599,9 +607,19 @@ const PredictorAllIndiaAYUSH = ({ initialValues, displayValues }) => {
                         val.replace(/([A-Z])/g, " $1").slice(1)
                       }`}
                       isMulti
-                      options={data[val]?.map((value) => {
-                        return { value: value, label: value };
-                      })}
+                      options={
+                        data[val]?.length === 1 && data[val]
+                          ? [
+                              {
+                                value: "",
+                                label: "Select Next Option",
+                                isDisabled: true,
+                              },
+                            ]
+                          : data[val]?.map((value) => {
+                              return { value: value, label: value };
+                            })
+                      }
                       onChange={(e) => {
                         setFieldValue(
                           val,
@@ -640,9 +658,7 @@ const PredictorAllIndiaAYUSH = ({ initialValues, displayValues }) => {
                 </button>
               </div>
               <div>
-                <>
-                  {/* <PdfDownloader /> */}
-                </>
+                <>{/* <PdfDownloader /> */}</>
                 {Object.keys(predictData).length > 0 || !predictorRan ? (
                   <div className="overflow-x-scroll mt-4">
                     <div className="flex justify-between bg-gray-100 items-center">
