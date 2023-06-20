@@ -607,7 +607,7 @@ const PredictorAllIndiaAYUSH = ({ initialValues, displayValues }) => {
                       }`}
                       isMulti
                       options={
-                        data[val]?.length === 1 && data[val]
+                        data[val]?.length === 1 && !data[val][0]
                           ? [
                               {
                                 value: "",
