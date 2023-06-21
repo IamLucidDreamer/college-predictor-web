@@ -6,11 +6,16 @@ import Updates from "../layout/Updates";
 import dayjs from "dayjs";
 import MainHeading from "../../components/shared/MainHeading";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const Colleges = () => {
   const [data, setData] = useState([]);
-  const [dataTop, setDataTop] = useState([]);
+
+  // const [dataTop, setDataTop] = useState([]);
+
   const [dataTopState, setDataTopState] = useState([]);
+
+  const user = useSelector((state) => state?.user);
 
   useEffect(() => {
     serverUnauth
@@ -21,25 +26,27 @@ const Colleges = () => {
       .catch((err) => {
         console.log(err);
       });
-    serverUnauth
-      .get(`/college/get-all-top`)
-      .then((res) => {
-        setDataTop(res?.data?.data?.College);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-    serverUnauth
-      .post(`/college/get-all-top-state`, { state: "Assam" })
-      .then((res) => {
-        setDataTopState(res?.data?.data?.College);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, []);
 
-  console.log(data, "hii");
+    // serverUnauth
+    //   .get(`/college/get-all-top`)
+    //   .then((res) => {
+    //     setDataTop(res?.data?.data?.College);
+    //   })
+    //   .catch((err) => {
+    //     console.log(err);
+    //   });
+
+    if (user?.state) {
+      serverUnauth
+        .post(`/college/get-all-top-state`, { state: user?.state })
+        .then((res) => {
+          setDataTopState(res?.data?.data?.College);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+  }, [user]);
 
   return (
     <div className="p-4 sm:p-8 mx-auto container">
@@ -61,7 +68,8 @@ const Colleges = () => {
           })}
         </div>
       </div>
-      <div className="flex items-center justify-between mb-4">
+
+      {/* <div className="flex items-center justify-between mb-4">
         <MainHeading text={"Top Colleges"} />
       </div>
       <div className="flex justify-between items-start gap-6">
@@ -80,25 +88,30 @@ const Colleges = () => {
             );
           })}
         </div>
-      </div>
-      <div className="flex items-center justify-between mb-4">
-        <MainHeading text={"Top Colleges in Your State"} />
-      </div>
-      <div className="flex justify-between items-start gap-6">
-        <div className="w-full flex gap-8 justify-center lg:justify-evenly my-4 max-w-screen overflow-x-scroll no-scrollbar">
-          {dataTopState?.map((val) => {
-            return (
-              <CollegeCardLocal
-                data={val}
-                coverImage={val.collegeCover}
-                collegeIcon={val.collegeIcon}
-                collegeName={val.collegeName}
-                location={`${val.city}, ${val.state}`}
-              />
-            );
-          })}
-        </div>
-      </div>
+      </div> */}
+
+      {user?.name && user?.state && dataTopState?.length !== 0 && (
+        <>
+          <div className="flex items-center justify-between mb-4">
+            <MainHeading text={"Top Colleges in Your State"} />
+          </div>
+          <div className="flex justify-between items-start gap-6">
+            <div className="w-full flex gap-8 justify-center lg:justify-evenly my-4 max-w-screen overflow-x-scroll no-scrollbar">
+              {dataTopState?.map((val) => {
+                return (
+                  <CollegeCardLocal
+                    data={val}
+                    coverImage={val.collegeCover}
+                    collegeIcon={val.collegeIcon}
+                    collegeName={val.collegeName}
+                    location={`${val.city}, ${val.state}`}
+                  />
+                );
+              })}
+            </div>
+          </div>
+        </>
+      )}
     </div>
   );
 };
