@@ -77,7 +77,7 @@ const CollegeProfile = () => {
   ];
 
   return (
-    <div className="bg-gray-100 w-full">
+    <div className="bg-gray-100 w-full scroll-smooth">
       <div className="relative">
         <img
           style={{ maxHeight: "300px" }}
@@ -104,6 +104,49 @@ const CollegeProfile = () => {
       >
         {data?.displayName || data?.collegeName}
       </h1>
+      <div
+        className="flex items-center justify-center md:justify-between container mx-auto flex-wrap px-2 md:px-4 mt-6 gap-2"
+        id="about"
+        data-aos="fade-up"
+        data-aos-offset="70"
+      >
+        <a
+          className="py-2 bg-secondary text-white font-semibold text-lg text-center w-48 rounded-md"
+          href="#about"
+        >
+          About
+        </a>
+        {data?.campusPhotos?.length > 0 && (
+          <a
+            className="py-2 bg-secondary text-white font-semibold text-lg text-center w-48 rounded-md"
+            href="#campus-photos"
+          >
+            Campus Photos
+          </a>
+        )}
+        {data?.coursesOffered?.length > 0 && (
+          <a
+            className="py-2 bg-secondary text-white font-semibold text-lg text-center w-48 rounded-md"
+            href="#courses-offered"
+          >
+            Courses
+          </a>
+        )}
+        <a
+          className="py-2 bg-secondary text-white font-semibold text-lg text-center w-48 rounded-md"
+          href="#cut-off"
+        >
+          Cut Off
+        </a>
+        {data?.applicationLink?.length > 0 && (
+          <a
+            className="py-2 bg-secondary text-white font-semibold text-lg text-center w-48 rounded-md"
+            href={data?.applicationLink}
+          >
+            Apply Now
+          </a>
+        )}
+      </div>
 
       <div className="container mx-auto my-5">
         <div className="md:flex no-wrap md:mx-2 ">
@@ -190,6 +233,10 @@ const CollegeProfile = () => {
                         </div>
                         <div className="px-2 md:px-4 py-2">{data.city}</div>
                       </div>
+                    )}
+                    <div id="campus-photos"></div>
+                    {data?.campusPhotos?.length <= 0 && (
+                      <div id="courses-offered"></div>
                     )}
                     {data.state && (
                       <div className="grid grid-cols-2">
@@ -321,7 +368,7 @@ const CollegeProfile = () => {
               </div>
             </div>
 
-            <div className="overflow-hidden">
+            <div className="overflow-hidden" id="cut-off">
               <div
                 className="overflow-x-scroll bg-white px-1 py-3 md:p-3 shadow rounded my-5"
                 data-aos="flip-up"
