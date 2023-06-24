@@ -85,7 +85,8 @@ const BlogCard = ({
   const navigate = useNavigate();
   console.log(imagePrimary, "hello");
   return (
-    <div
+    <button
+      onClick={() => navigate(`/dashboard/blogs/${id}`)}
       className="flex flex-col rounded-lg bg-white shadow-md md:max-w-5xl md:flex-row w-full"
       data-aos="fade-up"
       data-aos-offset="50"
@@ -117,15 +118,12 @@ const BlogCard = ({
           >
             {dayjs(createdAt).format("YYYY-MM-DD  HH:mm")}
           </p>
-          <button
-            className="bg-primary px-2.5 py-1.5 rounded-lg text-white font-semibold text-sm"
-            onClick={() => navigate(`/dashboard/blogs/${id}`)}
-          >
+          <div className="bg-primary px-2.5 py-1.5 rounded-lg text-white font-semibold text-sm">
             Read More
-          </button>
+          </div>
         </div>
       </div>
-    </div>
+    </button>
   );
 };
 

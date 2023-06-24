@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { serverUnauth } from "../../helpers/apiCall";
 import dayjs from "dayjs";
+import { isStringEmpty } from "../../helpers";
+
+import placeholderImage from "../../assets/images/profile_cover.jpg";
+import { useNavigate } from "react-router-dom";
 
 const BlogsSidebar = () => {
   const [data, setData] = useState([]);
@@ -27,9 +31,11 @@ const BlogsSidebar = () => {
         {data?.map((val) => {
           return (
             <Card
+              id={val?._id}
               title={val?.title}
               description={val?.description}
-              image={val?.imageSecondary}
+              imagePrimary={val?.imageMain}
+              imageSecondary={val?.imageSecondary}
               createdAt={val?.createdAt}
             />
           );
@@ -41,28 +47,44 @@ const BlogsSidebar = () => {
 
 export default BlogsSidebar;
 
-const Card = ({ title, description, image, createdAt }) => {
+const Card = ({
+  id,
+  title,
+  description,
+  imagePrimary,
+  imageSecondary,
+  createdAt,
+}) => {
+  const navigate = useNavigate();
+
   return (
-    <div style={{ borderWidth: "0px 0px 1px" }}>
+    <button
+      style={{ borderWidth: "0px 0px 1px" }}
+      onClick={() => navigate(`/dashboard/blogs/${id}`)}
+    >
       <div className="flow-root">
         <ul role="list" className="divide-y divide-gray-200">
           <li className="py-3 sm:py-4">
             <div className="">
               <div className="flex-shrink-0">
                 <img
-                  className="w-full rounded-lg"
-                  src={image}
+                  className="rounded-lg max-h-48 mx-auto"
+                  src={
+                    isStringEmpty(imageSecondary) ||
+                    isStringEmpty(imagePrimary) ||
+                    placeholderImage
+                  }
                   alt="Lana image"
                 />
               </div>
               <div className="flex-1 min-w-0">
-                <h2 className="text-secondary font-semibold leading-5 mb-1 text-xl my-4">
+                <h2 className="text-secondary font-semibold leading-6 mb-1 text-xl my-4 text-left">
                   {title}
                 </h2>
-                <p className="mb-1 font-medium text-secondary truncate">
+                <p className="mb-1 font-medium text-secondary truncate text-left">
                   {description}
                 </p>
-                <p className="text-sm text-gray-500 truncate">
+                <p className="text-sm text-gray-500 truncate mr-auto">
                   {dayjs(createdAt).format("YYYY-MM-DD  HH:mm")}
                 </p>
               </div>
@@ -70,6 +92,6 @@ const Card = ({ title, description, image, createdAt }) => {
           </li>
         </ul>
       </div>
-    </div>
+    </button>
   );
 };
