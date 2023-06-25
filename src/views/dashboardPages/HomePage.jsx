@@ -8,6 +8,7 @@ import Footer from "../../components/shared/Footer";
 
 import homeHeroBG from "../../assets/images/home_bg.jpg";
 import counsillingBg from "../../assets/images/counselling_bg.jpg";
+import achievementsBg from "../../assets/images/forgot_bg.jpg";
 
 import LoadingIndication from "../../components/loader/index";
 import { serverUnauth } from "../../helpers/apiCall";
@@ -689,35 +690,74 @@ const HomePage = () => {
           </div>
         </div>
       </section> */}
-      <section className="bg-white">
-        <div
-          className="py-8 lg:py-16 mx-auto max-w-screen-xl"
-          data-aos="fade-up"
-          data-aos-offset="50"
-        >
-          <h2 className="mb-8 lg:mb-16 text-3xl font-semibold tracking-tight leading-tight text-center text-gray-900 md:text-4xl">
-            Our <span className="text-primary font-bold"> Achievements </span>
-          </h2>
-          <div className="flex flex-wrap justify-center gap-8 md:gap-12 lg:gap-20">
-            <div className="bg-primary p-4 rounded-2xl m-2">
-              <div className="flex flex-col lg:flex-row items-center gap-4 lg:gap-6 justify-between w-full">
-                <div className="p-4">
-                  <h1 className="text-white text-3xl font-semibold">
-                    5000+ College Alloted
-                  </h1>
-                </div>
-                <div className="p-4">
-                  <h1 className="text-white text-3xl font-semibold">
-                    250000+ Students Guided
-                  </h1>
-                </div>
-                <div className="p-4">
-                  <h1 className="text-white text-3xl font-semibold">
-                    500+ College Tie-Ups
-                  </h1>
-                </div>
+      <section class="text-secondary body-font bg-white">
+        <div class="max-w-screen-2xl px-5 py-24 mx-auto flex flex-wrap overflow-hidden">
+          <div class="flex flex-wrap -mx-4 mt-auto mb-auto lg:w-1/2 sm:w-2/3 content-start sm:pr-10">
+            <div
+              class="w-full sm:p-4 px-4 mb-6"
+              data-aos="fade-right"
+              data-aos-offset="40"
+            >
+              <h1 class="title-font mb-2 text-3xl text-secondary font-bold text-center">
+                Our <span className="text-primary">Achievements</span>
+              </h1>
+              <div class="leading-relaxed">
+                We have statistical data that supports our claims, providing
+                validation for what we assert. Here are the numbers that
+                reinforce our position.
               </div>
             </div>
+            <div
+              class="p-4 sm:w-1/2 lg:w-1/4 w-1/2"
+              data-aos="flip-down"
+              data-aos-offset="40"
+            >
+              <h2 class="title-font font-medium text-3xl text-secondary">
+                5000<span className="text-primary">+</span>
+              </h2>
+              <p class="leading-relaxed">College Alloted</p>
+            </div>
+            <div
+              class="p-4 sm:w-1/2 lg:w-1/4 w-1/2"
+              data-aos="flip-down"
+              data-aos-offset="40"
+            >
+              <h2 class="title-font font-medium text-3xl text-secondary">
+                250000<span className="text-primary">+</span>
+              </h2>
+              <p class="leading-relaxed">Students Guided</p>
+            </div>
+            <div
+              class="p-4 sm:w-1/2 lg:w-1/4 w-1/2"
+              data-aos="flip-down"
+              data-aos-offset="40"
+            >
+              <h2 class="title-font font-medium text-3xl text-secondary">
+                25k<span className="text-primary">+</span>
+              </h2>
+              <p class="leading-relaxed">Downloads</p>
+            </div>
+            <div
+              class="p-4 sm:w-1/2 lg:w-1/4 w-1/2"
+              data-aos="flip-down"
+              data-aos-offset="40"
+            >
+              <h2 class="title-font font-medium text-3xl text-secondary">
+                500<span className="text-primary">+</span>
+              </h2>
+              <p class="leading-relaxed">College Tie-Ups</p>
+            </div>
+          </div>
+          <div
+            class="lg:w-1/2 sm:w-1/3 w-full rounded-lg overflow-hidden mt-6 sm:mt-0"
+            data-aos="fade-left"
+            data-aos-offset="40"
+          >
+            <img
+              class="object-cover object-center w-full h-full"
+              src={achievementsBg}
+              alt="stats"
+            />
           </div>
         </div>
       </section>
