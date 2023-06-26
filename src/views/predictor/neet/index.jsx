@@ -18,7 +18,8 @@ import Loader from "../../../components/loader/index";
 import mbbsImage from "../../../assets/images/test_mbbs.png";
 import ayushImage from "../../../assets/images/test_ayush.jpg";
 
-import { ArrowLeftIcon } from "@heroicons/react/outline";
+import { ArrowLeftIcon, ExclamationCircleIcon } from "@heroicons/react/outline";
+import { CollgeCard } from "../../dashboardPages/Colleges";
 
 const NeetIndex = () => {
   const [activeType, setActiveType] = useState(0);
@@ -488,7 +489,22 @@ const PredictorAllIndiaNEET = ({ initialValues, displayValues }) => {
                     </Droppable>
                   </div>
                 ) : (
-                  <h1 className="text-3xl font-semibold">Top Colleges</h1>
+                  <div>
+                    <div className="flex items-center gap-4 justify-center w-full md:w-1/2 mx-auto text-xl">
+                      <ExclamationCircleIcon className="w-10 h-10" />
+                      <h1 className="">
+                        Looks Like you have not found a result !
+                        <br />
+                        We have got you covered call us today :
+                        <br />
+                        <a href="tel:+917393062116">Call : +91-7393062116</a>
+                      </h1>
+                    </div>
+                    <div className="p-4">
+                      <h1 className="text-3xl font-semibold">Top Colleges</h1>
+                      <TopColleges />
+                    </div>
+                  </div>
                 )}
               </div>
             </div>
@@ -757,7 +773,22 @@ const PredictorAllIndiaAYUSH = ({ initialValues, displayValues }) => {
                     </Droppable>
                   </div>
                 ) : (
-                  <h1 className="text-3xl font-semibold">Top Colleges</h1>
+                  <div>
+                    <div className="flex items-center gap-4 justify-center w-full md:w-1/2 mx-auto text-xl">
+                      <ExclamationCircleIcon className="w-10 h-10" />
+                      <h1 className="">
+                        Looks Like you have not found a result !
+                        <br />
+                        We have got you covered call us today :
+                        <br />
+                        <a href="tel:+917393062116">Call : +91-7393062116</a>
+                      </h1>
+                    </div>
+                    <div className="p-4">
+                      <h1 className="text-3xl font-semibold">Top Colleges</h1>
+                      <TopColleges />
+                    </div>
+                  </div>
                 )}
               </div>
             </div>
@@ -765,5 +796,33 @@ const PredictorAllIndiaAYUSH = ({ initialValues, displayValues }) => {
         }}
       </Formik>
     </DragDropContext>
+  );
+};
+
+const TopColleges = () => {
+  const [college, setCollege] = useState([]);
+
+  useEffect(() => {
+    serverUnauth
+      .get(`/college/get-all`)
+      .then((res) => {
+        setCollege(res?.data?.data?.College);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
+  return (
+    <div className="mt-3 flex flex-wrap gap-4">
+      {college?.map((val) => (
+        <CollgeCard
+          data={val}
+          coverImage={val.collegeCover}
+          collegeIcon={val.collegeIcon}
+          collegeName={val.displayName || val.collegeName}
+          location={`${val.city}, ${val.state}`}
+        />
+      ))}
+    </div>
   );
 };
