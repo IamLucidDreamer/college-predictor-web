@@ -22,7 +22,7 @@ const AuthLayout = ({ imageLink, title, description, form }) => {
   }, []);
 
   return (
-    <div className="max-h-screen w-full bg-white overflow-hidden flex">
+    <div className="w-full bg-white overflow-hidden flex">
       <div
         ref={myRef}
         className="w-7/12 rounded-r-3xl bg-cover bg-no-repeat bg-center hidden lg:block"
@@ -43,7 +43,7 @@ const AuthLayout = ({ imageLink, title, description, form }) => {
         }}
       >
         <div
-          className="min-h-screen max-h-screen flex items-end lg:items-center justify-center pb-8 overflow-autp"
+          className="min-h-screen flex items-end lg:items-center justify-center pb-8 overflow-scroll"
           data-aos="fade-up"
           data-aos-offset="10"
         >
