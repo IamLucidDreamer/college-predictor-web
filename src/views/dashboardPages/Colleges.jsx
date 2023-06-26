@@ -198,7 +198,7 @@ export const CollgeCard = ({
             state: { data: data },
           });
         }}
-        className="relative rounded-lg bg-white shadow-md md:flex-row w-full md:max-w-screen-md"
+        className="relative rounded-lg bg-white shadow-md md:flex-row w-full md:max-w-screen-sm"
       >
         <img
           style={{ height: "220px" }}
