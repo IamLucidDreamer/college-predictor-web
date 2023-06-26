@@ -14,6 +14,8 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { setUser } from "../../store/actions/userActions";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
+import { RecaptchaVerifier, signInWithPhoneNumber } from "firebase/auth";
+import { auth } from "../../config/test-careerkick-otp-firebase-adminsdk-s8ncv-392336a3ab.js";
 
 const loginValidation = Yup.object({
   otp: Yup.string()
@@ -31,16 +33,34 @@ const VerifyOTP = () => {
   const [loading, setLoading] = useState(false);
   const [resendLoading, setResendLoading] = useState(false);
 
-  useEffect(() => {
-    if (!state) {
-      navigate("/signup");
-    }
-  }, []);
+  console.log(state, "hello");
+
+  // useEffect(() => {
+  //   if (!state) {
+  //     navigate("/signup");
+  //   }
+  // }, []);
+
+  const setUpRecaptha = async (number) => {
+    const recaptchaVerifier = new RecaptchaVerifier(
+      "recaptcha-container",
+      {},
+      auth
+    );
+    recaptchaVerifier.render();
+    const firebaseReponse = await signInWithPhoneNumber(
+      auth,
+      number,
+      recaptchaVerifier
+    );
+    console.log(firebaseReponse, "hello world");
+    return firebaseReponse;
+  };
 
   const resenOTP = async () => {
     setResendLoading(true);
     try {
-      const response = await sendOtp(
+      const response = await setUpRecaptha(
         `${state.values.countryCode}${state.values.phoneNumber}`
       );
       const { status } = response;
@@ -60,24 +80,33 @@ const VerifyOTP = () => {
     setLoading(true);
     const data = { ...state.values, ...values };
     try {
-      const response = await signup(data);
-      const { status } = response;
-      if (status >= 200 && status < 300) {
-        if (appInApp) {
-          navigate(
-            `/login-success?app_in_app=true&auth_token=${response?.data?.token}&user_id=${response?.data?.data?._id}`
-          );
-        } else {
-          dispatch(setUser(response?.data?.data));
-          localStorage.setItem("authToken", response?.data?.token);
-          navigate("/profile");
-        }
-        toast.success("Welcome to Career Kick");
-      }
+      window.confirmationResult
+        .confirm(values.otp)
+        .then(async (res) => {
+          const response = await signup(data);
+          const { status } = response;
+          if (status >= 200 && status < 300) {
+            if (appInApp) {
+              navigate(
+                `/login-success?app_in_app=true&auth_token=${response?.data?.token}&user_id=${response?.data?.data?._id}`
+              );
+            } else {
+              dispatch(setUser(response?.data?.data));
+              localStorage.setItem("authToken", response?.data?.token);
+              navigate("/profile");
+            }
+            toast.success("Welcome to Career Kick");
+          }
+        })
+        .catch((err) => {
+          console.log("Error : ", err);
+          toast.error("Invalid OTP");
+        });
     } catch (err) {
       console.error("Error : ", err);
       toast.error(err?.response?.data?.error || "Something went Wrong");
     }
+
     setLoading(false);
   };
 

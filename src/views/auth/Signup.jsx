@@ -21,6 +21,8 @@ import { phoneCodes } from "../../helpers/phoneNumberCode";
 import { getAuthToken } from "../../helpers/auth";
 import { useDispatch, useSelector } from "react-redux";
 import { setUser } from "../../store/actions/userActions";
+import { RecaptchaVerifier, signInWithPhoneNumber } from "firebase/auth";
+import { auth } from "../../config/test-careerkick-otp-firebase-adminsdk-s8ncv-392336a3ab.js";
 
 const signUpalidation = Yup.object({
   name: Yup.string()
@@ -49,6 +51,16 @@ const SignUp = () => {
 
   const appInApp = useSelector((state) => state.appInApp.appInApp);
 
+  const setUpRecaptha = async (number) => {
+    const recaptchaVerifier = new RecaptchaVerifier(
+      "recaptcha-container",
+      { size: "invisible" },
+      auth
+    );
+    recaptchaVerifier.render();
+    return signInWithPhoneNumber(auth, number, recaptchaVerifier);
+  };
+
   useEffect(() => {
     const authToken = getAuthToken();
     if (authToken?.length) {
@@ -62,42 +74,47 @@ const SignUp = () => {
       return;
     }
     setLoading(true);
-    // try {
-    //   const response = await sendOtp(
-    //     `${values.countryCode}${values.phoneNumber}`
-    //   );
-    //   const { status } = response;
-    //   if (status >= 200 && status < 300) {
-    //     toast.success(
-    //       `OTP Sent Succesfully to ${values.countryCode}${values.phoneNumber}`
-    //     );
-    //     navigate("/verify-otp", { state: { values } });
-    //   }
-    // } catch (err) {
-    //   console.error("Error : ", err);
-      try {
-        values.otp =12345678
-        const response = await signup(values);
-        const { status } = response;
-        if (status >= 200 && status < 300) {
-          if (appInApp) {
-            navigate(
-              `/login-success?app_in_app=true&auth_token=${response?.data?.token}&user_id=${response?.data?.data?._id}`
-            );
-          } else {
-            dispatch(setUser(response?.data?.data));
-            localStorage.setItem("authToken", response?.data?.token);
-            navigate("/profile");
-          }
-          toast.success("Welcome to Career Kick");
-        }
-      } catch (err) {
-        console.error("Error : ", err);
-        toast.error(err?.response?.data?.error || "Something went Wrong");
+    try {
+      const confirmationResult = await setUpRecaptha(
+        `${values.countryCode}${values.phoneNumber}`
+      );
+      console.log(confirmationResult, values, "hello world");
+      const { verificationId, onConfirmation } = confirmationResult;
+      if ((verificationId, onConfirmation)) {
+        toast.success(
+          `OTP Sent Succesfully to ${values.countryCode}${values.phoneNumber}`
+        );
+        window.confirmationResult = confirmationResult;
+        navigate("/verify-otp", {
+          state: {
+            values: values,
+          },
+        });
       }
-    //   toast.error(err?.response?.data?.error || "Something went Wrong.");
-
-    // }
+    } catch (err) {
+      console.error("Error : ", err);
+      // try {
+      //   values.otp =12345678
+      //   const response = await signup(values);
+      //   const { status } = response;
+      //   if (status >= 200 && status < 300) {
+      //     if (appInApp) {
+      //       navigate(
+      //         `/login-success?app_in_app=true&auth_token=${response?.data?.token}&user_id=${response?.data?.data?._id}`
+      //       );
+      //     } else {
+      //       dispatch(setUser(response?.data?.data));
+      //       localStorage.setItem("authToken", response?.data?.token);
+      //       navigate("/profile");
+      //     }
+      //     toast.success("Welcome to Career Kick");
+      //   }
+      // } catch (err) {
+      //   console.error("Error : ", err);
+      //   toast.error(err?.response?.data?.error || "Something went Wrong");
+      // }
+      toast.error(err?.response?.data?.error || "Something went Wrong.");
+    }
     setLoading(false);
   };
 
@@ -285,6 +302,9 @@ const SignUp = () => {
                           "Sign Up"
                         )}
                       </button>
+                      <div className="flex justify-center items-center">
+                        <div id="recaptcha-container" className="p-1"></div>
+                      </div>
                       {/* <div className="flex items-center gap-2 mt-4 mb-2 w-11/12 ">
                       <div className="bg-secondary h-0.5 w-full"></div>
                       <h1 className="text-sm text-secondary">or</h1>
