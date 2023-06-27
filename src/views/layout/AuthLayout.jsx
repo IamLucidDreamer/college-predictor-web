@@ -43,7 +43,7 @@ const AuthLayout = ({ imageLink, title, description, form }) => {
         }}
       >
         <div
-          className="min-h-screen flex items-end lg:items-center justify-center pb-8 overflow-scroll"
+          className="min-h-screen flex items-end lg:items-center justify-center pb-8 overflow-y-scroll"
           data-aos="fade-up"
           data-aos-offset="10"
         >
