@@ -35,11 +35,11 @@ const VerifyOTP = () => {
 
   console.log(state, "hello");
 
-  // useEffect(() => {
-  //   if (!state) {
-  //     navigate("/signup");
-  //   }
-  // }, []);
+  useEffect(() => {
+    if (!state) {
+      navigate("/signup");
+    }
+  }, []);
 
   const setUpRecaptha = async (number) => {
     const recaptchaVerifier = new RecaptchaVerifier(
@@ -100,7 +100,7 @@ const VerifyOTP = () => {
         })
         .catch((err) => {
           console.log("Error : ", err);
-          toast.error("Invalid OTP");
+          toast.error(err?.response?.data?.error || "Invalid OTP");
         });
     } catch (err) {
       console.error("Error : ", err);

@@ -302,9 +302,6 @@ const SignUp = () => {
                           "Sign Up"
                         )}
                       </button>
-                      <div className="flex justify-center items-center">
-                        <div id="recaptcha-container" className="p-1"></div>
-                      </div>
                       {/* <div className="flex items-center gap-2 mt-4 mb-2 w-11/12 ">
                       <div className="bg-secondary h-0.5 w-full"></div>
                       <h1 className="text-sm text-secondary">or</h1>
@@ -332,6 +329,9 @@ const SignUp = () => {
                 );
               }}
             </Formik>
+            <div className="hidden">
+              <div id="recaptcha-container" className="p-1"></div>
+            </div>
           </div>
         }
       />
