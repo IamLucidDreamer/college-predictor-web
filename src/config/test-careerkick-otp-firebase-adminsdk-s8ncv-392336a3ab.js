@@ -8,13 +8,13 @@ import { getAuth } from 'firebase/auth'
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-  apiKey: "AIzaSyCvX_osu5VSr4ice6gTr0Y7ZT9jiZADyqM",
-  authDomain: "test-careerkick-otp.firebaseapp.com",
-  projectId: "test-careerkick-otp",
-  storageBucket: "test-careerkick-otp.appspot.com",
-  messagingSenderId: "564663081460",
-  appId: "1:564663081460:web:4b2d7d376ba46a6aa681a1",
-  measurementId: "G-D4KF3ZK6M3"
+  apiKey: "AIzaSyDWu2ZEL8IdZZ0CnvVh4BEgHDReXSQ-7fI",
+  authDomain: "admission-careerkick.firebaseapp.com",
+  projectId: "admission-careerkick",
+  storageBucket: "admission-careerkick.appspot.com",
+  messagingSenderId: "611357425351",
+  appId: "1:611357425351:web:d4cdc6d689b41d91e508e2",
+  measurementId: "G-NKNV525BD8"
 };
 
 // Initialize Firebase
