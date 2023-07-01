@@ -78,7 +78,6 @@ const SignUp = () => {
       const confirmationResult = await setUpRecaptha(
         `${values.countryCode}${values.phoneNumber}`
       );
-      console.log(confirmationResult, values, "hello world");
       const { verificationId, onConfirmation } = confirmationResult;
       if ((verificationId, onConfirmation)) {
         toast.success(

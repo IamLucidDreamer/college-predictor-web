@@ -33,7 +33,7 @@ const VerifyOTP = () => {
   const [loading, setLoading] = useState(false);
   const [resendLoading, setResendLoading] = useState(false);
 
-  console.log(state, "hello");
+
 
   useEffect(() => {
     if (!state) {
@@ -44,30 +44,25 @@ const VerifyOTP = () => {
   const setUpRecaptha = async (number) => {
     const recaptchaVerifier = new RecaptchaVerifier(
       "recaptcha-container",
-      {},
+      { size: "invisible" },
       auth
     );
     recaptchaVerifier.render();
-    const firebaseReponse = await signInWithPhoneNumber(
-      auth,
-      number,
-      recaptchaVerifier
-    );
-    console.log(firebaseReponse, "hello world");
-    return firebaseReponse;
+    return signInWithPhoneNumber(auth, number, recaptchaVerifier);
   };
 
   const resenOTP = async () => {
     setResendLoading(true);
     try {
-      const response = await setUpRecaptha(
+      const confirmationResult = await setUpRecaptha(
         `${state.values.countryCode}${state.values.phoneNumber}`
       );
-      const { status } = response;
-      if (status >= 200 && status < 300) {
+      const { verificationId, onConfirmation } = confirmationResult;
+      if ((verificationId, onConfirmation)) {
         toast.success(
           `OTP Re-Sent Succesfully to ${state.values.countryCode}${state.values.phoneNumber}`
         );
+        window.confirmationResult = confirmationResult;
       }
     } catch (err) {
       console.error("Error : ", err);
@@ -83,6 +78,7 @@ const VerifyOTP = () => {
       window.confirmationResult
         .confirm(values.otp)
         .then(async (res) => {
+          data.otp = 12345678;
           const response = await signup(data);
           const { status } = response;
           if (status >= 200 && status < 300) {
@@ -199,8 +195,13 @@ const VerifyOTP = () => {
               }}
             </Formik>
             {resendLoading ? (
-              <Loader coverFullScreen={true} width={25} height={25} />
+              <div className="fixed top-0 left-0 right-0 bottom-0">
+                <Loader coverFullScreen={true} width={25} height={25} />
+              </div>
             ) : null}
+            <div className="hidden">
+              <div id="recaptcha-container" className="p-1"></div>
+            </div>
           </div>
         }
       />
