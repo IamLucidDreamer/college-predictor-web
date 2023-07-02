@@ -74,46 +74,46 @@ const SignUp = () => {
       return;
     }
     setLoading(true);
-    try {
-      const confirmationResult = await setUpRecaptha(
-        `${values.countryCode}${values.phoneNumber}`
-      );
-      const { verificationId, onConfirmation } = confirmationResult;
-      if ((verificationId, onConfirmation)) {
-        toast.success(
-          `OTP Sent Succesfully to ${values.countryCode}${values.phoneNumber}`
-        );
-        window.confirmationResult = confirmationResult;
-        navigate("/verify-otp", {
-          state: {
-            values: values,
-          },
-        });
+    // try {
+    //   const confirmationResult = await setUpRecaptha(
+    //     `${values.countryCode}${values.phoneNumber}`
+    //   );
+    //   const { verificationId, onConfirmation } = confirmationResult;
+    //   if ((verificationId, onConfirmation)) {
+    //     toast.success(
+    //       `OTP Sent Succesfully to ${values.countryCode}${values.phoneNumber}`
+    //     );
+    //     window.confirmationResult = confirmationResult;
+    //     navigate("/verify-otp", {
+    //       state: {
+    //         values: values,
+    //       },
+    //     });
+    //   }
+    // } catch (err) {
+    //   console.error("Error : ", err);
+      try {
+        values.otp =12345678
+        const response = await signup(values);
+        const { status } = response;
+        if (status >= 200 && status < 300) {
+          if (appInApp) {
+            navigate(
+              `/login-success?app_in_app=true&auth_token=${response?.data?.token}&user_id=${response?.data?.data?._id}`
+            );
+          } else {
+            dispatch(setUser(response?.data?.data));
+            localStorage.setItem("authToken", response?.data?.token);
+            navigate("/profile");
+          }
+          toast.success("Welcome to Career Kick");
+        }
+      } catch (err) {
+        console.error("Error : ", err);
+        toast.error(err?.response?.data?.error || "Something went Wrong");
       }
-    } catch (err) {
-      console.error("Error : ", err);
-      // try {
-      //   values.otp =12345678
-      //   const response = await signup(values);
-      //   const { status } = response;
-      //   if (status >= 200 && status < 300) {
-      //     if (appInApp) {
-      //       navigate(
-      //         `/login-success?app_in_app=true&auth_token=${response?.data?.token}&user_id=${response?.data?.data?._id}`
-      //       );
-      //     } else {
-      //       dispatch(setUser(response?.data?.data));
-      //       localStorage.setItem("authToken", response?.data?.token);
-      //       navigate("/profile");
-      //     }
-      //     toast.success("Welcome to Career Kick");
-      //   }
-      // } catch (err) {
-      //   console.error("Error : ", err);
-      //   toast.error(err?.response?.data?.error || "Something went Wrong");
-      // }
-      toast.error(err?.response?.data?.error || "Something went Wrong.");
-    }
+      // toast.error(err?.response?.data?.error || "Something went Wrong.");
+    // }
     setLoading(false);
   };
 
