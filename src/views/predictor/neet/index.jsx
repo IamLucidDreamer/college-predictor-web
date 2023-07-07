@@ -399,7 +399,7 @@ const PredictorAllIndiaNEET = ({ initialValues, displayValues }) => {
                             return;
                           }
                           return (
-                            <div className="p-2 w-auto rounded-full mx-auto font-semibold">
+                            <div className="p-2 w-auto rounded-full mx-auto font-semibold hidden lg:block">
                               <h1
                                 style={{
                                   minWidth: "120px",
@@ -452,7 +452,7 @@ const PredictorAllIndiaNEET = ({ initialValues, displayValues }) => {
                                     </div>
                                     {val.map((valMap) => (
                                       <div
-                                        className="flex gap-2 justify-between lg:gap-5 my-2 pl-5 border-b-2 py-0.5 px-1 w-full"
+                                        className="flex flex-col lg:flex-row gap-2 justify-start lg:justify-between lg:gap-5 my-2 pl-5 border-b-2 py-0.5 px-1 w-full"
                                         style={{
                                           boxShadow: `0 1px 2px 0 ${getFeildColor(
                                             valMap?.percentage
@@ -464,12 +464,31 @@ const PredictorAllIndiaNEET = ({ initialValues, displayValues }) => {
                                             (colData, index) => {
                                               return (
                                                 <div className="p-1">
+                                                  <h1 className="text-left truncate block lg:hidden">
+                                                    <span className="font-bold">
+                                                      {colData
+                                                        .replace(
+                                                          /([A-Z])/g,
+                                                          " $1"
+                                                        )
+                                                        .charAt(0)
+                                                        .toUpperCase() +
+                                                        colData
+                                                          .replace(
+                                                            /([A-Z])/g,
+                                                            " $1"
+                                                          )
+                                                          .slice(1)}{" "}
+                                                      :
+                                                    </span>{" "}
+                                                    {valMap[colData]}
+                                                  </h1>
                                                   <h1
                                                     style={{
                                                       minWidth: "120px",
                                                       maxWidth: "120px",
                                                     }}
-                                                    className="text-center truncate"
+                                                    className="text-center truncate hidden lg:block"
                                                   >
                                                     {valMap[colData]}
                                                   </h1>
@@ -690,7 +709,7 @@ const PredictorAllIndiaAYUSH = ({ initialValues, displayValues }) => {
                             return;
                           }
                           return (
-                            <div className="p-2 w-auto rounded-full mx-auto font-semibold">
+                            <div className="p-2 w-auto rounded-full mx-auto font-semibold hidden lg:block">
                               <h1
                                 style={{
                                   minWidth: "120px",
@@ -743,7 +762,7 @@ const PredictorAllIndiaAYUSH = ({ initialValues, displayValues }) => {
                                     </div>
                                     {val.map((valMap) => (
                                       <div
-                                        className="flex gap-2 justify-between lg:gap-5 my-2 pl-5 border-b-2 py-0.5 px-1 w-full"
+                                        className="flex flex-col lg:flex-row gap-2 justify-start lg:justify-between lg:gap-5 my-2 pl-5 border-b-2 py-0.5 px-1 w-full"
                                         style={{
                                           boxShadow: `0 1px 2px 0 ${getFeildColor(
                                             valMap?.percentage
@@ -755,12 +774,31 @@ const PredictorAllIndiaAYUSH = ({ initialValues, displayValues }) => {
                                             (colData, index) => {
                                               return (
                                                 <div className="p-1">
+                                                  <h1 className="text-left truncate block lg:hidden">
+                                                    <span className="font-bold">
+                                                      {colData
+                                                        .replace(
+                                                          /([A-Z])/g,
+                                                          " $1"
+                                                        )
+                                                        .charAt(0)
+                                                        .toUpperCase() +
+                                                        colData
+                                                          .replace(
+                                                            /([A-Z])/g,
+                                                            " $1"
+                                                          )
+                                                          .slice(1)}{" "}
+                                                      :
+                                                    </span>{" "}
+                                                    {valMap[colData]}
+                                                  </h1>
                                                   <h1
                                                     style={{
                                                       minWidth: "120px",
                                                       maxWidth: "120px",
                                                     }}
-                                                    className="text-center truncate"
+                                                    className="text-center truncate hidden lg:block"
                                                   >
                                                     {valMap[colData]}
                                                   </h1>
