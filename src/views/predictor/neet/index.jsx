@@ -490,16 +490,23 @@ const PredictorAllIndiaNEET = ({ initialValues, displayValues }) => {
                   </div>
                 ) : (
                   <div>
-                    <div className="flex items-center gap-4 justify-center w-full md:w-1/2 mx-auto text-xl">
-                      <ExclamationCircleIcon className="w-10 h-10" />
-                      <h1 className="">
-                        Looks Like you have not found a result !
-                        <br />
-                        We have got you covered call us today :
-                        <br />
-                        <a href="tel:+917393062116">Call : +91-7393062116</a>
-                      </h1>
-                    </div>
+                    <section class="text-gray-600 body-font">
+                      <div class="container px-5 py-8 mx-auto">
+                        <div class="lg:w-2/3 flex flex-col sm:flex-row sm:items-center items-start mx-auto">
+                          <h1 class="flex flex-col md:flex-row justify-center items-center gap-4 flex-grow sm:pr-16 text-2xl font-medium title-font text-gray-900">
+                            <ExclamationCircleIcon className="w-16 h-16" />
+                            Looks Like you have not found a result ! We have got
+                            you covered call us today.
+                          </h1>
+                          <a
+                            href="tel:+917393062116"
+                            class="flex-shrink-0 text-white bg-secondary border-0 py-2 px-8 focus:outline-none text-lg mt-10 sm:mt-0 rounded-lg"
+                          >
+                            Call Us
+                          </a>
+                        </div>
+                      </div>
+                    </section>
                     <div className="p-4">
                       <h1 className="text-3xl font-semibold">Top Colleges</h1>
                       <TopColleges />
