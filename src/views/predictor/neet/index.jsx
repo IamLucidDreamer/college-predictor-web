@@ -446,7 +446,7 @@ const PredictorAllIndiaNEET = ({ initialValues, displayValues }) => {
                                       <div className="font-semibold">
                                         {index + 1} )
                                       </div>
-                                      <div className="w-10/12 font-semibold">
+                                      <div className="w-10/12 font-semibold break-all">
                                         {key}
                                       </div>
                                     </div>
