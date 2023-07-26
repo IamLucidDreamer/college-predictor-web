@@ -43,7 +43,7 @@ const Profile = () => {
       .then((res) => {
         toast.success(res?.data?.message);
         dispatch(setUser(res?.data?.data));
-        setEdit(false)
+        setEdit(false);
       })
       .catch((err) => {
         toast.error(err?.response?.data?.error);
@@ -68,6 +68,7 @@ const Profile = () => {
         examType: user?.examType || "",
         tenthMarks: user?.tenthMarks || "",
         twelthMarks: user?.twelthMarks || "",
+        medicalMarks: user?.medicalMarks || "",
       }}
       validationSchema={editProfileValidation}
       onSubmit={(values) => handleSubmitForm(values)}
@@ -302,6 +303,21 @@ const Profile = () => {
                               edit ? "border-primary" : "border-transparent"
                             }`}
                             value={values.twelthMarks}
+                            onChange={handleChange}
+                          />
+                        </div>
+                      )}
+                      {(user?.medicalMarks || edit) && (
+                        <div className="my-2 w-full max-w-none lg:max-w-screen-xs">
+                          <h1 className="text-gray-500">Neet Marks (%)</h1>
+                          <input
+                            id="medicalMarks"
+                            name="medicalMarks"
+                            disabled={!edit}
+                            className={`w-full font-semibold text-lg bg-transparent p-1 border rounded-md focus:outline-primary ${
+                              edit ? "border-primary" : "border-transparent"
+                            }`}
+                            value={values.medicalMarks}
                             onChange={handleChange}
                           />
                         </div>
