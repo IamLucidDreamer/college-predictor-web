@@ -52,7 +52,7 @@ function App() {
   return (
     <div style={{ backgroundColor: "rgb(247 248 249)" }}>
       <Routes />
-      <Development />
+      {/* <Development /> */}
       {/* <Banner /> */}
     </div>
   );
