@@ -127,7 +127,7 @@ export const CollegeCardLocal = ({
 }) => {
   const navigate = useNavigate();
   return (
-    <div className="p-1" data-aos="flip-up" data-aos-offset="10">
+    <div className="p-1" data-aos="fade" data-aos-offset="10">
       <button
         onClick={(e) => {
           e.stopPropagation();
@@ -135,7 +135,8 @@ export const CollegeCardLocal = ({
             state: { data: data },
           });
         }}
-        className="relative rounded-lg bg-white shadow-md md:flex-row md:max-w-screen-md"
+        className="relative rounded-lg bg-white shadow-md md:flex-row"
+        style={{ maxWidth: "450px" }}
       >
         <img
           style={{ height: "220px" }}
