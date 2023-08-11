@@ -6,6 +6,7 @@ import image from "../assets/images/onboarding.png";
 import AppLogo from "../components/images/AppLogo";
 import { clearAuth, getAuthToken } from "../helpers/auth";
 import { useDispatch } from "react-redux";
+import { logout } from "../store/actions/userActions";
 
 const LandingPAgeApp = () => {
   const navigate = useNavigate();
