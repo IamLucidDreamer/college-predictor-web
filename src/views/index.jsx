@@ -4,16 +4,16 @@ import AuthLayout from "./layout/AuthLayout";
 
 import image from "../assets/images/onboarding.png";
 import AppLogo from "../components/images/AppLogo";
-import { getAuthToken } from "../helpers/auth";
+import { clearAuth, getAuthToken } from "../helpers/auth";
+import { useDispatch } from "react-redux";
 
 const LandingPAgeApp = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    const authToken = getAuthToken();
-    if (authToken?.length) {
-      navigate("/dashboard/predictor");
-    }
+    dispatch(logout());
+    clearAuth();
   }, []);
 
   return (
@@ -29,7 +29,9 @@ const LandingPAgeApp = () => {
               height={"250px"}
               classname={"mx-auto mb-4"}
             />
-            <h1 className="text-secondary text-5xl my-2 text-center">Welcome</h1>
+            <h1 className="text-secondary text-5xl my-2 text-center">
+              Welcome
+            </h1>
             <p className="text-secondary text-lg my-2 text-center">
               India's largest online consulting platform which provides
               information about regarding Educational Institutions and Colleges.
