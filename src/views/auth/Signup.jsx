@@ -16,6 +16,9 @@ import {
   MailIcon,
   PhoneIcon,
   PencilIcon,
+  BookOpenIcon,
+  ChipIcon,
+  MenuIcon,
 } from "@heroicons/react/outline";
 import { phoneCodes } from "../../helpers/phoneNumberCode";
 import { getAuthToken } from "../../helpers/auth";
@@ -41,6 +44,10 @@ const signUpalidation = Yup.object({
   examType: Yup.number()
     .min(1, "Please Select a value")
     .required("Exam Type field is required"),
+  medicalMarks: Yup.string()
+    .min(1, "Please Select a value")
+    .max(720, "Marks Cannot Exceed 720."),
+  course: Yup.string().required("Password field is required"),
 });
 
 const SignUp = () => {
@@ -120,6 +127,8 @@ const SignUp = () => {
                 email: "",
                 password: "",
                 examType: 0,
+                course: "Select",
+                medicalMarks: "",
                 consent: false,
               }}
               validationSchema={signUpalidation}
@@ -233,6 +242,54 @@ const SignUp = () => {
                           touched.examType && errors.examType ? true : false
                         }
                         error={errors.examType}
+                      />
+                      <div className="bg-gray-100 text-secondary flex gap-3 items-center px-3 rounded-lg my-5 shadow-lg">
+                        <MenuIcon className="w-4 h-4" />
+                        <select
+                          id="course"
+                          className="p-2.5 text-lg rounded-lg bg-gray-100 w-full focus:outline-none"
+                          name="course"
+                          value={values.course}
+                          onChange={handleChange}
+                        >
+                          <option value={"Select"} disabled>
+                            Select Course
+                          </option>
+                          {[
+                            "MBBS",
+                            "BDS",
+                            "BAMS",
+                            "BHMS",
+                            "BUMS",
+                            "BSMS",
+                            "BNYS",
+                          ].map((item, index) => (
+                            <option value={item}>{item}</option>
+                          ))}
+                        </select>
+                      </div>
+                      <CustomValidationErrorMessage
+                        show={touched.course && errors.course ? true : false}
+                        error={errors.course}
+                      />
+                      <div className="bg-gray-100 text-secondary flex gap-3 items-center px-3 rounded-lg my-5 shadow-lg">
+                        <BookOpenIcon className="w-5 h-5" />
+                        <input
+                          id="medicalMarks"
+                          placeholder="720"
+                          className="p-2.5 text-lg rounded-lg bg-gray-100 w-full focus:outline-none"
+                          type="number"
+                          value={values.medicalMarks}
+                          onChange={handleChange}
+                        />
+                      </div>
+                      <CustomValidationErrorMessage
+                        show={
+                          touched.medicalMarks && errors.medicalMarks
+                            ? true
+                            : false
+                        }
+                        error={errors.medicalMarks}
                       />
                       <div className="flex items-center justify-start gap-3 ">
                         <input

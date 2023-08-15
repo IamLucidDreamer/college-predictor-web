@@ -69,6 +69,7 @@ const Profile = () => {
         tenthMarks: user?.tenthMarks || "",
         twelthMarks: user?.twelthMarks || "",
         medicalMarks: user?.medicalMarks || "",
+        course: user?.course || "",
       }}
       validationSchema={editProfileValidation}
       onSubmit={(values) => handleSubmitForm(values)}
@@ -320,6 +321,36 @@ const Profile = () => {
                             value={values.medicalMarks}
                             onChange={handleChange}
                           />
+                        </div>
+                      )}
+                      {(user?.course || edit) && (
+                        <div className="my-2 w-full max-w-none lg:max-w-screen-xs">
+                          <h1 className="text-gray-500">Course</h1>
+                          <select
+                            id="course"
+                            name="course"
+                            disabled={!edit}
+                            value={values.course}
+                            onChange={handleChange}
+                            className={`w-full font-semibold text-lg bg-transparent p-1 border rounded-md focus:outline-primary ${
+                              edit ? "border-primary" : "border-transparent"
+                            }`}
+                          >
+                            <option value="" disabled>
+                              Select Course
+                            </option>
+                            {[
+                              "MBBS",
+                              "BDS",
+                              "BAMS",
+                              "BHMS",
+                              "BUMS",
+                              "BSMS",
+                              "BNYS",
+                            ].map((item, index) => (
+                              <option value={item}>{item}</option>
+                            ))}
+                          </select>
                         </div>
                       )}
                     </div>
