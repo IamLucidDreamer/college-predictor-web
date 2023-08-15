@@ -68,7 +68,7 @@ const NewPassword = () => {
     setLoading(true);
     const data = { ...state.values, ...values };
     try {
-      const response = await forgotPassword(data);
+      const response = await forgotPassword(data); 
       const { status } = response;
       if (status >= 200 && status < 300) {
         if (appInApp) {
