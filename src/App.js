@@ -8,7 +8,7 @@ import { XIcon } from "@heroicons/react/outline";
 import { server } from "./helpers/apiCall";
 import { setUser } from "./store/actions/userActions";
 
-import imageCelebrations from "./assets/images/seminar_banner.jpeg"
+import imageCelebrations from "./assets/images/seminar_banner.jpg"
 
 function App() {
 
