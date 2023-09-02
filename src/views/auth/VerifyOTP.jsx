@@ -33,8 +33,6 @@ const VerifyOTP = () => {
   const [loading, setLoading] = useState(false);
   const [resendLoading, setResendLoading] = useState(false);
 
-
-
   useEffect(() => {
     if (!state) {
       navigate("/signup");
@@ -79,6 +77,7 @@ const VerifyOTP = () => {
         .confirm(values.otp)
         .then(async (res) => {
           data.otp = 12345678;
+          data.ref_code = localStorage.getItem("ref_code");
           const response = await signup(data);
           const { status } = response;
           if (status >= 200 && status < 300) {

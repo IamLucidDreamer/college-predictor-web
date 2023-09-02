@@ -41,13 +41,12 @@ const signUpalidation = Yup.object({
   password: Yup.string()
     .required("Password field is required")
     .min(8, "The Password length should be atleast 8 characters"),
-  examType: Yup.number()
+  examType: Yup.number().required("Exam Type field is required"),
+  medicalMarks: Yup.number()
     .min(1, "Please Select a value")
-    .required("Exam Type field is required"),
-  medicalMarks: Yup.string()
-    .min(1, "Please Select a value")
-    .max(720, "Marks Cannot Exceed 720."),
-  course: Yup.string().required("Password field is required"),
+    .max(720, "Marks Cannot Exceed 720.")
+    .required("Medical Marks field is required"),
+  course: Yup.string().required("Course field is required"),
 });
 
 const SignUp = () => {
@@ -93,7 +92,7 @@ const SignUp = () => {
         window.confirmationResult = confirmationResult;
         navigate("/verify-otp", {
           state: {
-            values: values,
+            values: { ...values, medicalMarks: values.medicalMarks.toString() },
           },
         });
       }
@@ -126,8 +125,8 @@ const SignUp = () => {
                 phoneNumber: "",
                 email: "",
                 password: "",
-                examType: 0,
-                course: "Select",
+                examType: "",
+                course: "",
                 medicalMarks: "",
                 consent: false,
               }}
@@ -222,13 +221,13 @@ const SignUp = () => {
                       <div className="bg-gray-100 text-secondary flex gap-3 items-center px-3 rounded-lg my-5 shadow-lg">
                         <PencilIcon className="w-4 h-4" />
                         <select
-                          id="examTYpe"
+                          id="examType"
                           className="p-2.5 text-lg rounded-lg bg-gray-100 w-full focus:outline-none"
                           name="examType"
                           value={values.examType}
                           onChange={handleChange}
                         >
-                          <option value={0} disabled>
+                          <option value={""} disabled>
                             Select Exam
                           </option>
                           <option value={1} disabled>
@@ -252,7 +251,7 @@ const SignUp = () => {
                           value={values.course}
                           onChange={handleChange}
                         >
-                          <option value={"Select"} disabled>
+                          <option value={""} disabled>
                             Select Course
                           </option>
                           {[
