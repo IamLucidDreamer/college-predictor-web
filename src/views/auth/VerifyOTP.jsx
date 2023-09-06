@@ -81,6 +81,17 @@ const VerifyOTP = () => {
           const response = await signup(data);
           const { status } = response;
           if (status >= 200 && status < 300) {
+            if(response?.data?.referral)
+            {
+              if(response?.data?.referral === "Valid")
+              {
+                toast.success("Referral Code Validated Succesfully")
+              }
+              else
+              {
+                toast.success("Referral Code is InValidated")
+              }
+            }
             if (appInApp) {
               navigate(
                 `/login-success?app_in_app=true&auth_token=${response?.data?.token}&user_id=${response?.data?.data?._id}`
