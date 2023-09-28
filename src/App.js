@@ -59,7 +59,7 @@ function App() {
     <div style={{ backgroundColor: "rgb(247 248 249)" }}>
       <Routes />
       {/* <Development /> */}
-      <Banner />
+      {/* <Banner /> */}
     </div>
   );
 }
